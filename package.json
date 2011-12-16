@@ -1,0 +1,18 @@
+{
+
+	"name": "mediaslide",
+	"version": "0.0.1",
+	"author": "Kieran Simkin",
+	"description": "Media viewer widget with a sliding thumbnail bar",
+	"homepage": "http://slinq.com/software/mediaslide",
+	"title": "jQuery.ui.MediaSlide",
+	"licenses": [
+		{
+			"type": "BSD-2-Clause",
+			"url": "http://www.opensource.org/licenses/bsd-license.php"
+		}
+	],
+	"dependencies": {
+		"jquery": "1"
+	}
+}
