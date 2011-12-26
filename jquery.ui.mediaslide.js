@@ -119,7 +119,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
-		this.element.html('').addClass('ui-helper-clearfix');
+		this.element.html('');
 		this.mainpicture=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-main-picture-div')
 							.css({position: 'relative'})
