@@ -85,6 +85,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
+		this.mainpicture=jQuery('<div></div>').addClass('ui-widget').addClass('mediaslide-main-picture-div').prependTo(this.element);
 		this.html_setup=true;
 	},
 	// Skips (without sliding) to a specific image number
