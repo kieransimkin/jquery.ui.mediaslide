@@ -87,11 +87,30 @@ $.widget( "ui.mediaslide", {
 		this.setup=true;
 	},
 	_parse_data: function() { 
+		this.d=new Array();
 		if (this.dataType=='atom') { 
 			this.data.find('entry').each(function(i,ob) { 
 				alert(jQuery(ob).find('title').text());
+				var normal=null;
+				var thumb=null;
+				jQuery(ob).find('link').each(function (o,lob) { 
+					if (jQuery(lob).attr('title')=='normal') { 
+						normal=jQuery(lob).attr('href');
+					} else if (jQuery(lob).attr('title')=='thumb') { 
+						thumb=jQuery(lob).attr('href');
+					}
+				});
+				this.d.push({
+					title: jQuery(ob).find('title').text(),
+					link: jQuery(obj).find('link').text(),
+					id: jQuery(obj).find('id').text(),
+					updated: jQuery(obj).find('updated').text(),
+					normal: normal,
+					thumb: thumb
+				});
 				//alert(o.html());
 			});
+			alert(this.d);
 		} else if (this.dataType=='json') { 
 
 		} else {
