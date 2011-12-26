@@ -14,6 +14,7 @@ $.widget( "ui.mediaslide", {
 	// Set up the widget
 	_create: function() {
 		this.setup = false;
+		this.html_setup = false;
 		this.position=this.options.start_position;
 		this._init_data();
 	},
@@ -28,10 +29,8 @@ $.widget( "ui.mediaslide", {
 			}
 			this._init_display();
 		} else if (this.options.atom_xml_ajax != null) { 
-			if (typeof(this.options.atom_xml_ajax.length)!='string') { 
-				alert('11');
+			if (typeof(this.options.atom_xml_ajax)!='string') { 
 				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, complete: function(data) { 
-					alert('1');
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
@@ -39,9 +38,7 @@ $.widget( "ui.mediaslide", {
 					alert(t);
 				}});
 			} else { 
-				alert('22');
 				jQuery.ajax(this.options.atom_xml_ajax,{complete: function(data) { 
-					alert('2');
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
@@ -58,24 +55,29 @@ $.widget( "ui.mediaslide", {
 			}
 			this._init_display();
 		} else if (this.options.json_ajax != null) { 
-			if (this.options.json_ajax.length!=null) { 
-				jQuery.getJSON(this.options.json_ajax.url,this.options.json_ajax.options,function(data) { 
+			if (typeof(this.options.json_ajax)!='string') { 
+				jQuery.getJSON(this.options.json_ajax.url,{data: this.options.json_ajax.options, complete: function(data) { 
 					o.data=data;
 					o.dataType='json';
 					o._init_display();
-				});
+				}, error: function (j,t,e) { 
+					alert(t);
+				}});
 			} else { 
-				jQuery.getJSON(this.options.json_ajax,{}, function(data) { 
+				jQuery.getJSON(this.options.json_ajax,{complete: function(data) { 
 					o.data=data;
 					o.dataType='json';
 					o._init_display();
-				});
+				}, error: function (j,t,e) { 
+					alert(t);
+				}});
 			}
 		} else {
 			alert('No data specified.');
 		}
 	},
 	_init_display: function() { 
+		this.element.html('hello');
 		alert('got to display');
 	},
 	// Use the _setOption method to respond to changes to options
