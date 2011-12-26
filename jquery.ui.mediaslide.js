@@ -28,7 +28,7 @@ $.widget( "ui.mediaslide", {
 			}
 			this._init_display();
 		} else if (this.options.atom_xml_ajax != null) { 
-			if (this.options.atom_xml_ajax.length!=null) { 
+			if (typeof(this.options.atom_xml_ajax.length)!='string') { 
 				alert('11');
 				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, complete: function(data) { 
 					alert('1');
