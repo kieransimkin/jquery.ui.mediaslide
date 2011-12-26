@@ -16,6 +16,7 @@ $.widget( "ui.mediaslide", {
 		this.setup = false;
 		this.html_setup = false;
 		this.position=this.options.start_position;
+		this.pframe_displaying=1;
 		this._init_data();
 	},
 	_init_data: function() { 
@@ -79,12 +80,14 @@ $.widget( "ui.mediaslide", {
 	_init_display: function() { 
 		if (!this.html_setup) { 
 			this._do_html_setup();
+			this.pframe_displaying=1;
 		}
 		this.position_skip(this.position);
 		this.setup=true;
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
+		this.element.html('');
 		this.mainpicture=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-main-picture-div')
 							.css({position: 'relative'})
@@ -101,9 +104,23 @@ $.widget( "ui.mediaslide", {
 							.appendTo(this.mainpicture);
 		this.html_setup=true;
 	},
+	_get_foreground_pframe: function() { 
+		if (this.pframe_displaying==1) { 
+			return this.pictureframe1;
+		} else { 
+			return this.pictureframe2;
+		}
+	},
+	_get_background_pframe: function() { 
+		if (this.pframe_displaying==1) { 
+			return this.pictureframe2;
+		} else { 
+			return this.pictureframe1;
+		}
+	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
-
+		frame=this._get_foreground_pframe;
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
