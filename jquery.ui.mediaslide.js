@@ -93,12 +93,12 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe1')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px'})
-							.prependTo(this.mainpicture);
+							.appendTo(this.mainpicture);
 		this.pictureframe2=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe2')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px','display': 'none'})
-							.prependTo(this.mainpicture);
+							.appendTo(this.mainpicture);
 		this.html_setup=true;
 	},
 	// Skips (without sliding) to a specific image number
