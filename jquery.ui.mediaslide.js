@@ -31,7 +31,7 @@ $.widget( "ui.mediaslide", {
 			this._init_display();
 		} else if (this.options.atom_xml_ajax != null) { 
 			if (typeof(this.options.atom_xml_ajax)!='string') { 
-				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, complete: function(data) { 
+				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
@@ -39,7 +39,7 @@ $.widget( "ui.mediaslide", {
 					alert(t);
 				}});
 			} else { 
-				jQuery.ajax(this.options.atom_xml_ajax,{complete: function(data) { 
+				jQuery.ajax(this.options.atom_xml_ajax,{success: function(data) { 
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
@@ -57,7 +57,7 @@ $.widget( "ui.mediaslide", {
 			this._init_display();
 		} else if (this.options.json_ajax != null) { 
 			if (typeof(this.options.json_ajax)!='string') { 
-				jQuery.getJSON(this.options.json_ajax.url,{data: this.options.json_ajax.options, complete: function(data) { 
+				jQuery.getJSON(this.options.json_ajax.url,{data: this.options.json_ajax.options, success: function(data) { 
 					o.data=data;
 					o.dataType='json';
 					o._init_display();
@@ -65,7 +65,7 @@ $.widget( "ui.mediaslide", {
 					alert(t);
 				}});
 			} else { 
-				jQuery.getJSON(this.options.json_ajax,{complete: function(data) { 
+				jQuery.getJSON(this.options.json_ajax,{success: function(data) { 
 					o.data=data;
 					o.dataType='json';
 					o._init_display();
