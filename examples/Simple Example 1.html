@@ -6,6 +6,7 @@
 <script src="../jquery.ui.mediaslide.js"></script>
 <body>
 <div id="slide_1"></div>
+<a href="#" onclick="$('#slide_1').mediaslide('previous'); return false;">Prev</a> - <a href="#" onclick="$('#slide_1').mediaslide('next'); return false;">Next</a>
 <script>
 	$('#slide_1').mediaslide({atom_xml_ajax: {url: 'imagelist.xml', data: {} }});
 </script>

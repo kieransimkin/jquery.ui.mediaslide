@@ -155,10 +155,11 @@ $.widget( "ui.mediaslide", {
 		frame=this._get_foreground_pframe();
 		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">');
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
+		this.position=pos;
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
-		
+		alert('slide: '+offset.toString());	
 	},
 	next: function() { 
 		this.position_slide(1);
