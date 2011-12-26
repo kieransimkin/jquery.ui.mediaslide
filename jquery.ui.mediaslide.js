@@ -30,12 +30,14 @@ $.widget( "ui.mediaslide", {
 		} else if (this.options.atom_xml_ajax != null) { 
 			if (this.options.atom_xml_ajax.length!=null) { 
 				jQuery.ajax(this.options.atom_xml_ajax.url,this.options.atom_xml_ajax.options,function(data) { 
+					alert('1');
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
 				});
 			} else { 
 				jQuery.ajax(this.options.atom_xml_ajax,{},function(data) { 
+					alert('2');
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
