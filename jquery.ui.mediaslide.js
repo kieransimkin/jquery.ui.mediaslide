@@ -123,7 +123,7 @@ $.widget( "ui.mediaslide", {
 		this.mainpicture=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-main-picture-div')
 							.css({position: 'relative'})
-							.append('<br style="clear: both;">')
+							.after('<br style="clear: both;">')
 							.prependTo(this.element);
 		this.pictureframe1=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
