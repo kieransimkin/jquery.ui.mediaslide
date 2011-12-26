@@ -77,8 +77,35 @@ $.widget( "ui.mediaslide", {
 		}
 	},
 	_init_display: function() { 
-		this.element.html('hello');
-		alert('got to display');
+		if (!this.html_setup) { 
+			this._do_html_setup();
+		}
+		this.position_skip(this.position);
+		this.setup=true;
+	},
+	_do_html_setup: function() { 
+		// setup element HTML here
+		this.html_setup=true;
+	},
+	// Skips (without sliding) to a specific image number
+	position_skip: function(pos) { 
+
+	},
+	// Slides forwards or backwards a number of positions
+	position_slide: function (offset) { 
+		
+	},
+	next: function() { 
+		this.position_slide(1);
+	},
+	previous: function() { 
+		this.position_slide(-1);
+	},
+	forward: function (num) { 
+		this.position_slide(num);
+	},
+	backward: function (num) { 
+		this.position_slide(0-num);
 	},
 	// Use the _setOption method to respond to changes to options
 	_setOption: function( key, value ) {
