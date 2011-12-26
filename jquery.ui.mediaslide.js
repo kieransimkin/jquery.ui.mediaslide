@@ -123,6 +123,7 @@ $.widget( "ui.mediaslide", {
 		this.mainpicture=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-main-picture-div')
 							.css({position: 'relative'})
+							.addClass('ui-helper-clearfix')
 							.prependTo(this.element);
 		this.pictureframe1=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
@@ -155,6 +156,8 @@ $.widget( "ui.mediaslide", {
 		frame=this._get_foreground_pframe();
 		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">');
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
+		this.mainpicture.width(jQuery(frame).width());
+		this.mainpicture.height(jQuery(frame).height());
 		this.position=pos;
 	},
 	// Slides forwards or backwards a number of positions
