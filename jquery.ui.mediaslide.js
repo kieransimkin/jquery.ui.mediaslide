@@ -103,9 +103,9 @@ $.widget( "ui.mediaslide", {
 				});
 				d.push({
 					title: jQuery(ob).find('title').text(),
-					link: jQuery(obj).find('link').text(),
-					id: jQuery(obj).find('id').text(),
-					updated: jQuery(obj).find('updated').text(),
+					link: jQuery(ob).find('link').text(),
+					id: jQuery(ob).find('id').text(),
+					updated: jQuery(ob).find('updated').text(),
 					normal: normal,
 					thumb: thumb
 				});
