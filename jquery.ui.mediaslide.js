@@ -30,20 +30,20 @@ $.widget( "ui.mediaslide", {
 		} else if (this.options.atom_xml_ajax != null) { 
 			if (this.options.atom_xml_ajax.length!=null) { 
 				alert('11');
-				jQuery.ajax(this.options.atom_xml_ajax.url,this.options.atom_xml_ajax.options,function(data) { 
+				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, complete: function(data) { 
 					alert('1');
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
-				});
+				}});
 			} else { 
 				alert('22');
-				jQuery.ajax(this.options.atom_xml_ajax,{},function(data) { 
+				jQuery.ajax(this.options.atom_xml_ajax,{complete: function(data) { 
 					alert('2');
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
-				});
+				}});
 			}
 		} else if (this.options.json_data!= null) { 
 			this.dataType='json';
