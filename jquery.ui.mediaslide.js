@@ -7,12 +7,14 @@ $.widget( "ui.mediaslide", {
 		"atom_xml_data": null,
 		"atom_xml_ajax": null,
 		"json_data": null,
-		"json_ajax": null
+		"json_ajax": null,
+		"start_position": 0
 	},
 
 	// Set up the widget
 	_create: function() {
 		this.setup = false;
+		this.position=this.options.start_position;
 		this._init_data();
 	},
 	_init_data: function() { 
@@ -65,13 +67,16 @@ $.widget( "ui.mediaslide", {
 		}
 	},
 	_init_display: function() { 
-
+		this.element.html('hello');
 	},
 	// Use the _setOption method to respond to changes to options
 	_setOption: function( key, value ) {
 		switch( key ) {
-			case "clear":
-				// handle changes to clear option
+			case "atom_xml_data":
+			case "atom_xml_ajax":
+			case "json_data":
+			case "json_ajax":
+				this._init_data();
 				break;
 		}
 		 
