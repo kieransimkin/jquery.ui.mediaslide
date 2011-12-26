@@ -67,7 +67,7 @@ $.widget( "ui.mediaslide", {
 		}
 	},
 	_init_display: function() { 
-		this.element.html('hello');
+		alert('got to display');
 	},
 	// Use the _setOption method to respond to changes to options
 	_setOption: function( key, value ) {
