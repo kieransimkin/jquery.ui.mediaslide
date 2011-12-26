@@ -87,7 +87,8 @@ $.widget( "ui.mediaslide", {
 		this.setup=true;
 	},
 	_parse_data: function() { 
-		this.d=new Array();
+		d=new Array();
+		
 		if (this.dataType=='atom') { 
 			this.data.find('entry').each(function(i,ob) { 
 				alert(jQuery(ob).find('title').text());
@@ -100,7 +101,7 @@ $.widget( "ui.mediaslide", {
 						thumb=jQuery(lob).attr('href');
 					}
 				});
-				this.d.push({
+				d.push({
 					title: jQuery(ob).find('title').text(),
 					link: jQuery(obj).find('link').text(),
 					id: jQuery(obj).find('id').text(),
@@ -110,7 +111,7 @@ $.widget( "ui.mediaslide", {
 				});
 				//alert(o.html());
 			});
-			alert(this.d);
+			this.d=d;
 		} else if (this.dataType=='json') { 
 
 		} else {
