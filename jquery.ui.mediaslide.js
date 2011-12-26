@@ -153,8 +153,8 @@ $.widget( "ui.mediaslide", {
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
 		frame=this._get_foreground_pframe;
-		frame.html('<img class="ui-widget-mediaslide-active-img">');
-		frame.find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
+		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">');
+		jQuery(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
