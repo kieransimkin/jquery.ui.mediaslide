@@ -91,7 +91,6 @@ $.widget( "ui.mediaslide", {
 		
 		if (this.dataType=='atom') { 
 			this.data.find('entry').each(function(i,ob) { 
-				alert(jQuery(ob).find('title').text());
 				var normal=null;
 				var thumb=null;
 				jQuery(ob).find('link').each(function (o,lob) { 
@@ -103,7 +102,7 @@ $.widget( "ui.mediaslide", {
 				});
 				d.push({
 					title: jQuery(ob).find('title').text(),
-					link: jQuery(ob).find('link').text(),
+					link: jQuery(ob).find('link').attr('href'),
 					id: jQuery(ob).find('id').text(),
 					updated: jQuery(ob).find('updated').text(),
 					normal: normal,
