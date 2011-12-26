@@ -32,7 +32,7 @@ $.widget( "ui.mediaslide", {
 		} else if (this.options.atom_xml_ajax != null) { 
 			if (typeof(this.options.atom_xml_ajax)!='string') { 
 				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
-					o.data=data;
+					o.data=jQuery(data);
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
@@ -40,7 +40,7 @@ $.widget( "ui.mediaslide", {
 				}});
 			} else { 
 				jQuery.ajax(this.options.atom_xml_ajax,{success: function(data) { 
-					o.data=data;
+					o.data=jQuery(data);
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
@@ -58,7 +58,7 @@ $.widget( "ui.mediaslide", {
 		} else if (this.options.json_ajax != null) { 
 			if (typeof(this.options.json_ajax)!='string') { 
 				jQuery.getJSON(this.options.json_ajax.url,{data: this.options.json_ajax.options, success: function(data) { 
-					o.data=data;
+					o.data=jQuery(data);
 					o.dataType='json';
 					o._init_display();
 				}, error: function (j,t,e) { 
@@ -66,7 +66,7 @@ $.widget( "ui.mediaslide", {
 				}});
 			} else { 
 				jQuery.getJSON(this.options.json_ajax,{success: function(data) { 
-					o.data=data;
+					o.data=jQuery(data);
 					o.dataType='json';
 					o._init_display();
 				}, error: function (j,t,e) { 
@@ -121,6 +121,9 @@ $.widget( "ui.mediaslide", {
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
 		frame=this._get_foreground_pframe;
+		this.data.each(function(o,i) { 
+			alert(o);
+		});
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
