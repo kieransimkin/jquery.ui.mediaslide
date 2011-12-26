@@ -122,7 +122,7 @@ $.widget( "ui.mediaslide", {
 	position_skip: function(pos) { 
 		frame=this._get_foreground_pframe;
 		this.data.each(function(o,i) { 
-			alert(o);
+			alert(i);
 		});
 	},
 	// Slides forwards or backwards a number of positions
