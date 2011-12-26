@@ -82,8 +82,20 @@ $.widget( "ui.mediaslide", {
 			this._do_html_setup();
 			this.pframe_displaying=1;
 		}
+		this._parse_data();
 		this.position_skip(this.position);
 		this.setup=true;
+	},
+	_parse_data: function() { 
+		if (this.dataType=='atom') { 
+			this.data.find('entry').each(function(i,o) { 
+				alert(jQuery(o).find('title').html());
+			});
+		} else if (this.dataType=='json') { 
+
+		} else {
+			alert('unknown data type');
+		}
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
@@ -122,7 +134,6 @@ $.widget( "ui.mediaslide", {
 	position_skip: function(pos) { 
 		frame=this._get_foreground_pframe;
 		this.data.each(function(o,i) { 
-			alert(i);
 		});
 	},
 	// Slides forwards or backwards a number of positions
