@@ -171,7 +171,8 @@ $.widget( "ui.mediaslide", {
 		var active_frame = this._get_foreground_pframe();
 		var inactive_frame = this._get_background_pframe();
 		jQuery(active_frame).css({'z-index': 1});
-		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position+offset].normal).fadeIn('slow', function() { 
+		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position+offset].normal);
+		jQuery(inactive_frame).fadeIn('slow', function() { 
 			
 		});
 		alert('slide: '+offset.toString());	
