@@ -35,6 +35,8 @@ $.widget( "ui.mediaslide", {
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
+				}, error: function(j,t,e) { 
+					alert(t);
 				}});
 			} else { 
 				alert('22');
@@ -43,6 +45,8 @@ $.widget( "ui.mediaslide", {
 					o.data=data;
 					o.dataType='atom';
 					o._init_display();
+				}, error: function(j,t,e) { 
+					alert(t);
 				}});
 			}
 		} else if (this.options.json_data!= null) { 
