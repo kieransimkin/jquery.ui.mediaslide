@@ -87,7 +87,7 @@ $.widget( "ui.mediaslide", {
 		this.setup=true;
 	},
 	_parse_data: function() { 
-		d=new Array();
+		var d=new Array();
 		
 		if (this.dataType=='atom') { 
 			this.data.find('entry').each(function(i,ob) { 
