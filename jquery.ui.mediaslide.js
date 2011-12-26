@@ -89,7 +89,7 @@ $.widget( "ui.mediaslide", {
 	_parse_data: function() { 
 		if (this.dataType=='atom') { 
 			this.data.find('entry').each(function(i,ob) { 
-				alert(ob.html());
+				alert(ob.text());
 				//alert(o.html());
 			});
 		} else if (this.dataType=='json') { 
