@@ -123,7 +123,6 @@ $.widget( "ui.mediaslide", {
 		this.mainpicture=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-main-picture-div')
 							.css({position: 'relative'})
-							.addClass('ui-helper-clearfix')
 							.prependTo(this.element);
 		this.pictureframe1=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
@@ -153,15 +152,28 @@ $.widget( "ui.mediaslide", {
 	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
-		frame=this._get_foreground_pframe();
-		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">');
-		jQuery(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
+		var frame=this._get_foreground_pframe();
+		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
 		this.mainpicture.width(jQuery(frame).width());
 		this.mainpicture.height(jQuery(frame).height());
 		this.position=pos;
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
+		if (this.position+offset<0) { 
+			console.log('Tried to skip past the beginning');
+			return false;
+		}
+		if (this.position+offset>this.d.length-1) { 
+			console.log('Tried to skip past the end');
+			return false;
+		}
+		var active_frame = this._get_foreground_pframe();
+		var inactive_frame = this._get_background_pframe();
+		jQuery(active_frame).css({'z-index': 1});
+		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position+offset].normal).fadeIn('slow', function() { 
+			
+		});
 		alert('slide: '+offset.toString());	
 	},
 	next: function() { 
