@@ -119,6 +119,15 @@ $.widget( "ui.mediaslide", {
 		} else {
 			console.log('unknown data type');
 		}
+		this._do_thumbnail_html_setup();
+	},
+	_do_thumbnail_html_setup: function() { 
+		this.thumbnails=new Array();
+		var t = this.thumbnails;
+		jQuery.each(this.d,function(i,o) { 
+			t.push(jQuery('<div></div>').addClass('ui-widget').addClass('ui-widget-mediaslide-thumb-div').html('<img class="ui-widget-mediaslide-thumb-img">').find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t);
+
+		});
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
@@ -223,6 +232,15 @@ $.widget( "ui.mediaslide", {
 	},
 	last: function() { 
 		this.position_slide_to(this.d.length-1);
+	},
+	get_position: function() { 
+		return this.position;
+	},
+	get_count: function() { 
+		return this.d.length;
+	},
+	get_current_title: function() { 
+		return this.d[this.position].title;	
 	},
 	// Use the _setOption method to respond to changes to options
 	_setOption: function( key, value ) {
