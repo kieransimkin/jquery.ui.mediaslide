@@ -139,7 +139,7 @@ $.widget( "ui.mediaslide", {
 		});
 		this.thumbslide.width(this._get_visible_scrollbox_width());
 		this.thumbslide_content.width(this._get_total_scrollbox_width());
-		this.thumbslide_slider.width(this._get_visible_scrollbox_width());
+		this.thumbslide_scrollbar.width(this._get_visible_scrollbox_width());
 
 		//scrollpane parts
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
