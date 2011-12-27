@@ -145,7 +145,7 @@ $.widget( "ui.mediaslide", {
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
 		
 		//build slider
-		this.scrollbar = this.thumbslide_slider.slider({
+		this.scrollbar = this.thumbslide_slider.slider({min: '0', max: this.d.length,
 			slide: function( event, ui ) {
 				if ( scrollContent.width() > scrollPane.width() ) {
 					scrollContent.css( "margin-left", Math.round(
