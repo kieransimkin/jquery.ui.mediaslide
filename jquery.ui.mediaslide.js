@@ -184,7 +184,7 @@ $.widget( "ui.mediaslide", {
 			width: handleSize,
 			"margin-left": -handleSize / 2
 		});
-		this.handleHelper.width( "" ).width( scrollbar.width() - handleSize );
+		this.handleHelper.width( "" ).width( this.scrollbar.width() - handleSize );
 	},
 	_do_thumbnail_image_loads: function() { 
 		var l=this.thumbnails;
