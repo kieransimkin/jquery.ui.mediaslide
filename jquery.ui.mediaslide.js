@@ -147,7 +147,6 @@ $.widget( "ui.mediaslide", {
 		//build slider
 		this.scrollbar = this.thumbslide_slider.slider({
 			slide: function( event, ui ) {
-				/*
 				if ( scrollContent.width() > scrollPane.width() ) {
 					scrollContent.css( "margin-left", Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
@@ -155,7 +154,6 @@ $.widget( "ui.mediaslide", {
 				} else {
 					scrollContent.css( "margin-left", 0 );
 				}
-				*/
 			}
 		});
 		//append icon to handle
