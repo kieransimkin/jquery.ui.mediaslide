@@ -171,7 +171,7 @@ $.widget( "ui.mediaslide", {
 		.wrap( "<div class='ui-handle-helper-parent'></div>" ).parent();
 	*/	
 		//change overflow to hidden now that slider handles the scrolling
-		scrollPane.css( "overflow", "hidden" );
+	//	scrollPane.css( "overflow", "hidden" );
 		
 		this._do_thumbnail_image_loads();
 	},
