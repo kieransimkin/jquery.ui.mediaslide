@@ -127,10 +127,11 @@ $.widget( "ui.mediaslide", {
 		var t = this.thumbslide_content;
 		t.html('');
 		var op = this.options;
+		var me = this;
 		jQuery.each(this.d,function(i,o) { 
 			var p=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-div')
-							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': op.thumb_spacing })
+							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing() })
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			l.push(p);
@@ -219,6 +220,16 @@ $.widget( "ui.mediaslide", {
 		} else { 
 			this.pframe_displaying=1;
 		}
+	},
+	_get_left_thumb_spacing: function() { 
+		var pad=Math.floor(this.options.thumb_spacing/2);
+		if (this.options.thumb_spacing % 2 != 0) { 
+			pad++;
+		}
+		return pad;
+	},
+	_get_right_thumb_spacing: function() { 
+		return Math.floor(this.options.thumb_spacing/2);
 	},
 	_get_first_preload_thumb_position: function() { 
 		var ret=this._get_first_thumb_position();
