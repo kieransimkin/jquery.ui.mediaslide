@@ -160,7 +160,7 @@ $.widget( "ui.mediaslide", {
 		});
 		//append icon to handle
 		var handleHelper = scrollbar.find( ".ui-slider-handle" )
-		.css({'top': '.2em','height': '1.5em'})
+		.css({'top': '0px','height': '0.8em'})
 		.mousedown(function() {
 			scrollbar.width( handleHelper.width() );
 		})
