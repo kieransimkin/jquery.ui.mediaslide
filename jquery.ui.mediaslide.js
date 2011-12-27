@@ -182,7 +182,7 @@ $.widget( "ui.mediaslide", {
 		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position+offset].normal);
 		jQuery(inactive_frame).fadeTo('slow', 1.0, function() { 
 			tob._toggle_pframe();
-			jQuery(active_frame).opacity(0).hide();
+			jQuery(active_frame).css({opacity: 0}).hide();
 			tob.position=tob.position+offset;
 			if (tob.mainpicture.height()!=jQuery(inactive_frame).height()) { 
 				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height()},'fast');
