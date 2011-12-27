@@ -135,7 +135,7 @@ $.widget( "ui.mediaslide", {
 		this._do_thumbnail_image_loads();
 	},
 	_do_thumbnail_image_loads: function() { 
-			alert(this._get_first_thumb_position + ' - ' + this._get_last_thumb_position);
+			alert(this._get_first_thumb_position() + ' - ' + this._get_last_thumb_position());
 			//.find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t);
 	},
 	_do_html_setup: function() { 
