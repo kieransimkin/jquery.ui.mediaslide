@@ -232,7 +232,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_get_scroll_position_estimate: function(pcent) { 
 		var dec=pcent/100;
-		return ((this.d.length-1)-this.options.num_thumbs)*dec;
+		return (((this.d.length-1)-this.options.num_thumbs)*dec)+this._get_first_thumb_count();
 	},
 	_get_foreground_pframe: function() { 
 		if (this.pframe_displaying==1) { 
