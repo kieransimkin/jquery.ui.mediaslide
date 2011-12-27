@@ -207,7 +207,7 @@ $.widget( "ui.mediaslide", {
 		}
 		var first_position=this.position-otherhalfthumbs;
 		if (first_position < 0) { 
-			halfthumbs+=0-first_position;
+			halfthumbs+=(0-first_position)-1;
 		}
 		var end_position=this.position+halfthumbs;
 		if (end_position>this.d.length-1) { 
