@@ -154,6 +154,9 @@ $.widget( "ui.mediaslide", {
 				} else {
 					scrollContent.css( "margin-left", 0 );
 				}
+			},
+			change: function(event, ui) { 
+				alert(ui.value);
 			}
 		});
 		//append icon to handle
