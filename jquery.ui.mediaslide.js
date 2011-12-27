@@ -135,10 +135,15 @@ $.widget( "ui.mediaslide", {
 		this._do_thumbnail_image_loads();
 	},
 	_do_thumbnail_image_loads: function() { 
+		for (var i=this._get_first_preload_thumb_position();i<=this._get_last_preload_thumb_position();i++) { 
+			console.log("Preloading: "+i);
+		}
 			//.find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t);
 	},
-	_handle_thumb_slide: function() { 
-			console.log(this._get_first_thumb_position() + ' - ' + this._get_last_thumb_position());
+	_handle_thumb_slide: function(oldpos) { 
+		
+
+		this._do_thumbnail_image_loads();
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
@@ -182,6 +187,22 @@ $.widget( "ui.mediaslide", {
 			this.pframe_displaying=2;
 		} else { 
 			this.pframe_displaying=1;
+		}
+	},
+	_get_first_preload_thumb_position: function() { 
+		var ret=this._get_first_thumb_position();
+		if (ret-1<0) { 
+			return 0;
+		} else { 
+			return ret-1;
+		}
+	},
+	_get_last_preload_thumb_position: function() { 
+		var ret=this._get_last_thumb_position();
+		if (ret+1>this.d.length-1) { 
+			return this.d.length-1;
+		} else { 
+			return ret+1;
 		}
 	},
 	_get_first_thumb_position: function() { 
@@ -237,11 +258,15 @@ $.widget( "ui.mediaslide", {
 			console.log('Mediaslide: Tried to skip past the end');
 			return false;
 		}
+		if (offset==0) { 
+			console.log('Mediaslide: Tried to move 0 spaces');
+		}
 		if (this.slide_in_progress) { 
 			console.log('Mediaslide: Slide already in progress');
 			return false;
 		}
 		this.slide_in_progress = true;
+		var oldpos=this.position;
 		this.position=this.position+offset;
 		var tob=this;
 		var active_frame = this._get_foreground_pframe();
@@ -257,7 +282,7 @@ $.widget( "ui.mediaslide", {
 				jQuery(active_frame).css({opacity: 0}).hide();
 				tob.slide_in_progress=false;
 			});
-			tob._handle_thumb_slide();
+			tob._handle_thumb_slide(oldpos);
 		});
 		//alert('slide: '+offset.toString());	
 	},
