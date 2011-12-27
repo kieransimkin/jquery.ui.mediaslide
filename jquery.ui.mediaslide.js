@@ -242,11 +242,12 @@ $.widget( "ui.mediaslide", {
 			return false;
 		}
 		this.slide_in_progress = true;
+		tob.position=tob.position+offset;
 		var active_frame = this._get_foreground_pframe();
 		var inactive_frame = this._get_background_pframe();
 		var tob=this;
 		jQuery(active_frame).css({'z-index': 1});
-		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position+offset].normal);
+		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position].normal);
 		jQuery(inactive_frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
 			if (tob.mainpicture.height()!=jQuery(inactive_frame).height() || tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
 				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width()},'fast');
@@ -254,7 +255,6 @@ $.widget( "ui.mediaslide", {
 			jQuery(inactive_frame).fadeTo('slow', 1.0, function() { 
 				tob._toggle_pframe();
 				jQuery(active_frame).css({opacity: 0}).hide();
-				tob.position=tob.position+offset;
 				tob.slide_in_progress=false;
 			});
 			tob._handle_thumb_slide();
