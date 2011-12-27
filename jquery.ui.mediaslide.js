@@ -191,9 +191,9 @@ $.widget( "ui.mediaslide", {
 		}
 	},
 	_handle_thumb_slide: function(oldpos) { 
-		
-
 		this._do_thumbnail_image_loads();
+		this.thumbnails[oldpos].fadeOut();
+		this.thumbnails[this.position].fadeIn();
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
