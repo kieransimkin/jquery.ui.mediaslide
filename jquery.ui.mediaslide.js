@@ -132,7 +132,7 @@ $.widget( "ui.mediaslide", {
 		this.pictureframe2=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe2')
-							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opaicty': '0'})
+							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
 							.appendTo(this.mainpicture);
 		this.html_setup=true;
 	},
