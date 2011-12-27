@@ -193,7 +193,7 @@ $.widget( "ui.mediaslide", {
 	_handle_thumb_slide: function(oldpos) { 
 		this._do_thumbnail_image_loads();
 		console.log("pos: "+this.position+" oldpos: "+oldpos);
-		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px').show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing()},'fast','linear',function() { 
+		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px'}).show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing()},'fast','linear',function() { 
 
 		});
 		var me = this;
