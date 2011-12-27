@@ -185,7 +185,7 @@ $.widget( "ui.mediaslide", {
 			tob._toggle_pframe();
 			jQuery(active_frame).css({opacity: 0.0});
 			tob.position=tob.position+offset;
-			alert('ending slide position:' + this.position+ ' offset: '+offset);
+			alert('ending slide position:' + tob.position+ ' offset: '+offset);
 		});
 		//alert('slide: '+offset.toString());	
 	},
