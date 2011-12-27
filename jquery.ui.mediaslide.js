@@ -187,6 +187,7 @@ $.widget( "ui.mediaslide", {
 		jQuery(active_frame).css({'z-index': 1});
 		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position+offset].normal);
 		jQuery(inactive_frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
+			alert('got here');
 			if (tob.mainpicture.height()!=jQuery(inactive_frame).height() || tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
 				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width()},'fast');
 			}
