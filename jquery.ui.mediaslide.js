@@ -185,9 +185,11 @@ $.widget( "ui.mediaslide", {
 			jQuery(active_frame).css({opacity: 0.0});
 			tob.position=tob.position+offset;
 			if (tob.mainpicture.height()!=jQuery(inactive_frame).height()) { 
+				alert('g1');
 				jQuery(mainpicture).animate({height: jQuery(inactive_frame).height()},'fast');
 			}
 			if (tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
+				alert('g2');
 				jQuery(mainpicture).animate({width: jQuery(inactive_frame).width()},'fast');
 			}
 		});
