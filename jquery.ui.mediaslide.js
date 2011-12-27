@@ -125,7 +125,7 @@ $.widget( "ui.mediaslide", {
 		this.thumbnails=new Array();
 		var t = this.thumbnails;
 		jQuery.each(this.d,function(i,o) { 
-			t.push(jQuery('<div></div>').addClass('ui-widget').addClass('ui-widget-mediaslide-thumb-div').html('<img class="ui-widget-mediaslide-thumb-img">').find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t);
+			t.push(jQuery('<div></div>').addClass('ui-widget').addClass('ui-widget-mediaslide-thumb-div').html('<img class="ui-widget-mediaslide-thumb-img">').find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t));
 
 		});
 	},
