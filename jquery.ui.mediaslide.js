@@ -129,6 +129,7 @@ $.widget( "ui.mediaslide", {
 		jQuery.each(this.d,function(i,o) { 
 			var p=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-div')
+							.css({'float': 'left', 'position': 'relative'})
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			l.push(p);
