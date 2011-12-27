@@ -187,11 +187,11 @@ $.widget( "ui.mediaslide", {
 		});
 		this.handleHelper.width( "" ).width( this.scrollbar.width() - handleSize );
 	},
-	_do_thumbnail_image_loads: function() { 
+	_do_thumbnail_image_loads: function(pos) { 
 		var l=this.thumbnails;
 		var t=this.thumbslide_content;
 		var d=this.d;
-		for (var i=this._get_first_preload_thumb_position();i<=this._get_last_preload_thumb_position();i++) { 
+		for (var i=this._get_first_preload_thumb_position(pos);i<=this._get_last_preload_thumb_position(pos);i++) { 
 			l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
 		}
 	},
@@ -280,50 +280,58 @@ $.widget( "ui.mediaslide", {
 	_get_right_thumb_spacing: function() { 
 		return Math.floor(this.options.thumb_spacing/2);
 	},
-	_get_first_preload_thumb_position: function() { 
-		var ret=this._get_first_thumb_position();
+	_get_first_preload_thumb_position: function(pos) { 
+		var ret=this._get_first_thumb_position(pos);
 		if (ret-1<0) { 
 			return 0;
 		} else { 
 			return ret-1;
 		}
 	},
-	_get_last_preload_thumb_position: function() { 
-		var ret=this._get_last_thumb_position();
+	_get_last_preload_thumb_position: function(pos) { 
+		var ret=this._get_last_thumb_position(pos);
 		if (ret+1>this.d.length-1) { 
 			return this.d.length-1;
 		} else { 
 			return ret+1;
 		}
 	},
-	_get_first_thumb_position: function() { 
+	_get_first_thumb_position: function(pos) { 
+		var position=this.position;
+		if (typeof(pos)!='undefined') { 
+			position=pos;
+		}
 		var halfthumbs=Math.floor(this.options.num_thumbs/2);
 		var otherhalfthumbs=halfthumbs;
 		if (this.options.num_thumbs % 2 != 0) { 
 			otherhalfthumbs++;
 		}
-		var end_position=this.position+otherhalfthumbs;
+		var end_position=position+otherhalfthumbs;
 		if (end_position > this.d.length-1) { 
 			halfthumbs+=end_position-(this.d.length-1)
 		}
-		var first_position=this.position-halfthumbs;
+		var first_position=position-halfthumbs;
 		if (first_position<0) { 
 			return 0;
 		} else { 
 			return first_position;
 		}
 	},
-	_get_last_thumb_position: function() { 
+	_get_last_thumb_position: function(pos) { 
+		var position=this.position;
+		if (typeof(pos)!='undefined') { 
+			position=pos;	
+		}
 		var halfthumbs=Math.floor(this.options.num_thumbs/2);
 		var otherhalfthumbs=halfthumbs;
 		if (this.options.num_thumbs % 2 != 0) { 
 			halfthumbs++;
 		}
-		var first_position=this.position-otherhalfthumbs;
+		var first_position=position-otherhalfthumbs;
 		if (first_position < 0) { 
 			halfthumbs+=0-first_position;
 		}
-		var end_position=this.position+halfthumbs;
+		var end_position=position+halfthumbs;
 		if (end_position>this.d.length-1) { 
 			return this.d.length-1;
 		} else {
