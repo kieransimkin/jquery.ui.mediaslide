@@ -177,7 +177,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_size_scrollbar: function() { 
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
-		var remainder = scrollContent.width() - scrollPan.width();
+		var remainder = scrollContent.width() - scrollPane.width();
 		var proportion = remainder / scrollContent.width();
 		var handleSize = scrollPane.width() - ( proportion * scrollPane.width() );
 		this.scrollbar.find( ".ui-slider-handle" ).css({
