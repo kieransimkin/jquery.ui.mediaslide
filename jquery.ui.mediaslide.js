@@ -156,7 +156,7 @@ $.widget( "ui.mediaslide", {
 				}
 			},
 			change: function(event, ui) {
-				alert(me._get_scroll_position_estimate(ui.value));
+				me._do_thumbnail_image_loads(Math.floor(me._get_scroll_position_estimate(ui.value)));
 			}
 		});
 		var sb=this.scrollbar;
