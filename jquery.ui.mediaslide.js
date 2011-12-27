@@ -164,7 +164,7 @@ $.widget( "ui.mediaslide", {
 		this.handleHelper = this.scrollbar.find( ".ui-slider-handle" )
 		.css({'top': '-1px','height': '0.8em'})
 		.mousedown(function() {
-			sb.width( handleHelper.width() );
+			sb.width( me.handleHelper.width() );
 		})
 		.mouseup(function() {
 			sb.width( "100%" );
