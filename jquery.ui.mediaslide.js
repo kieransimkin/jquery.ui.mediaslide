@@ -184,6 +184,12 @@ $.widget( "ui.mediaslide", {
 			tob._toggle_pframe();
 			jQuery(active_frame).css({opacity: 0.0});
 			tob.position=tob.position+offset;
+			if (tob.mainpicture.height()!=jQuery(inactive_frame).height()) { 
+				jQuery(mainpicture).animate({height: jQuery(inactive_frame).height()},'fast');
+			}
+			if (tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
+				jQuery(mainpicture).animate({width: jQuery(inactive_frame).width()},'fast');
+			}
 		});
 		//alert('slide: '+offset.toString());	
 	},
