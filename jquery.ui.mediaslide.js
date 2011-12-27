@@ -183,6 +183,7 @@ $.widget( "ui.mediaslide", {
 		jQuery(inactive_frame).fadeTo('slow', 1.0, function() { 
 			tob._toggle_pframe();
 			jQuery(active_frame).css({opacity: 0.0});
+			this.position+=offset;
 		});
 		//alert('slide: '+offset.toString());	
 	},
