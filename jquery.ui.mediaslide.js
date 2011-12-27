@@ -135,8 +135,10 @@ $.widget( "ui.mediaslide", {
 		this._do_thumbnail_image_loads();
 	},
 	_do_thumbnail_image_loads: function() { 
-			alert(this._get_first_thumb_position() + ' - ' + this._get_last_thumb_position());
 			//.find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t);
+	},
+	_handle_thumb_slide: function() { 
+			alert(this._get_first_thumb_position() + ' - ' + this._get_last_thumb_position());
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
@@ -255,6 +257,7 @@ $.widget( "ui.mediaslide", {
 				tob.position=tob.position+offset;
 				tob.slide_in_progress=false;
 			});
+			tob._handle_thumb_slide();
 		});
 		//alert('slide: '+offset.toString());	
 	},
