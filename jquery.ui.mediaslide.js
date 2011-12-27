@@ -167,7 +167,7 @@ $.widget( "ui.mediaslide", {
 			scrollbar.width( "100%" );
 		})
 		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical'></span>" )
-		.wrap( "<div class='ui-handle-helper-parent'></div>" ).parent();
+		.wrap( jQuery("<div></div>" ).css({ 'position': 'relative'; width: '100%'; height: '100%'; margin: '0 auto'; })).parent();
 		//change overflow to hidden now that slider handles the scrolling
 		scrollPane.css( "overflow", "hidden" );
 		
