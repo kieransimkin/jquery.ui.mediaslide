@@ -159,13 +159,13 @@ $.widget( "ui.mediaslide", {
 			}
 		});
 		//append icon to handle
-		this.handleHelper = scrollbar.find( ".ui-slider-handle" )
+		this.handleHelper = this.scrollbar.find( ".ui-slider-handle" )
 		.css({'top': '-1px','height': '0.8em'})
 		.mousedown(function() {
-			scrollbar.width( handleHelper.width() );
+			this.scrollbar.width( handleHelper.width() );
 		})
 		.mouseup(function() {
-			scrollbar.width( "100%" );
+			this.scrollbar.width( "100%" );
 		})
 		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical'></span>" )
 		.wrap( jQuery("<div></div>" ).css({ 'position': 'relative', width: '100%', height: '100%', margin: '0 auto' })).parent();
