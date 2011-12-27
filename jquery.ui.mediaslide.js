@@ -124,10 +124,17 @@ $.widget( "ui.mediaslide", {
 	_do_thumbnail_html_setup: function() { 
 		this.thumbnails=new Array();
 		var t = this.thumbslide;
+		t.html('');
 		jQuery.each(this.d,function(i,o) { 
-			t.push(jQuery('<div></div>').addClass('ui-widget').addClass('ui-widget-mediaslide-thumb-div').html('<img class="ui-widget-mediaslide-thumb-img">').find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t));
+			var p=jQuery('<div></div>').addClass('ui-widget').addClass('ui-widget-mediaslide-thumb-div').html('<img class="ui-widget-mediaslide-thumb-img">');
+			t.push(p);
 
 		});
+		this._do_thumbnail_image_loads();
+	},
+	_do_thumbnail_image_loads: function() { 
+	
+			//.find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t);
 	},
 	_do_html_setup: function() { 
 		// setup element HTML here
@@ -147,6 +154,8 @@ $.widget( "ui.mediaslide", {
 							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
 							.appendTo(this.mainpicture);
 		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide')
+							.css({'overflow-x': 'hidden'})
 							.appendTo(this.element);
 		this.html_setup=true;
 	},
