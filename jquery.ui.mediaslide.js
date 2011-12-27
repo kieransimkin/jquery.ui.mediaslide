@@ -8,7 +8,11 @@ $.widget( "ui.mediaslide", {
 		"atom_xml_ajax": null,
 		"json_data": null,
 		"json_ajax": null,
-		"start_position": 0
+		"start_position": 0,
+		"thumbs_visible": true,
+		"num_thumbs": 5,
+		"thumb_width": 200,
+		"thumb_spacing": 5
 	},
 
 	// Set up the widget
@@ -134,6 +138,8 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-pictureframe2')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
 							.appendTo(this.mainpicture);
+		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
+							.appendTo(this.element);
 		this.html_setup=true;
 	},
 	_get_foreground_pframe: function() { 
@@ -180,13 +186,13 @@ $.widget( "ui.mediaslide", {
 		var tob=this;
 		jQuery(active_frame).css({'z-index': 1});
 		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position+offset].normal);
+		if (this.mainpicture.height()!=jQuery(inactive_frame).height() || this.mainpicture.width()!=jQuery(inactive_frame).width()) { 
+			jQuery(this.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width()},'fast');
+		}
 		jQuery(inactive_frame).fadeTo('slow', 1.0, function() { 
 			tob._toggle_pframe();
 			jQuery(active_frame).css({opacity: 0}).hide();
 			tob.position=tob.position+offset;
-			if (tob.mainpicture.height()!=jQuery(inactive_frame).height() || tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
-				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width()},'fast');
-			}
 		});
 		//alert('slide: '+offset.toString());	
 	},
