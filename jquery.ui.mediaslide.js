@@ -126,10 +126,11 @@ $.widget( "ui.mediaslide", {
 		var l = this.thumbnails;
 		var t = this.thumbslide;
 		t.html('');
+		var op = this.options;
 		jQuery.each(this.d,function(i,o) { 
 			var p=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-div')
-							.css({'float': 'left', 'position': 'relative'})
+							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width })
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			l.push(p);
