@@ -139,6 +139,40 @@ $.widget( "ui.mediaslide", {
 		});
 		this.thumbslide.width(this._get_visible_scrollbox_width());
 		this.thumbslide_content.width(this._get_total_scrollbox_width());
+
+
+		//scrollpane parts
+		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
+		
+		//build slider
+		var scrollbar = this.thumbslide_slider.slider({
+			slide: function( event, ui ) {
+				/*
+				if ( scrollContent.width() > scrollPane.width() ) {
+					scrollContent.css( "margin-left", Math.round(
+						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
+					) + "px" );
+				} else {
+					scrollContent.css( "margin-left", 0 );
+				}
+				*/
+			}
+		});
+		
+		//append icon to handle
+		var handleHelper = scrollbar.find( ".ui-slider-handle" )
+		.mousedown(function() {
+			scrollbar.width( handleHelper.width() );
+		})
+		.mouseup(function() {
+			scrollbar.width( "100%" );
+		})
+		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical'></span>" )
+		.wrap( "<div class='ui-handle-helper-parent'></div>" ).parent();
+		
+		//change overflow to hidden now that slider handles the scrolling
+		scrollPane.css( "overflow", "hidden" );
+		
 		this._do_thumbnail_image_loads();
 	},
 	_do_thumbnail_image_loads: function() { 
