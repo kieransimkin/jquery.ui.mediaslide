@@ -242,7 +242,7 @@ $.widget( "ui.mediaslide", {
 			return false;
 		}
 		this.slide_in_progress = true;
-		this.position=tob.position+offset;
+		this.position=this.position+offset;
 		var tob=this;
 		var active_frame = this._get_foreground_pframe();
 		var inactive_frame = this._get_background_pframe();
