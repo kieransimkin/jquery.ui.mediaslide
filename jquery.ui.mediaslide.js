@@ -131,7 +131,7 @@ $.widget( "ui.mediaslide", {
 		jQuery.each(this.d,function(i,o) { 
 			var p=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-div')
-							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing() })
+							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center' })
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			l.push(p);
@@ -205,8 +205,8 @@ $.widget( "ui.mediaslide", {
 		}
 	},
 	_get_total_scrollbox_width: function() { 
-		var width=this.d.length*this.options.thumb_width;
-		width+=this.options.thumb_spacing*this.d.length;
+		var width=(this.d.length-1)*this.options.thumb_width;
+		width+=this.options.thumb_spacing*(this.d.length-1);
 		return width;
 	},
 	_get_visible_scrollbox_width: function() { 
@@ -319,7 +319,7 @@ $.widget( "ui.mediaslide", {
 			if (tob.mainpicture.height()!=jQuery(inactive_frame).height() || tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
 				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width()},'fast');
 			}
-			jQuery(inactive_frame).fadeTo('slow', 1.0, function() { 
+			jQuery(inactive_frame).fadeTo('slow', 1.0, 'linear', function() { 
 				tob._toggle_pframe();
 				jQuery(active_frame).css({opacity: 0}).hide();
 				tob.slide_in_progress=false;
