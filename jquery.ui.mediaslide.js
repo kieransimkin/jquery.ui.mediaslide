@@ -158,7 +158,7 @@ $.widget( "ui.mediaslide", {
 				*/
 			}
 		});
-		
+	/*	
 		//append icon to handle
 		var handleHelper = scrollbar.find( ".ui-slider-handle" )
 		.mousedown(function() {
@@ -169,7 +169,7 @@ $.widget( "ui.mediaslide", {
 		})
 		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical'></span>" )
 		.wrap( "<div class='ui-handle-helper-parent'></div>" ).parent();
-		
+	*/	
 		//change overflow to hidden now that slider handles the scrolling
 		scrollPane.css( "overflow", "hidden" );
 		
