@@ -192,6 +192,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_handle_thumb_slide: function(oldpos) { 
 		this._do_thumbnail_image_loads();
+		console.log("pos: "+this.position+" oldpos: "+oldpos);
 		this.thumbnails[oldpos].fadeOut();
 		this.thumbnails[this.position].fadeIn();
 	},
