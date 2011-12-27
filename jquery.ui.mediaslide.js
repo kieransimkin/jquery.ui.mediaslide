@@ -212,10 +212,6 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-pictureframe2')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
 							.appendTo(this.mainpicture);
-		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-thumbslide')
-							.css({'overflow': 'auto'})
-							.appendTo(this.element);
 		this.thumbslide_scrollbar=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
@@ -224,6 +220,10 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-slider')
 							.appendTo(this.thumbslide_scrollbar);
+		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide')
+							.css({'overflow': 'auto'})
+							.appendTo(this.element);
 		this.thumbslide_content=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
