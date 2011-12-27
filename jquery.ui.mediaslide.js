@@ -124,7 +124,7 @@ $.widget( "ui.mediaslide", {
 	_do_thumbnail_html_setup: function() { 
 		this.thumbnails=new Array();
 		var l = this.thumbnails;
-		var t = this.thumbslide;
+		var t = this.thumbslide_content;
 		t.html('');
 		var op = this.options;
 		jQuery.each(this.d,function(i,o) { 
@@ -140,7 +140,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_do_thumbnail_image_loads: function() { 
 		var l=this.thumbnails;
-		var t=this.thumbslide;
+		var t=this.thumbslide_content;
 		var d=this.d;
 		for (var i=this._get_first_preload_thumb_position();i<=this._get_last_preload_thumb_position();i++) { 
 			l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
@@ -170,8 +170,23 @@ $.widget( "ui.mediaslide", {
 							.appendTo(this.mainpicture);
 		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
-							.css({'overflow-x': 'hidden'})
+							.css({'overflow': 'auto'})
+							.width(this._get_visible_scrollbox_width())
 							.appendTo(this.element);
+		this.thumbslide_content=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide-content')
+							.width(this._get_total_scrollbox_width())
+							.appendTo(this.thumbslide);
+		this.thumbslide_scrollbar=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-content')
+							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
+							.appendTo(this.thumbslide);
+		this.thumbslide_slider=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide-slider')
+							.appendTo(this.thumbslide_scrollbar);
 		this.html_setup=true;
 	},
 	_get_foreground_pframe: function() { 
@@ -187,6 +202,16 @@ $.widget( "ui.mediaslide", {
 		} else { 
 			return this.pictureframe1;
 		}
+	},
+	_get_total_scrollbox_width: function() { 
+		var width=this.d.length*this.options.thumb_width;
+		width+=this.options.thumb_spacing*(this.d.length-1);
+		return width;
+	},
+	_get_visible_scrollbox_width: function() { 
+		var width=this.options.num_thumbs*this.options.thumb_width;
+		width+=this.options.thumb_spacing*(this.options.num_thumbs-1);
+		return width;
 	},
 	_toggle_pframe: function() { 
 		if (this.pframe_displaying==1) { 
