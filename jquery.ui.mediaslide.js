@@ -193,12 +193,12 @@ $.widget( "ui.mediaslide", {
 	_handle_thumb_slide: function(oldpos) { 
 		this._do_thumbnail_image_loads();
 		console.log("pos: "+this.position+" oldpos: "+oldpos);
-		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px'}).show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing()},'fast','linear',function() { 
+		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px', 'opacity': 0.0}).show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing(), 'opacity': 1.0},'fast','linear',function() { 
 
 		});
 		var me = this;
 		var p=me.position;
-		this.thumbnails[this.position].animate({width: '0px', 'margin-left': '0px', 'margin-right': '0px'},'fast','linear',function() { 
+		this.thumbnails[this.position].animate({'opacity': 0.0, width: '0px', 'margin-left': '0px', 'margin-right': '0px'},'fast','linear',function() { 
 			me.thumbnails[p].hide();
 		});
 		
