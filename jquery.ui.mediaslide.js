@@ -288,6 +288,7 @@ $.widget( "ui.mediaslide", {
 		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
 		this.mainpicture.width(jQuery(frame).width());
 		this.mainpicture.height(jQuery(frame).height());
+		this.thumbnails[this.position].hide();
 		this.position=pos;
 	},
 	// Slides forwards or backwards a number of positions
