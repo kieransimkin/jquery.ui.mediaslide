@@ -123,22 +123,26 @@ $.widget( "ui.mediaslide", {
 	},
 	_do_thumbnail_html_setup: function() { 
 		this.thumbnails=new Array();
+		var l = this.thumbnails;
 		var t = this.thumbslide;
 		t.html('');
 		jQuery.each(this.d,function(i,o) { 
 			var p=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-div')
-							.html('<img class="ui-widget-mediaslide-thumb-img">');
-			t.push(p);
+							.html('<img class="ui-widget-mediaslide-thumb-img">')
+							.appendTo(t);
+			l.push(p);
 
 		});
 		this._do_thumbnail_image_loads();
 	},
 	_do_thumbnail_image_loads: function() { 
+		var l=this.thumbnails;
+		var t=this.thumbslide;
+		var d=this.d;
 		for (var i=this._get_first_preload_thumb_position();i<=this._get_last_preload_thumb_position();i++) { 
-			console.log("Preloading: "+i);
+			l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
 		}
-			//.find('.ui-widget-mediaslide-thumb-img').attr('src',o.thumb).appendTo(t);
 	},
 	_handle_thumb_slide: function(oldpos) { 
 		
