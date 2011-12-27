@@ -155,8 +155,8 @@ $.widget( "ui.mediaslide", {
 					scrollContent.css( "margin-left", 0 );
 				}
 			},
-			change: function(event, ui) { 
-				alert(ui.value);
+			change: function(event, ui) {
+				alert(me._get_scroll_position_estimate(ui.value));
 			}
 		});
 		//append icon to handle
@@ -234,6 +234,10 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-thumbslide-slider')
 							.appendTo(this.thumbslide_scrollbar);
 		this.html_setup=true;
+	},
+	_get_scroll_position_estimate: function(pcent) { 
+		var dec=pcent/100;
+		return (this.d.length-1)*dec;
 	},
 	_get_foreground_pframe: function() { 
 		if (this.pframe_displaying==1) { 
