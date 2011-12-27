@@ -19,6 +19,7 @@ $.widget( "ui.mediaslide", {
 	_create: function() {
 		this.setup = false;
 		this.html_setup = false;
+		this.slide_in_progress = false;
 		this.position=this.options.start_position;
 		this.pframe_displaying=1;
 		this._init_data();
@@ -40,7 +41,7 @@ $.widget( "ui.mediaslide", {
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
-					alert(t);
+					console.log(t);
 				}});
 			} else { 
 				jQuery.ajax(this.options.atom_xml_ajax,{success: function(data) { 
@@ -48,7 +49,7 @@ $.widget( "ui.mediaslide", {
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
-					alert(t);
+					console.log(t);
 				}});
 			}
 		} else if (this.options.json_data!= null) { 
@@ -66,7 +67,7 @@ $.widget( "ui.mediaslide", {
 					o.dataType='json';
 					o._init_display();
 				}, error: function (j,t,e) { 
-					alert(t);
+					console.log(t);
 				}});
 			} else { 
 				jQuery.getJSON(this.options.json_ajax,{success: function(data) { 
@@ -74,11 +75,11 @@ $.widget( "ui.mediaslide", {
 					o.dataType='json';
 					o._init_display();
 				}, error: function (j,t,e) { 
-					alert(t);
+					console.log(t);
 				}});
 			}
 		} else {
-			alert('No data specified.');
+			console.log('No data specified.');
 		}
 	},
 	_init_display: function() { 
@@ -92,7 +93,6 @@ $.widget( "ui.mediaslide", {
 	},
 	_parse_data: function() { 
 		var d=new Array();
-		
 		if (this.dataType=='atom') { 
 			this.data.find('entry').each(function(i,ob) { 
 				var normal=null;
@@ -112,13 +112,12 @@ $.widget( "ui.mediaslide", {
 					normal: normal,
 					thumb: thumb
 				});
-				//alert(o.html());
 			});
 			this.d=d;
 		} else if (this.dataType=='json') { 
 
 		} else {
-			alert('unknown data type');
+			console.log('unknown data type');
 		}
 	},
 	_do_html_setup: function() { 
@@ -174,13 +173,18 @@ $.widget( "ui.mediaslide", {
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
 		if (this.position+offset<0) { 
-			console.log('Tried to skip past the beginning');
+			console.log('Mediaslide: Tried to skip past the beginning');
 			return false;
 		}
 		if (this.position+offset>this.d.length-1) { 
-			console.log('Tried to skip past the end');
+			console.log('Mediaslide: Tried to skip past the end');
 			return false;
 		}
+		if (this.slide_in_progress) { 
+			console.log('Mediaslide: Slide already in progress');
+			return false;
+		}
+		this.slide_in_progress = true;
 		var active_frame = this._get_foreground_pframe();
 		var inactive_frame = this._get_background_pframe();
 		var tob=this;
@@ -194,9 +198,13 @@ $.widget( "ui.mediaslide", {
 				tob._toggle_pframe();
 				jQuery(active_frame).css({opacity: 0}).hide();
 				tob.position=tob.position+offset;
+				tob.slide_in_progress=false;
 			});
 		});
 		//alert('slide: '+offset.toString());	
+	},
+	position_slide_to: function(pos) { 
+		this.position_slide(pos-this.position);
 	},
 	next: function() { 
 		this.position_slide(1);
@@ -209,6 +217,12 @@ $.widget( "ui.mediaslide", {
 	},
 	backward: function (num) { 
 		this.position_slide(0-num);
+	},
+	first: function() { 
+		this.position_slide_to(0);
+	},
+	last: function() { 
+		this.position_slide_to(this.d.length-1);
 	},
 	// Use the _setOption method to respond to changes to options
 	_setOption: function( key, value ) {
