@@ -150,6 +150,13 @@ $.widget( "ui.mediaslide", {
 			return this.pictureframe1;
 		}
 	},
+	_toggle_pframe: function() { 
+		if (this.pframe_displaying==1) { 
+			this.pframe_displaying=2;
+		} else { 
+			this.pframe_displaying=1;
+		}
+	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
 		var frame=this._get_foreground_pframe();
@@ -170,10 +177,12 @@ $.widget( "ui.mediaslide", {
 		}
 		var active_frame = this._get_foreground_pframe();
 		var inactive_frame = this._get_background_pframe();
+		var tob=this;
 		jQuery(active_frame).css({'z-index': 1});
 		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position+offset].normal);
 		jQuery(inactive_frame).fadeTo('slow', 1.0, function() { 
-			
+			tob._toggle_pframe();
+			jQuery(active_frame).css({opacity: 0.0});
 		});
 		//alert('slide: '+offset.toString());	
 	},
