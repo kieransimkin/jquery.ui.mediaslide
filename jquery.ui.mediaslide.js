@@ -136,6 +136,8 @@ $.widget( "ui.mediaslide", {
 			l.push(p);
 
 		});
+		this.thumbslide.width(this._get_visible_scrollbox_width());
+		this.thumbslide_content.width(this._get_total_scrollbox_width());
 		this._do_thumbnail_image_loads();
 	},
 	_do_thumbnail_image_loads: function() { 
@@ -171,12 +173,10 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
 							.css({'overflow': 'auto'})
-							.width(this._get_visible_scrollbox_width())
 							.appendTo(this.element);
 		this.thumbslide_content=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
-							.width(this._get_total_scrollbox_width())
 							.appendTo(this.thumbslide);
 		this.thumbslide_scrollbar=jQuery('<div></div>')
 							.addClass('ui-widget')
