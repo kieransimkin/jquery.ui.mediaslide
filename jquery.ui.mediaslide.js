@@ -232,7 +232,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_get_scroll_position_estimate: function(pcent) { 
 		var dec=pcent/100;
-		return (this.d.length-1)*dec;
+		return ((this.d.length-1)-this.options.num_thumbs)*dec;
 	},
 	_get_foreground_pframe: function() { 
 		if (this.pframe_displaying==1) { 
@@ -290,6 +290,16 @@ $.widget( "ui.mediaslide", {
 		} else { 
 			return ret+1;
 		}
+	},
+	_get_first_thumb_count: function() { 
+		return Math.floor(this.options.num_thumbs/2);
+	},
+	_get_last_thumb_count: function() { 
+		var halfthumbs=Math.floor(this.options.num_thumbs/2);
+		if (this.options.num_thumbs % 2 != 0) { 
+			halfthumbs++;
+		}
+		return halfthumbs;
 	},
 	_get_first_thumb_position: function(pos) { 
 		var position=this.position;
