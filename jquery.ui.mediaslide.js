@@ -10,7 +10,7 @@ $.widget( "ui.mediaslide", {
 		"json_ajax": null,
 		"start_position": 0,
 		"thumbs_visible": true,
-		"num_thumbs": 5,
+		"num_thumbs": 4,
 		"thumb_width": 200,
 		"thumb_spacing": 5
 	},
