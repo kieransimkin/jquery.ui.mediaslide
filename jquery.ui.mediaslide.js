@@ -190,11 +190,11 @@ $.widget( "ui.mediaslide", {
 			if (tob.mainpicture.height()!=jQuery(inactive_frame).height() || tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
 				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width()},'fast');
 			}
-		});
-		jQuery(inactive_frame).fadeTo('slow', 1.0, function() { 
-			tob._toggle_pframe();
-			jQuery(active_frame).css({opacity: 0}).hide();
-			tob.position=tob.position+offset;
+			jQuery(inactive_frame).fadeTo('slow', 1.0, function() { 
+				tob._toggle_pframe();
+				jQuery(active_frame).css({opacity: 0}).hide();
+				tob.position=tob.position+offset;
+			});
 		});
 		//alert('slide: '+offset.toString());	
 	},
