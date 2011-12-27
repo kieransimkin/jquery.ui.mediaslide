@@ -206,12 +206,12 @@ $.widget( "ui.mediaslide", {
 	},
 	_get_total_scrollbox_width: function() { 
 		var width=this.d.length*this.options.thumb_width;
-		width+=this.options.thumb_spacing*(this.d.length-1);
+		width+=this.options.thumb_spacing*this.d.length;
 		return width;
 	},
 	_get_visible_scrollbox_width: function() { 
 		var width=this.options.num_thumbs*this.options.thumb_width;
-		width+=this.options.thumb_spacing*(this.options.num_thumbs-1);
+		width+=this.options.thumb_spacing*this.options.num_thumbs;
 		return width;
 	},
 	_toggle_pframe: function() { 
