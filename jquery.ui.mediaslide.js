@@ -132,7 +132,8 @@ $.widget( "ui.mediaslide", {
 		this.pictureframe2=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe2')
-							.css({position: 'absolute', 'top': '0px', 'left': '0px','display': 'none'})
+							.css({position: 'absolute', 'top': '0px', 'left': '0px'})
+							.opacity(0)
 							.appendTo(this.mainpicture);
 		this.html_setup=true;
 	},
@@ -175,7 +176,7 @@ $.widget( "ui.mediaslide", {
 		jQuery(inactive_frame).fadeIn('slow', function() { 
 			
 		});
-		alert('slide: '+offset.toString());	
+		//alert('slide: '+offset.toString());	
 	},
 	next: function() { 
 		this.position_slide(1);
