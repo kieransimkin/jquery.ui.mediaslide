@@ -145,7 +145,7 @@ $.widget( "ui.mediaslide", {
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
 		
 		//build slider
-		var scrollbar = this.thumbslide_slider.slider({
+		this.scrollbar = this.thumbslide_slider.slider({
 			slide: function( event, ui ) {
 				/*
 				if ( scrollContent.width() > scrollPane.width() ) {
@@ -159,7 +159,7 @@ $.widget( "ui.mediaslide", {
 			}
 		});
 		//append icon to handle
-		var handleHelper = scrollbar.find( ".ui-slider-handle" )
+		this.handleHelper = scrollbar.find( ".ui-slider-handle" )
 		.css({'top': '-1px','height': '0.8em'})
 		.mousedown(function() {
 			scrollbar.width( handleHelper.width() );
@@ -170,9 +170,21 @@ $.widget( "ui.mediaslide", {
 		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical'></span>" )
 		.wrap( jQuery("<div></div>" ).css({ 'position': 'relative', width: '100%', height: '100%', margin: '0 auto' })).parent();
 		//change overflow to hidden now that slider handles the scrolling
+
 		scrollPane.css( "overflow", "hidden" );
-		
+		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
+	},
+	_size_scrollbar: function() { 
+		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
+		var remainder = scrollContent.width() - scrollPan.width();
+		var proportion = remainder / scrollContent.width();
+		var handleSize = scrollPane.width() - ( proportion * scrollPane.width() );
+		this.scrollbar.find( ".ui-slider-handle" ).css({
+			width: handleSize,
+			"margin-left": -handleSize / 2
+		});
+		this.handleHelper.width( "" ).width( scrollbar.width() - handleSize );
 	},
 	_do_thumbnail_image_loads: function() { 
 		var l=this.thumbnails;
