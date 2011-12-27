@@ -167,7 +167,6 @@ $.widget( "ui.mediaslide", {
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
-		alert('starting slide position:' + this.position+ ' offset: '+offset);
 		if (this.position+offset<0) { 
 			console.log('Tried to skip past the beginning');
 			return false;
@@ -185,7 +184,6 @@ $.widget( "ui.mediaslide", {
 			tob._toggle_pframe();
 			jQuery(active_frame).css({opacity: 0.0});
 			tob.position=tob.position+offset;
-			alert('ending slide position:' + tob.position+ ' offset: '+offset);
 		});
 		//alert('slide: '+offset.toString());	
 	},
