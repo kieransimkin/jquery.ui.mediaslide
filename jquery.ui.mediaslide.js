@@ -216,10 +216,6 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-thumbslide')
 							.css({'overflow': 'auto'})
 							.appendTo(this.element);
-		this.thumbslide_content=jQuery('<div></div>')
-							.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-thumbslide-content')
-							.appendTo(this.thumbslide);
 		this.thumbslide_scrollbar=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
@@ -228,6 +224,10 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-slider')
 							.appendTo(this.thumbslide_scrollbar);
+		this.thumbslide_content=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide-content')
+							.appendTo(this.thumbslide);
 		this.html_setup=true;
 	},
 	_get_scroll_position_estimate: function(pcent) { 
