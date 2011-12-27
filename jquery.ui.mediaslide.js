@@ -186,11 +186,11 @@ $.widget( "ui.mediaslide", {
 			tob.position=tob.position+offset;
 			if (tob.mainpicture.height()!=jQuery(inactive_frame).height()) { 
 				alert('g1');
-				jQuery(mainpicture).animate({height: jQuery(inactive_frame).height()},'fast');
+				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height()},'fast');
 			}
 			if (tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
 				alert('g2');
-				jQuery(mainpicture).animate({width: jQuery(inactive_frame).width()},'fast');
+				jQuery(tob.mainpicture).animate({width: jQuery(inactive_frame).width()},'fast');
 			}
 		});
 		//alert('slide: '+offset.toString());	
