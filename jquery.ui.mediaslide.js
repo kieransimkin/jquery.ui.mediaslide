@@ -150,7 +150,9 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-thumb-div')
 							.addClass('ui-corner-all')
 							.addClass('ui-state-default')
-							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center', 'border': '0px' })
+							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center'})
+							.css({'outline': p.css('border')})
+							.css({'border': 'none'})
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			jQuery("<div></div>")		.addClass('ui-widget')
@@ -319,7 +321,6 @@ $.widget( "ui.mediaslide", {
 		} else if (pos>=(this.d.length-1)-this._get_last_thumb_count()) { 
 			return this.d.length-(1+this.options.num_thumbs);
 		}
-		// This maths could be wrong, it took a lot of guessing to get it vaguely right
 		var onethumb=1/(this.d.length-(1+this.options.num_thumbs));
 		var p=pos-this._get_first_thumb_count();
 		return (onethumb*(p))*(this.d.length-(1+this.options.num_thumbs));
