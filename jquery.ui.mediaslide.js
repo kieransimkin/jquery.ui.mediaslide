@@ -158,8 +158,9 @@ $.widget( "ui.mediaslide", {
 				if (me.preloadtimeout!=null) {
 					clearTimeout(me.preloadtimeout);
 				}
+				var zme=me;
 				me.preloadtimeout=setTimeout(function() { 
-					me.do_thumbnail_image_loads(Math.floor(me._get_scroll_position_estimate(ui.value)));
+					zme.do_thumbnail_image_loads(Math.floor(zme._get_scroll_position_estimate(ui.value)));
 				},500);
 			},
 			change: function(event, ui) {
