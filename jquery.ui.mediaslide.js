@@ -285,8 +285,10 @@ $.widget( "ui.mediaslide", {
 			pos=this.position;
 		}
 		if (pos<=this._get_first_thumb_count()) {
+			console.log("0");
 			return 0;
 		} else if (pos>=this._get_last_thumb_count()) { 
+			console.log("100");
 			return 100;
 		}
 		var p=pos-this._get_first_thumb_count();
