@@ -370,11 +370,13 @@ $.widget( "ui.mediaslide", {
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
 		var frame=this._get_foreground_pframe();
-		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
-		this.mainpicture.width(jQuery(frame).width());
-		this.mainpicture.height(jQuery(frame).height());
 		this.position=pos;
 		this.thumbnails[this.position].hide();
+		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
+		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
+			this.mainpicture.width(jQuery(frame).width());
+			this.mainpicture.height(jQuery(frame).height());
+		});
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
