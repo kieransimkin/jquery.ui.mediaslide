@@ -166,12 +166,12 @@ $.widget( "ui.mediaslide", {
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
 		this.preloadtimeout=null;
 		//build slider
-		this.scrollbar = this.thumbslide_slider.slider({step: 0.1,
+		this.scrollbar = this.thumbslide_slider.slider({step: 0.1, max: (this.d.length-1),
 			slide: function( event, ui ) {
 				scrollContent.stop();
 				if ( scrollContent.width() > scrollPane.width() ) {
 					var tpos =  Math.round(
-						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
+						ui.value / (this.d.length-1) * ( scrollPane.width() - scrollContent.width() )
 					);
 					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
 					if (tpos % val > val/2) { 
@@ -194,7 +194,7 @@ $.widget( "ui.mediaslide", {
 				scrollContent.stop();
 				if ( scrollContent.width() > scrollPane.width() ) {
 					var tpos= Math.round(
-						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
+						ui.value / (this.d.length-1) * ( scrollPane.width() - scrollContent.width() )
 					);
 					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
 					if (tpos % val > val/2) { 
@@ -289,7 +289,7 @@ $.widget( "ui.mediaslide", {
 		this.html_setup=true;
 	},
 	_get_scroll_position_estimate: function(pcent) { 
-		var dec=pcent/100;
+		var dec=pcent/(this.d.length-1);
 		return (((this.d.length-1)-this.options.num_thumbs)*dec)+this._get_first_thumb_count();
 	},
 	_get_position_scroll_estimate: function(pos) { 
@@ -299,12 +299,12 @@ $.widget( "ui.mediaslide", {
 		if (pos<=this._get_first_thumb_count()) {
 			return 0;
 		} else if (pos>=(this.d.length-1)-this._get_last_thumb_count()) { 
-			return 100;
+			return this.d.length-1;
 		}
 		// This maths could be wrong, it took a lot of guessing to get it vaguely right
 		var onethumb=1/(this.d.length-(1+this.options.num_thumbs));
 		var p=pos-this._get_first_thumb_count();
-		return (onethumb*(p))*100;
+		return (onethumb*(p))*(this.d.length-1);
 	},
 	_get_foreground_pframe: function() { 
 		if (this.pframe_displaying==1) { 
