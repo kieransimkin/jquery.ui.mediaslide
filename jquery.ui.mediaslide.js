@@ -29,7 +29,7 @@ $.widget( "ui.mediaslide", {
 		"thumb_spacing": 10,	
 		"loading_thumb": "ajaxloader.gif",
 		"quantize_scroll": false,
-		"caption_formatter": function(c) { return c; }}
+		"caption_formatter": function(c) { return c; }
 	},
 
 	// Set up the widget
