@@ -136,7 +136,8 @@ $.widget( "ui.mediaslide", {
 							.appendTo(t);
 			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
 			p.find('.ui-widget-mediaslide-thumb-link').click(function() { 
-				console.log("clicked!");
+				me.position_slide_to(i);
+				return false;
 			});
 			l.push(p);
 
