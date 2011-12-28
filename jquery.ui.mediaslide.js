@@ -154,7 +154,7 @@ $.widget( "ui.mediaslide", {
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			p.css({'outline': '1px solid ' + p.css('border-color')});
-			alert(p.css('border-color'));	
+			alert(p.css('border'));	
 			p.css({'border': 'none'});
 			jQuery("<div></div>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
