@@ -1,10 +1,11 @@
 /*  jQuery.ui.mediaslide.js
+ *  Ver: 0.0.1
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2012, Kieran Simkin
  *  All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ *  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  * 
  *  -  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *  -  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
@@ -40,7 +41,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_init_data: function() { 
 		o=this;
-		if (this.options.atom_xml_data != null) { 
+		if (this.options.atom_xml_data !== null) { 
 			this.dataType='atom';
 			if (typeof(this.options.atom_xml_data)=='string') { 
 				this.data=jQuery.parseXML(this.options.atom_xml_data);
@@ -48,7 +49,7 @@ $.widget( "ui.mediaslide", {
 				this.data=this.options.atom_xml_data;
 			}
 			this._init_display();
-		} else if (this.options.atom_xml_ajax != null) { 
+		} else if (this.options.atom_xml_ajax !== null) { 
 			if (typeof(this.options.atom_xml_ajax)!='string') { 
 				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
 					o.data=jQuery(data);
@@ -66,7 +67,7 @@ $.widget( "ui.mediaslide", {
 					console.log(t);
 				}});
 			}
-		} else if (this.options.json_data!= null) { 
+		} else if (this.options.json_data!== null) { 
 			this.dataType='json';
 			if (typeof(this.options.json_data)=='string') { 
 				this.data=jQuery.parseJSON(this.options.json_data);
@@ -74,7 +75,7 @@ $.widget( "ui.mediaslide", {
 				this.data=this.options.json_data;
 			}
 			this._init_display();
-		} else if (this.options.json_ajax != null) { 
+		} else if (this.options.json_ajax !== null) { 
 			if (typeof(this.options.json_ajax)!='string') { 
 				jQuery.getJSON(this.options.json_ajax.url,{data: this.options.json_ajax.options, success: function(data) { 
 					o.data=jQuery(data);
@@ -176,7 +177,7 @@ $.widget( "ui.mediaslide", {
 					scrollContent.animate({ "margin-left": 0},300);
 				}
 				var scrollpos=Math.floor(me._get_scroll_position_estimate(ui.value));
-				if (me.preloadtimeout!=null) {
+				if (me.preloadtimeout!==null) {
 					clearTimeout(me.preloadtimeout);
 				}
 				me.preloadtimeout=setTimeout(function(zme) { 
@@ -238,6 +239,7 @@ $.widget( "ui.mediaslide", {
 			me.thumbnails[p].hide();
 		});
 		
+		this.scrollbar.slider('value',this._get_position_scroll_estimate());
 	},
 	_do_html_setup: function() { 
 		this.element.html('');
@@ -277,6 +279,21 @@ $.widget( "ui.mediaslide", {
 	_get_scroll_position_estimate: function(pcent) { 
 		var dec=pcent/100;
 		return (((this.d.length-1)-this.options.num_thumbs)*dec)+this._get_first_thumb_count();
+	},
+	_get_position_scroll_estimate: function(pos) { 
+		if (typeof(pos)=='undefined') { 
+			pos=this.position;
+		}
+		if (pos<=this._get_first_thumb_count()) {
+			return 0;
+		} else if (pos>=this._get_last_thumb_count()) { 
+			return 100;
+		}
+		var p=pos-this._get_first_thumb_count();
+		return (p/(((this.d.length-1)-this._get_first_thumb_count())-this._get_last_thumb_count()))*100;
+	},
+	_get_scroll_position_in_range: function(pcent) {
+
 	},
 	_get_foreground_pframe: function() { 
 		if (this.pframe_displaying==1) { 
