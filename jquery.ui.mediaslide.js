@@ -200,7 +200,6 @@ $.widget( "ui.mediaslide", {
 	},
 	_handle_thumb_slide: function(oldpos) { 
 		this._do_thumbnail_image_loads();
-		console.log("pos: "+this.position+" oldpos: "+oldpos);
 		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px', 'opacity': 0.0, 'top': '-150px'}).show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing(), 'opacity': 1.0,'top': '0px'},500,'linear',function() { 
 
 		});
