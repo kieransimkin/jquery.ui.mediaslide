@@ -28,7 +28,8 @@ $.widget( "ui.mediaslide", {
 		"thumb_width": 200,
 		"thumb_spacing": 10,	
 		"loading_thumb": "ajaxloader.gif",
-		"quantize_scroll": false
+		"quantize_scroll": false,
+		"caption_formatter": function(c) { return c; }}
 	},
 
 	// Set up the widget
@@ -150,6 +151,10 @@ $.widget( "ui.mediaslide", {
 							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center' })
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
+			jQuery("<div></div>")		.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumb-caption')
+							.html(me.options.caption_formatter(o.title))
+							.appendTo(p);
 			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
 			p.find('.ui-widget-mediaslide-thumb-img').attr('src',me.options.loading_thumb);
 			p.find('.ui-widget-mediaslide-thumb-link').click(function() { 
