@@ -152,7 +152,7 @@ $.widget( "ui.mediaslide", {
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
 		this.preloadtimeout=null;
 		//build slider
-		this.scrollbar = this.thumbslide_slider.slider({
+		this.scrollbar = this.thumbslide_slider.slider({step: 0.1,
 			slide: function( event, ui ) {
 				scrollContent.stop();
 				if ( scrollContent.width() > scrollPane.width() ) {
