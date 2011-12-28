@@ -171,7 +171,7 @@ $.widget( "ui.mediaslide", {
 				scrollContent.stop();
 				if ( scrollContent.width() > scrollPane.width() ) {
 					var tpos =  Math.round(
-						ui.value / (this.d.length-1) * ( scrollPane.width() - scrollContent.width() )
+						ui.value / (me.d.length-1) * ( scrollPane.width() - scrollContent.width() )
 					);
 					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
 					if (tpos % val > val/2) { 
