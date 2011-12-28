@@ -303,7 +303,7 @@ $.widget( "ui.mediaslide", {
 		}
 		// This maths could be wrong, it took a lot of guessing to get it vaguely right
 		var p=pos-this._get_first_thumb_count();
-		var onethumb=1/(this.d.length-(1+this._get_last_thumb_count()+this._get_first_thumb_count()));
+		var onethumb=1/(this.d.length-(1+this.options.thumb_count));
 		return (onethumb*(p))*100;
 	},
 	_get_foreground_pframe: function() { 
