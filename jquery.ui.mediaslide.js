@@ -18,12 +18,15 @@
 $.widget( "ui.mediaslide", {
 	// These options will be used as defaults
 	options: { 
+
+		// One of these must be specified:
 		"atom_xml_data": null,
 		"atom_xml_ajax": null,
 		"json_data": null,
 		"json_ajax": null,
-		"start_position": 0,
-		"num_thumbs": 4,
+
+		"start_position": 0, // where to start in the list
+		"num_thumbs": 4, 
 		"thumb_width": 200,
 		"thumb_spacing": 10,	
 		"loading_thumb": "ajaxloader.gif",
@@ -35,33 +38,43 @@ $.widget( "ui.mediaslide", {
 		"show_slide_page_controls": true,
 		"show_thumbs": true
 	},
+	// Slide to a specific position
 	position_slide_to: function(pos) { 
 		this.position_slide(pos-this.position);
 	},
+	// Slide to the next position
 	next: function() { 
 		this.position_slide(1);
 	},
+	// Slide to the previous position
 	previous: function() { 
 		this.position_slide(-1);
 	},
+	// Slide forward a number of places
 	forward: function (num) { 
 		this.position_slide(num);
 	},
+	// Slide backwards a number of places
 	backward: function (num) { 
 		this.position_slide(0-num);
 	},
+	// Slide to the beginning
 	first: function() { 
 		this.position_slide_to(0);
 	},
+	// Slide to the end
 	last: function() { 
 		this.position_slide_to(this.d.length-1);
 	},
+	// Get the current position (zero indexed)
 	get_position: function() { 
 		return this.position;
 	},
+	// Get total number of media items
 	get_count: function() { 
 		return this.d.length;
 	},
+	// Get the title of the current media item
 	get_current_title: function() { 
 		return this.d[this.position].title;	
 	},
@@ -114,6 +127,7 @@ $.widget( "ui.mediaslide", {
 			tob._handle_thumb_slide(oldpos);
 		});
 	},
+	// Setup the main HTML
 	_do_html_setup: function() { 
 		this.element.html('');
 		this.top_controls=jQuery('<div></div>')	.addClass('ui-widget')
@@ -171,12 +185,15 @@ $.widget( "ui.mediaslide", {
 		}
 		this.html_setup=true;
 	},
+	// Setup the HTML for the top controls
 	_do_top_controls_html_setup: function() { 
 
 	},
+	// Setup the HTML for the bottom controls
 	_do_bottom_controls_html_setup: function() { 
 
 	},
+	// Setup the HTML for the thumbnail strip
 	_do_thumbnail_html_setup: function() { 
 		this.thumbnails=new Array();
 		var l = this.thumbnails;
@@ -283,6 +300,7 @@ $.widget( "ui.mediaslide", {
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
 	},
+	// Size the scrollbar handle depending on how many media items we have
 	_size_scrollbar: function() { 
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
 		var remainder = scrollContent.width() - scrollPane.width();
@@ -294,6 +312,7 @@ $.widget( "ui.mediaslide", {
 		});
 		this.handleHelper.width( "" ).width( this.scrollbar.width() - handleSize );
 	},
+	// Load images centred on a specific position
 	_do_thumbnail_image_loads: function(pos) { 
 		this.preloadtimeout=null;
 		var l=this.thumbnails;
@@ -303,6 +322,7 @@ $.widget( "ui.mediaslide", {
 			l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
 		}
 	},
+	// Perform the actual animations that show and hide thumbs from the thumbnail strip
 	_handle_thumb_slide: function(oldpos) { 
 		this._do_thumbnail_image_loads();
 		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px', 'opacity': 0.0, 'top': '-150px'}).show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing(), 'opacity': 1.0,'top': '0px'},600,'linear',function() { 
@@ -316,10 +336,12 @@ $.widget( "ui.mediaslide", {
 		
 		this.scrollbar.slider('value',this._get_position_scroll_estimate());
 	},
+	// Estimate which image position is in the centre of the thumbnail strip
 	_get_scroll_position_estimate: function(pcent) { 
 		var dec=pcent/(this.d.length-(1+this.options.num_thumbs));
 		return (((this.d.length-1)-this.options.num_thumbs)*dec)+this._get_first_thumb_count();
 	},
+	// Estimate the scrollbar position for a specific image in the thumbnail strip
 	_get_position_scroll_estimate: function(pos) { 
 		if (typeof(pos)=='undefined') { 
 			pos=this.position;
@@ -333,6 +355,7 @@ $.widget( "ui.mediaslide", {
 		var p=pos-this._get_first_thumb_count();
 		return (onethumb*(p))*(this.d.length-(1+this.options.num_thumbs));
 	},
+	// Get the picture frame that's currently in the foreground
 	_get_foreground_pframe: function() { 
 		if (this.pframe_displaying==1) { 
 			return this.pictureframe1;
@@ -340,6 +363,7 @@ $.widget( "ui.mediaslide", {
 			return this.pictureframe2;
 		}
 	},
+	// Get the picture frame that's not currently visible
 	_get_background_pframe: function() { 
 		if (this.pframe_displaying==1) { 
 			return this.pictureframe2;
@@ -347,16 +371,19 @@ $.widget( "ui.mediaslide", {
 			return this.pictureframe1;
 		}
 	},
+	// Get the total width of the thumbnail strip
 	_get_total_scrollbox_width: function() { 
 		var width=(this.d.length-1)*this.options.thumb_width;
 		width+=this.options.thumb_spacing*(this.d.length-1);
 		return width;
 	},
+	// Get the width of the visible section of the thumbnail strip
 	_get_visible_scrollbox_width: function() { 
 		var width=this.options.num_thumbs*this.options.thumb_width;
 		width+=this.options.thumb_spacing*this.options.num_thumbs;
 		return width;
 	},
+	// Switch our record of which picture frame is visible
 	_toggle_pframe: function() { 
 		if (this.pframe_displaying==1) { 
 			this.pframe_displaying=2;
@@ -364,6 +391,7 @@ $.widget( "ui.mediaslide", {
 			this.pframe_displaying=1;
 		}
 	},
+	// Work out how much margin-left to apply to each thumbnail
 	_get_left_thumb_spacing: function() { 
 		var pad=Math.floor(this.options.thumb_spacing/2);
 		if (this.options.thumb_spacing % 2 != 0) { 
@@ -371,9 +399,11 @@ $.widget( "ui.mediaslide", {
 		}
 		return pad;
 	},
+	// Work out how much margin-right to apply to each thumbnail
 	_get_right_thumb_spacing: function() { 
 		return Math.floor(this.options.thumb_spacing/2);
 	},
+	// What's the first image in the range we're loading?
 	_get_first_preload_thumb_position: function(pos) { 
 		var ret=this._get_first_thumb_position(pos);
 		if (ret-1<0) { 
@@ -382,6 +412,7 @@ $.widget( "ui.mediaslide", {
 			return ret-1;
 		}
 	},
+	// What's the last image in the range to load?
 	_get_last_preload_thumb_position: function(pos) { 
 		var ret=this._get_last_thumb_position(pos);
 		if (ret+1>this.d.length-1) { 
@@ -390,9 +421,11 @@ $.widget( "ui.mediaslide", {
 			return ret+1;
 		}
 	},
+	// How many thumbs before the middle
 	_get_first_thumb_count: function() { 
 		return Math.floor(this.options.num_thumbs/2);
 	},
+	// How many thumbs after the middle?
 	_get_last_thumb_count: function() { 
 		var halfthumbs=Math.floor(this.options.num_thumbs/2);
 		if (this.options.num_thumbs % 2 != 0) { 
@@ -400,6 +433,7 @@ $.widget( "ui.mediaslide", {
 		}
 		return halfthumbs;
 	},
+	// Used to calculate the range of images to preload when we seek the slider
 	_get_first_thumb_position: function(pos) { 
 		var position=this.position;
 		if (typeof(pos)!='undefined') { 
@@ -421,6 +455,7 @@ $.widget( "ui.mediaslide", {
 			return first_position;
 		}
 	},
+	// Used to calculate 
 	_get_last_thumb_position: function(pos) { 
 		var position=this.position;
 		if (typeof(pos)!='undefined') { 
