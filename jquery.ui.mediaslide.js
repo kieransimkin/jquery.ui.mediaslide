@@ -143,7 +143,7 @@ $.widget( "ui.mediaslide", {
 
 		//scrollpane parts
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
-		
+		this.preloadtimeout=null;
 		//build slider
 		this.scrollbar = this.thumbslide_slider.slider({step: 0.1,
 			slide: function( event, ui ) {
@@ -154,6 +154,11 @@ $.widget( "ui.mediaslide", {
 				} else {
 					scrollContent.css( "margin-left", 0 );
 				}
+				var scrollpos=Math.floor(me._get_scroll_position_estimate(ui.value));
+				if (me.preloadtimeout!=null) {
+					clearTimeout(me.preloadtimeout);
+				}
+				me.preloadtimeout=setTimeout("me._do_thumbnail_image_loads("+scrollpos+")",500);
 			},
 			change: function(event, ui) {
 				me._do_thumbnail_image_loads(Math.floor(me._get_scroll_position_estimate(ui.value)));
@@ -183,6 +188,7 @@ $.widget( "ui.mediaslide", {
 		this.handleHelper.width( "" ).width( this.scrollbar.width() - handleSize );
 	},
 	_do_thumbnail_image_loads: function(pos) { 
+		this.preloadtimeout=null;
 		var l=this.thumbnails;
 		var t=this.thumbslide_content;
 		var d=this.d;
