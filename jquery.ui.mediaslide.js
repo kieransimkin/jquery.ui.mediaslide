@@ -160,6 +160,8 @@ $.widget( "ui.mediaslide", {
 				me.position_slide_to(i);
 				return false;
 			});
+
+			an.css({'outline': 0});
 			var cap=jQuery("<span></span>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
 							.css({'width': me.options.thumb_width, 'margin-bottom': '5px'})
