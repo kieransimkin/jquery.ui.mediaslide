@@ -173,11 +173,10 @@ $.widget( "ui.mediaslide", {
 					var tpos =  Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
 					);
-					var val=Math.floor((me.options.thumb_width+me.options_thumb_spacing));
+					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
 					if (tpos % val > val/2) { 
 						tpos+=val;
 					}
-					console.log("tpos: "+tpos+ " val: "+val);
 					tpos-=tpos % val;
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
@@ -197,11 +196,10 @@ $.widget( "ui.mediaslide", {
 					var tpos= Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
 					);
-					var val=Math.floor((me.options.thumb_width+me.options_thumb_spacing));
+					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
 					if (tpos % val > val/2) { 
 						tpos+=val;
 					}
-					console.log("tpos: "+tpos+" val: "+val);
 					tpos-=tpos % val;
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
