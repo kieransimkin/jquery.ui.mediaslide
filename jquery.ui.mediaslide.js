@@ -304,7 +304,7 @@ $.widget( "ui.mediaslide", {
 		// This maths could be wrong, it took a lot of guessing to get it vaguely right
 		var p=pos-this._get_first_thumb_count();
 		var onethumb=1/(this.d.length-(1+this.options.num_thumbs));
-		return (onethumb*(p+this._get_first_thumb_count()))*100;
+		return (onethumb*(pos))*100;
 	},
 	_get_foreground_pframe: function() { 
 		if (this.pframe_displaying==1) { 
