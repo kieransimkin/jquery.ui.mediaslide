@@ -290,8 +290,8 @@ $.widget( "ui.mediaslide", {
 			return 100;
 		}
 		var p=pos-this._get_first_thumb_count();
-		var onethumb=1/(this.d.length-7);
-		return (onethumb*(p+1))*100;
+		var onethumb=1/(this.d.length-(1+this._get_last_thumb_count()+this._get_first_thumb_count()));
+		return (onethumb*(p+this._get_first_thumb_count()))*100;
 	},
 	_get_scroll_position_in_range: function(pcent) {
 
