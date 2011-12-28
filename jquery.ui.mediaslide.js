@@ -148,7 +148,9 @@ $.widget( "ui.mediaslide", {
 		jQuery.each(this.d,function(i,o) { 
 			var p=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-div')
-							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center', 'border': '1px solid black' })
+							.addClass('ui-corner-all')
+							.addClass('ui-state-default')
+							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center', 'border': '0px' })
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			jQuery("<div></div>")		.addClass('ui-widget')
