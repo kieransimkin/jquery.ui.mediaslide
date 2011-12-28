@@ -28,7 +28,7 @@ $.widget( "ui.mediaslide", {
 		"thumb_width": 200,
 		"thumb_spacing": 10,	
 		"loading_thumb": "ajaxloader.gif",
-		"quantize_scroll": true
+		"quantize_scroll": false
 	},
 
 	// Set up the widget
@@ -191,6 +191,11 @@ $.widget( "ui.mediaslide", {
 				}
 				me.preloadtimeout=setTimeout(function(zme) { 
 					zme._do_thumbnail_image_loads(Math.floor(zme._get_scroll_position_estimate(ui.value)));
+					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
+					if (tpos % val > val/2) { 
+						tpos+=val;
+					}
+					tpos-=tpos % val;
 				},300,me);
 			},
 			change: function(event, ui) {
