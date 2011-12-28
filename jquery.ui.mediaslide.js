@@ -289,7 +289,6 @@ $.widget( "ui.mediaslide", {
 							.appendTo(this.mainpicture);
 		this.thumbslide_scrollbar=jQuery('<div></div>')
 							.addClass('ui-widget')
-							.addClass('ui-helper-clearfix')
 							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
 							.css({'z-index': 1,'margin':'auto auto'})
 							.appendTo(this.element);
