@@ -158,8 +158,9 @@ $.widget( "ui.mediaslide", {
 				if (me.preloadtimeout!=null) {
 					clearTimeout(me.preloadtimeout);
 				}
-				var loadfunc=me._do_thumbnail_image_loads;
-				me.preloadtimeout=setTimeout("loadfunc("+scrollpos+")",500);
+				me.preloadtimeout=setTimeout(function() { 
+					me.do_thumbnail_image_loads(Math.floor(me._get_scroll_position_estimate(ui.value)));
+				},500);
 			},
 			change: function(event, ui) {
 				me._do_thumbnail_image_loads(Math.floor(me._get_scroll_position_estimate(ui.value)));
