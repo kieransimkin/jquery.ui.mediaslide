@@ -178,6 +178,7 @@ $.widget( "ui.mediaslide", {
 						tpos+=val;
 					}
 					tpos-=tpos % val;
+					console.log("tpos: "+tpos);
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
 					scrollContent.animate({ "margin-left": 0},300);
@@ -201,6 +202,7 @@ $.widget( "ui.mediaslide", {
 						tpos+=val;
 					}
 					tpos-=tpos % val;
+					console.log("tpos: "+tpos);
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
 					scrollContent.animate({ "margin-left": 0},300);
