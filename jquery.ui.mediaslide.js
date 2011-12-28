@@ -93,18 +93,19 @@ $.widget( "ui.mediaslide", {
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
 		if (this.position+offset<0) { 
-			console.log('Mediaslide: Tried to skip past the beginning');
+			//console.log('Mediaslide: Tried to skip past the beginning');
 			return false;
 		}
 		if (this.position+offset>this.d.length-1) { 
-			console.log('Mediaslide: Tried to skip past the end');
+			//console.log('Mediaslide: Tried to skip past the end');
 			return false;
 		}
 		if (offset==0) { 
-			console.log('Mediaslide: Tried to move 0 spaces');
+			//console.log('Mediaslide: Tried to move 0 spaces');
+			return false;
 		}
 		if (this.slide_in_progress) { 
-			console.log('Mediaslide: Slide already in progress');
+			//console.log('Mediaslide: Slide already in progress');
 			return false;
 		}
 		this.slide_in_progress = true;
@@ -525,7 +526,7 @@ $.widget( "ui.mediaslide", {
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
-					console.log(t);
+					alert(t);
 				}});
 			} else { 
 				jQuery.ajax(this.options.atom_xml_ajax,{success: function(data) { 
@@ -533,7 +534,7 @@ $.widget( "ui.mediaslide", {
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
-					console.log(t);
+					alert(t);
 				}});
 			}
 		} else if (this.options.json_data!== null) { 
@@ -551,7 +552,7 @@ $.widget( "ui.mediaslide", {
 					o.dataType='json';
 					o._init_display();
 				}, error: function (j,t,e) { 
-					console.log(t);
+					alert(t);
 				}});
 			} else { 
 				jQuery.getJSON(this.options.json_ajax,{success: function(data) { 
@@ -559,11 +560,11 @@ $.widget( "ui.mediaslide", {
 					o.dataType='json';
 					o._init_display();
 				}, error: function (j,t,e) { 
-					console.log(t);
+					alert(t);
 				}});
 			}
 		} else {
-			console.log('No data specified.');
+			alert('No data specified.');
 		}
 	},
 	_init_display: function() { 
@@ -601,7 +602,7 @@ $.widget( "ui.mediaslide", {
 		} else if (this.dataType=='json') { 
 
 		} else {
-			console.log('unknown data type');
+			alert('unknown data type');
 		}
 		this._do_thumbnail_html_setup();
 	}
