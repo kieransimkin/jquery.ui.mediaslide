@@ -296,6 +296,7 @@ $.widget( "ui.mediaslide", {
 		if (typeof(pos)=='undefined') { 
 			pos=this.position;
 		}
+		return pos;
 		if (pos<=this._get_first_thumb_count()) {
 			return 0;
 		} else if (pos>=(this.d.length-1)-this._get_last_thumb_count()) { 
