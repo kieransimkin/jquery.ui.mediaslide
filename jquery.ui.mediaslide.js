@@ -151,10 +151,10 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-corner-all')
 							.addClass('ui-state-default')
 							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center'})
-							.css({'outline': p.css('border')})
-							.css({'border': 'none'})
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
+			p.css({'outline': p.css('border')});
+			p.css({'border': 'none'});
 			jQuery("<div></div>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
 							.css({'width': me.options.thumb_width})
