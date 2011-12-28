@@ -170,9 +170,11 @@ $.widget( "ui.mediaslide", {
 			slide: function( event, ui ) {
 				scrollContent.stop();
 				if ( scrollContent.width() > scrollPane.width() ) {
-					scrollContent.animate( {"margin-left": Math.round(
+					var tpos =  Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
-					) + "px"},300 );
+					);
+					tpos-=tpos % Math.floor(me.options.thumb_width/5);
+					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
 					scrollContent.animate({ "margin-left": 0},300);
 				}
@@ -187,9 +189,11 @@ $.widget( "ui.mediaslide", {
 			change: function(event, ui) {
 				scrollContent.stop();
 				if ( scrollContent.width() > scrollPane.width() ) {
-					scrollContent.animate( {"margin-left": Math.round(
+					var tpos= Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
-					) + "px"},300 );
+					);
+					tpos-=tpos % Math.floor(me.options.thumb_width/5);
+					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
 					scrollContent.animate({ "margin-left": 0},300);
 				}
@@ -289,12 +293,10 @@ $.widget( "ui.mediaslide", {
 		} else if (pos>=(this.d.length-1)-this._get_last_thumb_count()) { 
 			return 100;
 		}
+		// This maths could be wrong, it took a lot of guessing to get it vaguely right
 		var p=pos-this._get_first_thumb_count();
 		var onethumb=1/(this.d.length-(1+this._get_last_thumb_count()+this._get_first_thumb_count()));
 		return (onethumb*(p))*100;
-	},
-	_get_scroll_position_in_range: function(pcent) {
-
 	},
 	_get_foreground_pframe: function() { 
 		if (this.pframe_displaying==1) { 
