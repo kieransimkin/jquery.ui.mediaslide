@@ -287,7 +287,7 @@ $.widget( "ui.mediaslide", {
 		if (pos<=this._get_first_thumb_count()) {
 			console.log("pos: "+pos+" fcc: "+this._get_first_thumb_count());
 			return 0;
-		} else if (pos>=this._get_last_thumb_count()) { 
+		} else if (pos>=this.d.length-this._get_last_thumb_count()) { 
 			console.log("pos: "+pos+" lcc: "+this._get_last_thumb_count());
 			return 100;
 		}
