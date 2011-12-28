@@ -24,7 +24,7 @@ $.widget( "ui.mediaslide", {
 		"json_ajax": null,
 		"start_position": 0,
 		"thumbs_visible": true,
-		"num_thumbs": 4,
+		"num_thumbs": 6,
 		"thumb_width": 200,
 		"thumb_spacing": 10,	
 		"loading_thumb": "ajaxloader.gif"
