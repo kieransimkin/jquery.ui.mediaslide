@@ -32,114 +32,146 @@ $.widget( "ui.mediaslide", {
 		"caption_formatter": function(c) { return c; },
 		"small_captions": true,
 		"show_bottom_controls": true,
-		"show_top_controls": true
+		"show_top_controls": true,
+		"show_slide_page_controls": true
 	},
-
-	// Set up the widget
-	_create: function() {
-		this.setup = false;
-		this.html_setup = false;
-		this.slide_in_progress = false;
-		this.position=this.options.start_position;
-		this.pframe_displaying=1;
-		this._init_data();
+	position_slide_to: function(pos) { 
+		this.position_slide(pos-this.position);
 	},
-	_init_data: function() { 
-		o=this;
-		if (this.options.atom_xml_data !== null) { 
-			this.dataType='atom';
-			if (typeof(this.options.atom_xml_data)=='string') { 
-				this.data=jQuery.parseXML(this.options.atom_xml_data);
-			} else { 
-				this.data=this.options.atom_xml_data;
-			}
-			this._init_display();
-		} else if (this.options.atom_xml_ajax !== null) { 
-			if (typeof(this.options.atom_xml_ajax)!='string') { 
-				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
-					o.data=jQuery(data);
-					o.dataType='atom';
-					o._init_display();
-				}, error: function(j,t,e) { 
-					console.log(t);
-				}});
-			} else { 
-				jQuery.ajax(this.options.atom_xml_ajax,{success: function(data) { 
-					o.data=jQuery(data);
-					o.dataType='atom';
-					o._init_display();
-				}, error: function(j,t,e) { 
-					console.log(t);
-				}});
-			}
-		} else if (this.options.json_data!== null) { 
-			this.dataType='json';
-			if (typeof(this.options.json_data)=='string') { 
-				this.data=jQuery.parseJSON(this.options.json_data);
-			} else { 
-				this.data=this.options.json_data;
-			}
-			this._init_display();
-		} else if (this.options.json_ajax !== null) { 
-			if (typeof(this.options.json_ajax)!='string') { 
-				jQuery.getJSON(this.options.json_ajax.url,{data: this.options.json_ajax.options, success: function(data) { 
-					o.data=jQuery(data);
-					o.dataType='json';
-					o._init_display();
-				}, error: function (j,t,e) { 
-					console.log(t);
-				}});
-			} else { 
-				jQuery.getJSON(this.options.json_ajax,{success: function(data) { 
-					o.data=jQuery(data);
-					o.dataType='json';
-					o._init_display();
-				}, error: function (j,t,e) { 
-					console.log(t);
-				}});
-			}
-		} else {
-			console.log('No data specified.');
+	next: function() { 
+		this.position_slide(1);
+	},
+	previous: function() { 
+		this.position_slide(-1);
+	},
+	forward: function (num) { 
+		this.position_slide(num);
+	},
+	backward: function (num) { 
+		this.position_slide(0-num);
+	},
+	first: function() { 
+		this.position_slide_to(0);
+	},
+	last: function() { 
+		this.position_slide_to(this.d.length-1);
+	},
+	get_position: function() { 
+		return this.position;
+	},
+	get_count: function() { 
+		return this.d.length;
+	},
+	get_current_title: function() { 
+		return this.d[this.position].title;	
+	},
+	// Skips (without sliding) to a specific image number
+	position_skip: function(pos) { 
+		var frame=this._get_foreground_pframe();
+		this.position=pos;
+		this.thumbnails[this.position].hide();
+		var me=this;
+		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
+		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
+			me.mainpicture.width(jQuery(frame).width());
+			me.mainpicture.height(jQuery(frame).height());
+		});
+	},
+	// Slides forwards or backwards a number of positions
+	position_slide: function (offset) { 
+		if (this.position+offset<0) { 
+			console.log('Mediaslide: Tried to skip past the beginning');
+			return false;
 		}
-	},
-	_init_display: function() { 
-		if (!this.html_setup) { 
-			this._do_html_setup();
-			this.pframe_displaying=1;
+		if (this.position+offset>this.d.length-1) { 
+			console.log('Mediaslide: Tried to skip past the end');
+			return false;
 		}
-		this._parse_data();
-		this.position_skip(this.position);
-		this.setup=true;
-	},
-	_parse_data: function() { 
-		var d=new Array();
-		if (this.dataType=='atom') { 
-			this.data.find('entry').each(function(i,ob) { 
-				var normal=null;
-				var thumb=null;
-				jQuery(ob).find('link').each(function (o,lob) { 
-					if (jQuery(lob).attr('title')=='normal') { 
-						normal=jQuery(lob).attr('href');
-					} else if (jQuery(lob).attr('title')=='thumb') { 
-						thumb=jQuery(lob).attr('href');
-					}
-				});
-				d.push({
-					title: jQuery(ob).find('title').text(),
-					link: jQuery(ob).find('link').attr('href'),
-					id: jQuery(ob).find('id').text(),
-					updated: jQuery(ob).find('updated').text(),
-					normal: normal,
-					thumb: thumb
-				});
+		if (offset==0) { 
+			console.log('Mediaslide: Tried to move 0 spaces');
+		}
+		if (this.slide_in_progress) { 
+			console.log('Mediaslide: Slide already in progress');
+			return false;
+		}
+		this.slide_in_progress = true;
+		var oldpos=this.position;
+		this.position=this.position+offset;
+		var tob=this;
+		var active_frame = this._get_foreground_pframe();
+		var inactive_frame = this._get_background_pframe();
+		jQuery(active_frame).css({'z-index': 1});
+		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position].normal);
+		jQuery(inactive_frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
+			if (tob.mainpicture.height()!=jQuery(inactive_frame).height() || tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
+				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width()},'fast');
+			}
+			jQuery(inactive_frame).fadeTo('slow', 1.0, 'linear', function() { 
+				tob._toggle_pframe();
+				jQuery(active_frame).css({opacity: 0}).hide();
+				tob.slide_in_progress=false;
 			});
-			this.d=d;
-		} else if (this.dataType=='json') { 
-
-		} else {
-			console.log('unknown data type');
+			tob._handle_thumb_slide(oldpos);
+		});
+	},
+	_do_html_setup: function() { 
+		this.element.html('');
+		this.top_controls=jQuery('<div></div>')	.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-top-controls-div')
+							.css({'z-index': 1,'margin':'auto auto'})
+							.prependTo(this.element);
+		this._do_top_controls_html_setup();
+		if (!this.options.show_top_controls) { 
+			this.top_controls.hide();
 		}
-		this._do_thumbnail_html_setup();
+		this.mainpicture=jQuery('<div></div>')	.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-main-picture-div')
+							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'auto auto'})
+							.appendTo(this.element);
+		this.pictureframe1=jQuery('<div></div>').addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-pictureframe')
+							.addClass('ui-widget-mediaslide-pictureframe1')
+							.css({position: 'absolute', 'top': '0px', 'left': '0px'})
+							.appendTo(this.mainpicture);
+		this.pictureframe2=jQuery('<div></div>').addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-pictureframe')
+							.addClass('ui-widget-mediaslide-pictureframe2')
+							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
+							.appendTo(this.mainpicture);
+		this.bottom_controls=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-bottom-controls-div')
+							.css({'z-index': 1,'margin':'auto auto'})
+							.appendTo(this.element);
+		this._do_bottom_controls_html_setup();
+		if (!this.options.show_bottom_controls) { 
+			this.bottom_controls.hide();
+		}
+		this.thumbslide_scrollbar=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
+							.css({'z-index': 1,'margin':'auto auto'})
+							.appendTo(this.element);
+		jQuery('<br />').appendTo(this.element);
+		this.thumbslide_slider=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide-slider')
+							.appendTo(this.thumbslide_scrollbar);
+		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide')
+							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto'})
+							.appendTo(this.element);
+		this.thumbslide_content=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide-content')
+							.appendTo(this.thumbslide);
+		this.html_setup=true;
+	},
+	_do_top_controls_html_setup: function() { 
+
+	},
+	_do_bottom_controls_html_setup: function() { 
+
 	},
 	_do_thumbnail_html_setup: function() { 
 		this.thumbnails=new Array();
@@ -280,42 +312,6 @@ $.widget( "ui.mediaslide", {
 		
 		this.scrollbar.slider('value',this._get_position_scroll_estimate());
 	},
-	_do_html_setup: function() { 
-		this.element.html('');
-		this.mainpicture=jQuery('<div></div>')	.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-main-picture-div')
-							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'auto auto'})
-							.prependTo(this.element);
-		this.pictureframe1=jQuery('<div></div>').addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-pictureframe')
-							.addClass('ui-widget-mediaslide-pictureframe1')
-							.css({position: 'absolute', 'top': '0px', 'left': '0px'})
-							.appendTo(this.mainpicture);
-		this.pictureframe2=jQuery('<div></div>').addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-pictureframe')
-							.addClass('ui-widget-mediaslide-pictureframe2')
-							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
-							.appendTo(this.mainpicture);
-		this.thumbslide_scrollbar=jQuery('<div></div>')
-							.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
-							.css({'z-index': 1,'margin':'auto auto'})
-							.appendTo(this.element);
-		jQuery('<br />').appendTo(this.element);
-		this.thumbslide_slider=jQuery('<div></div>')
-							.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-thumbslide-slider')
-							.appendTo(this.thumbslide_scrollbar);
-		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-thumbslide')
-							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto'})
-							.appendTo(this.element);
-		this.thumbslide_content=jQuery('<div></div>')
-							.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-thumbslide-content')
-							.appendTo(this.thumbslide);
-		this.html_setup=true;
-	},
 	_get_scroll_position_estimate: function(pcent) { 
 		var dec=pcent/(this.d.length-(1+this.options.num_thumbs));
 		return (((this.d.length-1)-this.options.num_thumbs)*dec)+this._get_first_thumb_count();
@@ -443,85 +439,6 @@ $.widget( "ui.mediaslide", {
 		}
 		return halfthumbs;
 	},
-	// Skips (without sliding) to a specific image number
-	position_skip: function(pos) { 
-		var frame=this._get_foreground_pframe();
-		this.position=pos;
-		this.thumbnails[this.position].hide();
-		var me=this;
-		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
-		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
-			me.mainpicture.width(jQuery(frame).width());
-			me.mainpicture.height(jQuery(frame).height());
-		});
-	},
-	// Slides forwards or backwards a number of positions
-	position_slide: function (offset) { 
-		if (this.position+offset<0) { 
-			console.log('Mediaslide: Tried to skip past the beginning');
-			return false;
-		}
-		if (this.position+offset>this.d.length-1) { 
-			console.log('Mediaslide: Tried to skip past the end');
-			return false;
-		}
-		if (offset==0) { 
-			console.log('Mediaslide: Tried to move 0 spaces');
-		}
-		if (this.slide_in_progress) { 
-			console.log('Mediaslide: Slide already in progress');
-			return false;
-		}
-		this.slide_in_progress = true;
-		var oldpos=this.position;
-		this.position=this.position+offset;
-		var tob=this;
-		var active_frame = this._get_foreground_pframe();
-		var inactive_frame = this._get_background_pframe();
-		jQuery(active_frame).css({'z-index': 1});
-		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position].normal);
-		jQuery(inactive_frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
-			if (tob.mainpicture.height()!=jQuery(inactive_frame).height() || tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
-				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width()},'fast');
-			}
-			jQuery(inactive_frame).fadeTo('slow', 1.0, 'linear', function() { 
-				tob._toggle_pframe();
-				jQuery(active_frame).css({opacity: 0}).hide();
-				tob.slide_in_progress=false;
-			});
-			tob._handle_thumb_slide(oldpos);
-		});
-	},
-	position_slide_to: function(pos) { 
-		this.position_slide(pos-this.position);
-	},
-	next: function() { 
-		this.position_slide(1);
-	},
-	previous: function() { 
-		this.position_slide(-1);
-	},
-	forward: function (num) { 
-		this.position_slide(num);
-	},
-	backward: function (num) { 
-		this.position_slide(0-num);
-	},
-	first: function() { 
-		this.position_slide_to(0);
-	},
-	last: function() { 
-		this.position_slide_to(this.d.length-1);
-	},
-	get_position: function() { 
-		return this.position;
-	},
-	get_count: function() { 
-		return this.d.length;
-	},
-	get_current_title: function() { 
-		return this.d[this.position].title;	
-	},
 	// Use the _setOption method to respond to changes to options
 	_setOption: function( key, value ) {
 		switch( key ) {
@@ -541,6 +458,112 @@ $.widget( "ui.mediaslide", {
 	// Use the destroy method to clean up any modifications your widget has made to the DOM
 	destroy: function() {
 		$.Widget.prototype.destroy.call( this );
+	},
+	// Set up the widget
+	_create: function() {
+		this.setup = false;
+		this.html_setup = false;
+		this.slide_in_progress = false;
+		this.position=this.options.start_position;
+		this.pframe_displaying=1;
+		this._init_data();
+	},
+	_init_data: function() { 
+		o=this;
+		if (this.options.atom_xml_data !== null) { 
+			this.dataType='atom';
+			if (typeof(this.options.atom_xml_data)=='string') { 
+				this.data=jQuery.parseXML(this.options.atom_xml_data);
+			} else { 
+				this.data=this.options.atom_xml_data;
+			}
+			this._init_display();
+		} else if (this.options.atom_xml_ajax !== null) { 
+			if (typeof(this.options.atom_xml_ajax)!='string') { 
+				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
+					o.data=jQuery(data);
+					o.dataType='atom';
+					o._init_display();
+				}, error: function(j,t,e) { 
+					console.log(t);
+				}});
+			} else { 
+				jQuery.ajax(this.options.atom_xml_ajax,{success: function(data) { 
+					o.data=jQuery(data);
+					o.dataType='atom';
+					o._init_display();
+				}, error: function(j,t,e) { 
+					console.log(t);
+				}});
+			}
+		} else if (this.options.json_data!== null) { 
+			this.dataType='json';
+			if (typeof(this.options.json_data)=='string') { 
+				this.data=jQuery.parseJSON(this.options.json_data);
+			} else { 
+				this.data=this.options.json_data;
+			}
+			this._init_display();
+		} else if (this.options.json_ajax !== null) { 
+			if (typeof(this.options.json_ajax)!='string') { 
+				jQuery.getJSON(this.options.json_ajax.url,{data: this.options.json_ajax.options, success: function(data) { 
+					o.data=jQuery(data);
+					o.dataType='json';
+					o._init_display();
+				}, error: function (j,t,e) { 
+					console.log(t);
+				}});
+			} else { 
+				jQuery.getJSON(this.options.json_ajax,{success: function(data) { 
+					o.data=jQuery(data);
+					o.dataType='json';
+					o._init_display();
+				}, error: function (j,t,e) { 
+					console.log(t);
+				}});
+			}
+		} else {
+			console.log('No data specified.');
+		}
+	},
+	_init_display: function() { 
+		if (!this.html_setup) { 
+			this._do_html_setup();
+			this.pframe_displaying=1;
+		}
+		this._parse_data();
+		this.position_skip(this.position);
+		this.setup=true;
+	},
+	_parse_data: function() { 
+		var d=new Array();
+		if (this.dataType=='atom') { 
+			this.data.find('entry').each(function(i,ob) { 
+				var normal=null;
+				var thumb=null;
+				jQuery(ob).find('link').each(function (o,lob) { 
+					if (jQuery(lob).attr('title')=='normal') { 
+						normal=jQuery(lob).attr('href');
+					} else if (jQuery(lob).attr('title')=='thumb') { 
+						thumb=jQuery(lob).attr('href');
+					}
+				});
+				d.push({
+					title: jQuery(ob).find('title').text(),
+					link: jQuery(ob).find('link').attr('href'),
+					id: jQuery(ob).find('id').text(),
+					updated: jQuery(ob).find('updated').text(),
+					normal: normal,
+					thumb: thumb
+				});
+			});
+			this.d=d;
+		} else if (this.dataType=='json') { 
+
+		} else {
+			console.log('unknown data type');
+		}
+		this._do_thumbnail_html_setup();
 	}
 });
 }(jQuery));
