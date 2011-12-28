@@ -24,10 +24,11 @@ $.widget( "ui.mediaslide", {
 		"json_ajax": null,
 		"start_position": 0,
 		"thumbs_visible": true,
-		"num_thumbs": 6,
+		"num_thumbs": 4,
 		"thumb_width": 200,
 		"thumb_spacing": 10,	
-		"loading_thumb": "ajaxloader.gif"
+		"loading_thumb": "ajaxloader.gif",
+		"quantize_scroll": true
 	},
 
 	// Set up the widget
@@ -173,11 +174,13 @@ $.widget( "ui.mediaslide", {
 					var tpos =  Math.round(
 						ui.value / (me.d.length-(1+me.options.num_thumbs)) * ( scrollPane.width() - scrollContent.width() )
 					);
-					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
-					if (tpos % val > val/2) { 
-						tpos+=val;
+					if (me.options.quantize_scroll) {
+						var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
+						if (tpos % val > val/2) { 
+							tpos+=val;
+						}
+						tpos-=tpos % val;
 					}
-					tpos-=tpos % val;
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
 					scrollContent.animate({ "margin-left": 0},300);
@@ -196,11 +199,13 @@ $.widget( "ui.mediaslide", {
 					var tpos= Math.round(
 						ui.value / (me.d.length-(1+me.options.num_thumbs)) * ( scrollPane.width() - scrollContent.width() )
 					);
-					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
-					if (tpos % val > val/2) { 
-						tpos+=val;
+					if (me.options.quantize_scroll) {
+						var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
+						if (tpos % val > val/2) { 
+							tpos+=val;
+						}
+						tpos-=tpos % val;
 					}
-					tpos-=tpos % val;
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
 					scrollContent.animate({ "margin-left": 0},300);
