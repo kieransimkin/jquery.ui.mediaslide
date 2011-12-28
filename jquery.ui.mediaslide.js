@@ -170,6 +170,7 @@ $.widget( "ui.mediaslide", {
 				},300,me);
 			},
 			change: function(event, ui) {
+				alert('g');
 				if ( scrollContent.width() > scrollPane.width() ) {
 					scrollContent.animate( {"margin-left": Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
