@@ -210,7 +210,8 @@ $.widget( "ui.mediaslide", {
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
-			p.find('.ui-widget-mediaslide-thumb-img').attr('src',me.options.loading_thumb);
+			var im=p.find('.ui-widget-mediaslide-thumb-img').attr('src',me.options.loading_thumb);
+			im.css({border:'none'}); // For IE
 			var an=p.find('.ui-widget-mediaslide-thumb-link').click(function() { 
 				me.position_slide_to(i);
 				return false;
