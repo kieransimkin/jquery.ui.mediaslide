@@ -155,11 +155,11 @@ $.widget( "ui.mediaslide", {
 		this.scrollbar = this.thumbslide_slider.slider({step: 0.1,
 			slide: function( event, ui ) {
 				if ( scrollContent.width() > scrollPane.width() ) {
-					scrollContent.css( "margin-left", Math.round(
+					scrollContent.animate( {"margin-left": Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
-					) + "px" );
+					) + "px"},500 );
 				} else {
-					scrollContent.css( "margin-left", 0 );
+					scrollContent.animate({ "margin-left": 0},500);
 				}
 				var scrollpos=Math.floor(me._get_scroll_position_estimate(ui.value));
 				if (me.preloadtimeout!=null) {
@@ -170,6 +170,13 @@ $.widget( "ui.mediaslide", {
 				},300,me);
 			},
 			change: function(event, ui) {
+				if ( scrollContent.width() > scrollPane.width() ) {
+					scrollContent.css( "margin-left", Math.round(
+						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
+					) + "px" );
+				} else {
+					scrollContent.css( "margin-left", 0 );
+				}
 				me._do_thumbnail_image_loads(Math.floor(me._get_scroll_position_estimate(ui.value)));
 			}
 		});
