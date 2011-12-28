@@ -285,15 +285,12 @@ $.widget( "ui.mediaslide", {
 			pos=this.position;
 		}
 		if (pos<=this._get_first_thumb_count()) {
-			console.log("pos: "+pos+" fcc: "+this._get_first_thumb_count());
 			return 0;
 		} else if (pos>=this.d.length-this._get_last_thumb_count()) { 
-			console.log("pos: "+pos+" lcc: "+this._get_last_thumb_count());
 			return 100;
 		}
 		var p=pos-this._get_first_thumb_count();
-		console.log( (p/(((this.d.length-1)-this._get_first_thumb_count())-this._get_last_thumb_count()))*100);
-		return (p/(((this.d.length-1)-this._get_first_thumb_count())-this._get_last_thumb_count()))*100;
+		return (p/(((this.d.length-1)-(this._get_first_thumb_count()+1))-(this._get_last_thumb_count()+1)))*100;
 	},
 	_get_scroll_position_in_range: function(pcent) {
 
