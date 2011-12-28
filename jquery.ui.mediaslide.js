@@ -177,7 +177,7 @@ $.widget( "ui.mediaslide", {
 					if (tpos % val > val/2) { 
 						tpos+=val;
 					}
-					console.log("tpos: "+tpos);
+					console.log("tpos: "+tpos+ " val: "+val);
 					tpos-=tpos % val;
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
@@ -201,7 +201,7 @@ $.widget( "ui.mediaslide", {
 					if (tpos % val > val/2) { 
 						tpos+=val;
 					}
-					console.log("tpos: "+tpos);
+					console.log("tpos: "+tpos+" val: "+val);
 					tpos-=tpos % val;
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
