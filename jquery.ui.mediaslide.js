@@ -173,7 +173,7 @@ $.widget( "ui.mediaslide", {
 					var tpos =  Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
 					);
-					tpos-=tpos % Math.floor(me.options.thumb_width/5);
+					tpos-=tpos % Math.floor((me.options.thumb_width+me.options.thumb_spacing)/5);
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
 					scrollContent.animate({ "margin-left": 0},300);
@@ -192,7 +192,7 @@ $.widget( "ui.mediaslide", {
 					var tpos= Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
 					);
-					tpos-=tpos % Math.floor(me.options.thumb_width/5);
+					tpos-=tpos % Math.floor((me.options.thumb_width+me.options.thumb_spacing)/5);
 					scrollContent.animate( {"margin-left": tpos+"px"},300 );
 				} else {
 					scrollContent.animate({ "margin-left": 0},300);
