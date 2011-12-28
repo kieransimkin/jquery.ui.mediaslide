@@ -12,7 +12,8 @@ $.widget( "ui.mediaslide", {
 		"thumbs_visible": true,
 		"num_thumbs": 4,
 		"thumb_width": 200,
-		"thumb_spacing": 5
+		"thumb_spacing": 5,	
+		"loading_thumb": "ajaxloader.gif"
 	},
 
 	// Set up the widget
@@ -135,6 +136,7 @@ $.widget( "ui.mediaslide", {
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
+			p.find('.ui-widget-mediaslide-thumb-img').attr('src',me.options.loading_thumb);
 			p.find('.ui-widget-mediaslide-thumb-link').click(function() { 
 				me.position_slide_to(i);
 				return false;
