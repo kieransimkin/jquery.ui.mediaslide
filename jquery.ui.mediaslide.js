@@ -372,10 +372,11 @@ $.widget( "ui.mediaslide", {
 		var frame=this._get_foreground_pframe();
 		this.position=pos;
 		this.thumbnails[this.position].hide();
+		var me=this;
 		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
-			this.mainpicture.width(jQuery(frame).width());
-			this.mainpicture.height(jQuery(frame).height());
+			me.mainpicture.width(jQuery(frame).width());
+			me.mainpicture.height(jQuery(frame).height());
 		});
 	},
 	// Slides forwards or backwards a number of positions
