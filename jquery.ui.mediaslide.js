@@ -23,7 +23,6 @@ $.widget( "ui.mediaslide", {
 		"json_data": null,
 		"json_ajax": null,
 		"start_position": 0,
-		"thumbs_visible": true,
 		"num_thumbs": 4,
 		"thumb_width": 200,
 		"thumb_spacing": 10,	
@@ -33,7 +32,8 @@ $.widget( "ui.mediaslide", {
 		"small_captions": true,
 		"show_bottom_controls": true,
 		"show_top_controls": true,
-		"show_slide_page_controls": true
+		"show_slide_page_controls": true,
+		"show_thumbs": true
 	},
 	position_slide_to: function(pos) { 
 		this.position_slide(pos-this.position);
@@ -165,6 +165,10 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
 							.appendTo(this.thumbslide);
+		if (!this.options.show_thumbs) { 
+			this.thumbslide.hide();
+			this.thumbslide_scrollbar.hide();
+		}
 		this.html_setup=true;
 	},
 	_do_top_controls_html_setup: function() { 
