@@ -154,6 +154,7 @@ $.widget( "ui.mediaslide", {
 		//build slider
 		this.scrollbar = this.thumbslide_slider.slider({
 			slide: function( event, ui ) {
+				scrollContent.stop();
 				if ( scrollContent.width() > scrollPane.width() ) {
 					scrollContent.animate( {"margin-left": Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
