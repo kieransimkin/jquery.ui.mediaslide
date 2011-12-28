@@ -154,20 +154,20 @@ $.widget( "ui.mediaslide", {
 							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center','border': 'none'})
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
+			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
+			p.find('.ui-widget-mediaslide-thumb-img').attr('src',me.options.loading_thumb);
+			var an=p.find('.ui-widget-mediaslide-thumb-link').click(function() { 
+				me.position_slide_to(i);
+				return false;
+			});
 			var cap=jQuery("<div></div>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
 							.css({'width': me.options.thumb_width, 'margin-bottom': '5px'})
 							.html(me.options.caption_formatter(o.title))
-							.appendTo(p);
+							.appendTo(an);
 			if (me.options.small_captions) { 
 				cap.wrap("<small></small>");
 			}
-			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
-			p.find('.ui-widget-mediaslide-thumb-img').attr('src',me.options.loading_thumb);
-			p.find('.ui-widget-mediaslide-thumb-link').click(function() { 
-				me.position_slide_to(i);
-				return false;
-			});
 			l.push(p);
 
 		});
