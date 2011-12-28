@@ -158,9 +158,9 @@ $.widget( "ui.mediaslide", {
 				if ( scrollContent.width() > scrollPane.width() ) {
 					scrollContent.animate( {"margin-left": Math.round(
 						ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
-					) + "px"},500 );
+					) + "px"},300 );
 				} else {
-					scrollContent.animate({ "margin-left": 0},500);
+					scrollContent.animate({ "margin-left": 0},300);
 				}
 				var scrollpos=Math.floor(me._get_scroll_position_estimate(ui.value));
 				if (me.preloadtimeout!=null) {
