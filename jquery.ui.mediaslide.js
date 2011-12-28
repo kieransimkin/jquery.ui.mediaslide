@@ -150,12 +150,12 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-thumb-div')
 							.addClass('ui-corner-all')
 							.addClass('ui-state-default')
-							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center','border': 'none', 'margin-bottom': '5px'})
+							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center','border': 'none'})
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.appendTo(t);
 			jQuery("<div></div>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
-							.css({'width': me.options.thumb_width})
+							.css({'width': me.options.thumb_width, 'margin-bottom': '5px'})
 							.html(me.options.caption_formatter(o.title))
 							.appendTo(p);
 			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
