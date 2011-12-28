@@ -282,7 +282,7 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide_scrollbar=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
-							.css({'z-index': 1})
+							.css({'z-index': 1,'margin':'auto auto'})
 							.appendTo(this.element);
 		this.thumbslide_slider=jQuery('<div></div>')
 							.addClass('ui-widget')
@@ -290,7 +290,7 @@ $.widget( "ui.mediaslide", {
 							.appendTo(this.thumbslide_scrollbar);
 		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
-							.css({'overflow': 'auto','z-index': 2})
+							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto'})
 							.appendTo(this.element);
 		this.thumbslide_content=jQuery('<div></div>')
 							.addClass('ui-widget')
