@@ -155,7 +155,7 @@ $.widget( "ui.mediaslide", {
 							.appendTo(t);
 			jQuery("<div></div>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
-							.css({'width': me.options.thumb_width, 'margin-bottom': '5px'})
+							.css({'width': me.options.thumb_width, 'margin-bottom': '5px', 'margin-left': '5px', 'margin-right': '5px'})
 							.html(me.options.caption_formatter(o.title))
 							.appendTo(p);
 			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
