@@ -262,6 +262,10 @@ $.widget( "ui.mediaslide", {
 					clearTimeout(me.preloadtimeout);
 				}
 				me.preloadtimeout=setTimeout(function(zme) { 
+					if (typeof(zme)=='undefined') { 
+						// Stupid IE
+						return;
+					}
 					zme._do_thumbnail_image_loads(Math.floor(zme._get_scroll_position_estimate(ui.value)));
 					var val=Math.floor((me.options.thumb_width+me.options.thumb_spacing));
 					if (tpos % val > val/2) { 
