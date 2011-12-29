@@ -270,9 +270,9 @@ $.widget( "ui.mediaslide", {
 							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center','border': 'none'})
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.hover(function() { 
-								p.addClass('ui-state-active');
+								p.addClass('ui-state-hover');
 							}, function() { 
-								p.removeClass('ui-state-active');
+								p.removeClass('ui-state-hover');
 							})
 							.appendTo(t);
 			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
