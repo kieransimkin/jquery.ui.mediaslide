@@ -247,7 +247,7 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_position_indicator=jQuery("<div></div>")
 							.addClass("ui-widget")
 							.addClass("ui-widget-mediaslide-top-controls-position-indicator")
-							.html((this.position+1)+' / '+this.d.length)
+							.html('Loading')
 							.appendTo(this.top_controls_center);
 		if (this.options.small_top_controls) { 
 			
