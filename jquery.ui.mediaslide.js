@@ -37,7 +37,8 @@ $.widget( "ui.mediaslide", {
 		"show_bottom_controls": true,
 		"show_top_controls": true,
 		"show_slide_page_controls": true,
-		"show_thumbs": true
+		"show_thumbs": true,
+		"navigation_controls_text": false
 	},
 	// Slide to a specific position
 	position_slide_to: function(pos) { 
@@ -216,7 +217,7 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_leftfloat=jQuery("<div></div>").css({'text-align': 'left'}).appendTo(this.top_controls);
 		this.top_controls_first_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
-							.html('Beginning')
+							.html((this.options.navigation_controls_text ? 'Beginning' : ''))
 							.appendTo(this.top_controls_leftfloat)
 							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}})
 							.click(function() { 
