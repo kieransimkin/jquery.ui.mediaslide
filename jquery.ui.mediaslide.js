@@ -205,6 +205,7 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide_content=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
+							.css({'text-wrap':'avoid'})
 							.appendTo(this.thumbslide);
 		if (!this.options.show_thumbs) { 
 			this.thumbslide.hide();
