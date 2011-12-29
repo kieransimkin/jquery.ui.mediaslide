@@ -210,6 +210,7 @@ $.widget( "ui.mediaslide", {
 	_do_top_controls_html_setup: function() { 
 		var me = this;
 		this.top_controls_rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.top_controls);
+		this.top_controls_center=jQuery("<div></div>").css({'position': 'absolute','text-align': 'center'}).appendTo(this.top_controls);
 		this.top_controls_leftfloat=jQuery("<div></div>").css({'text-align': 'left'}).appendTo(this.top_controls);
 		this.top_controls_first_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
@@ -243,7 +244,13 @@ $.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.last();
 							});
+		this.top_controls_position_indicator=jQuery("<div></div>")
+							.addClass("ui-widget")
+							.addClass("ui-widget-mediaslide-top-controls-position-indicator")
+							.html((this.position+1)+' / '+this.d.length)
+							.appendTo(this.top_controls_center);
 		if (this.options.small_top_controls) { 
+			
 			this.top_controls_first_button.wrap('<small></small>');
 			this.top_controls_previous_button.wrap('<small></small>');
 			this.top_controls_next_button.wrap('<small></small>');
@@ -299,6 +306,7 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide.width(this._get_visible_scrollbox_width());
 		this.thumbslide_content.width(this._get_total_scrollbox_width()+5); // +5 is a hack to stop glitches caused by breaking onto a new line when the length occasionally goes over what it should be during animations
 		this.top_controls_rightfloat.width(this._get_visible_scrollbox_width());
+		this.top_controls_center.width(this._get_visible_scrollbox_width());
 		this.thumbslide_scrollbar.width(this._get_visible_scrollbox_width());
 
 		//scrollpane parts
