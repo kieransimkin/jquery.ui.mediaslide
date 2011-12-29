@@ -40,7 +40,7 @@ $.widget( "ui.mediaslide", {
 		"show_thumbs": true,
 		"top_navigation_controls_text": false,
 		"bottom_navigation_controls_text": false,
-		"top_position_indicator": false
+		"top_position_indicator": true
 	},
 	// Slide to a specific position
 	position_slide_to: function(pos) { 
