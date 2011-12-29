@@ -39,7 +39,8 @@ $.widget( "ui.mediaslide", {
 		"show_slide_page_controls": true,
 		"show_thumbs": true,
 		"top_navigation_controls_text": false,
-		"bottom_navigation_controls_text": false
+		"bottom_navigation_controls_text": false,
+		"top_position_indicator": false
 	},
 	// Slide to a specific position
 	position_slide_to: function(pos) { 
@@ -386,7 +387,9 @@ $.widget( "ui.mediaslide", {
 		this._do_thumbnail_image_loads();
 	},
 	_begin_update_controls: function() { 
-		this.top_controls_position_indicator.fadeOut('fast');
+		if (this.options.top_position_indicator) { 
+			this.top_controls_position_indicator.fadeOut('fast');
+		}
 		if (this.position==1) { 
 			this.top_controls_previous_button.attr('disabled',true);
 			this.top_controls_first_button.attr('disabled',true);
@@ -404,8 +407,10 @@ $.widget( "ui.mediaslide", {
 	},
 	// Gets executed after a slide to update the controls with the current image's title and position
 	_update_controls: function() { 
-		this.top_controls_position_indicator.html((this.position+1)+' / '+this.d.length);
-		this.top_controls_position_indicator.fadeIn('fast');
+		if (this.options.top_position_indicator) { 
+			this.top_controls_position_indicator.html((this.position+1)+' / '+this.d.length);
+			this.top_controls_position_indicator.fadeIn('fast');
+		}
 	},
 	// Size the scrollbar handle depending on how many media items we have
 	_size_scrollbar: function() { 
