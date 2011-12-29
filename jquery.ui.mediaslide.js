@@ -205,7 +205,6 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide_content=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
-							.css({'text-wrap':'none', 'overflow-wrap':'normal','line-break':'strict','word-break':'keep-all'})
 							.appendTo(this.thumbslide);
 		if (!this.options.show_thumbs) { 
 			this.thumbslide.hide();
@@ -439,8 +438,10 @@ $.widget( "ui.mediaslide", {
 	// Perform the actual animations that show and hide thumbs from the thumbnail strip
 	_handle_thumb_slide: function(oldpos) { 
 		this._do_thumbnail_image_loads();
+		this.thumbslide_content.width(this.thumbslide_content.width()+10);
 		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px', 'opacity': 0.0, 'top': '-150px'}).show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing(), 'opacity': 1.0,'top': '0px'},600,'linear',function() { 
 
+			this.thumbslide_content.width(this.thumbslide_content.width()-10);
 		});
 		var me = this;
 		var p=me.position;
