@@ -106,6 +106,7 @@ $.widget( "ui.mediaslide", {
 			me.mainpicture.width(jQuery(frame).width());
 			me.mainpicture.height(jQuery(frame).height());
 		});
+		this._update_controls();
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
@@ -249,6 +250,7 @@ $.widget( "ui.mediaslide", {
 							.addClass("ui-widget")
 							.addClass("ui-widget-mediaslide-top-controls-position-indicator")
 							.html('Loading')
+							.css({'display': 'none'})
 							.appendTo(this.top_controls_center);
 		if (this.options.small_top_controls) { 
 			
