@@ -287,10 +287,9 @@ $.widget( "ui.mediaslide", {
 			jQuery('<br />').appendTo(an);
 			var cap=jQuery("<span></span>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
-							.css({'width': me.options.thumb_width, 'margin-bottom': '5px','display' : 'inline-block'})
+							.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px'})
 							.html(me.options.caption_formatter(o.title))
-							.appendTo(an)
-							.wrap('<div style="padding-left: 5px; padding-right: 5px;"></div>');
+							.appendTo(an);
 			if (me.options.small_captions) { 
 				cap.wrap("<small></small>");
 			}
