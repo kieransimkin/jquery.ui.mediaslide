@@ -204,7 +204,27 @@ $.widget( "ui.mediaslide", {
 	},
 	// Setup the HTML for the top controls
 	_do_top_controls_html_setup: function() { 
-
+		var me = this;
+		this.top_controls_first_button=jQuery("<div></div>")
+							.addClass('ui-widget-mediaslide-top-controls-first-button')
+							.html('Beginning')
+							.appendTo(this.top_controls)
+							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}});
+		this.top_controls_previous_button=jQuery("<div></div>")
+							.addClass('ui-widget-mediaslide-top-controls-previous-button')
+							.html('Previous')
+							.appendTo(this.top_controls)
+							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}});
+		this.top_controls_next_button=jQuery("<div></div>")
+							.addClass('ui-widget-mediaslide-top-controls-next-button')
+							.html('Next')
+							.appendTo(this.top_controls)
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}});
+		this.top_controls_last_button=jQuery("<div></div>")
+							.addClass("ui-widget-mediaslide-top-controls-last-button")
+							.html('End')
+							.appendTo(this.top_controls)
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}});
 	},
 	// Setup the HTML for the bottom controls
 	_do_bottom_controls_html_setup: function() { 
