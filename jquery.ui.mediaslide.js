@@ -127,6 +127,7 @@ $.widget( "ui.mediaslide", {
 		}
 		this._trigger("startslide",offset);
 		this.slide_in_progress = true;
+		this._begin_update_controls();
 		var oldpos=this.position;
 		this.position=this.position+offset;
 		var tob=this;
@@ -380,9 +381,13 @@ $.widget( "ui.mediaslide", {
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
 	},
+	_begin_update_controls: function() { 
+		this.top_controls_position_indicator.fadeOut('fast');
+	},
 	// Gets executed after a slide to update the controls with the current image's title and position
 	_update_controls: function() { 
 		this.top_controls_position_indicator.html((this.position+1)+' / '+this.d.length);
+		this.top_controls_position_indicator.fadeIn('fast');
 	},
 	// Size the scrollbar handle depending on how many media items we have
 	_size_scrollbar: function() { 
