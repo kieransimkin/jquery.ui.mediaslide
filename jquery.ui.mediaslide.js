@@ -38,7 +38,8 @@ $.widget( "ui.mediaslide", {
 		"show_top_controls": true,
 		"show_slide_page_controls": true,
 		"show_thumbs": true,
-		"navigation_controls_text": false
+		"top_navigation_controls_text": false,
+		"bottom_navigation_controls_text": false
 	},
 	// Slide to a specific position
 	position_slide_to: function(pos) { 
@@ -217,33 +218,33 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_leftfloat=jQuery("<div></div>").css({'text-align': 'left'}).appendTo(this.top_controls);
 		this.top_controls_first_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
-							.html((this.options.navigation_controls_text ? 'Beginning' : null))
+							.html((this.options.top_navigation_controls_text ? 'Beginning' : null))
 							.appendTo(this.top_controls_leftfloat)
-							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}, text: this.options.navigation_controls_text})
+							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}, text: this.options.top_navigation_controls_text})
 							.click(function() { 
 								me.first();
 							});
 		this.top_controls_previous_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-previous-button')
-							.html((this.options.navigation_controls_text ? 'Previous' : null))
+							.html((this.options.top_navigation_controls_text ? 'Previous' : null))
 							.appendTo(this.top_controls_leftfloat)
-							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}, text: this.options.navigation_controls_text})
+							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}, text: this.options.top_navigation_controls_text})
 							.click(function() { 
 								me.previous();
 							});
 		this.top_controls_next_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-next-button')
-							.html((this.options.navigation_controls_text ? 'Next' : null))
+							.html((this.options.top_navigation_controls_text ? 'Next' : null))
 							.appendTo(this.top_controls_rightfloat)
-							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}, text: this.options.navigation_controls_text})
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}, text: this.options.top_navigation_controls_text})
 							.click(function() { 
 								me.next();
 							});
 		this.top_controls_last_button=jQuery("<div></div>")
 							.addClass("ui-widget-mediaslide-top-controls-last-button")
-							.html((this.options.navigation_controls_text ? 'End' : null))
+							.html((this.options.top_navigation_controls_text ? 'End' : null))
 							.appendTo(this.top_controls_rightfloat)
-							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}, text: this.options.navigation_controls_text})
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}, text: this.options.top_navigation_controls_text})
 							.click(function() { 
 								me.last();
 							});
