@@ -209,12 +209,12 @@ $.widget( "ui.mediaslide", {
 	// Setup the HTML for the top controls
 	_do_top_controls_html_setup: function() { 
 		var me = this;
-		var leftfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'left', 'width': '100%'}).appendTo(this.top_controls);
-		var rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right', 'width': '100%'}).appendTo(this.top_controls);
+		this.top_controls_leftfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'left'}).appendTo(this.top_controls);
+		this.top_controls_rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.top_controls);
 		this.top_controls_first_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
 							.html('Beginning')
-							.appendTo(leftfloat)
+							.appendTo(this.top_controls_leftfloat)
 							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}})
 							.click(function() { 
 								me.first();
@@ -222,7 +222,7 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_previous_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-previous-button')
 							.html('Previous')
-							.appendTo(leftfloat)
+							.appendTo(this.top_controls_leftfloat)
 							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}})
 							.click(function() { 
 								me.previous();
@@ -230,7 +230,7 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_next_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-next-button')
 							.html('Next')
-							.appendTo(rightfloat)
+							.appendTo(this.top_controls_rightfloat)
 							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}})
 							.click(function() { 
 								me.next();
@@ -238,7 +238,7 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_last_button=jQuery("<div></div>")
 							.addClass("ui-widget-mediaslide-top-controls-last-button")
 							.html('End')
-							.appendTo(rightfloat)
+							.appendTo(this.top_controls_rightfloat)
 							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}})
 							.click(function() { 
 								me.last();
@@ -293,6 +293,7 @@ $.widget( "ui.mediaslide", {
 		});
 		this.thumbslide.width(this._get_visible_scrollbox_width());
 		this.thumbslide_content.width(this._get_total_scrollbox_width());
+		this.top_controls_rightfloat.width(this._get_total_scrollbox_width());
 		this.thumbslide_scrollbar.width(this._get_visible_scrollbox_width());
 
 		//scrollpane parts
