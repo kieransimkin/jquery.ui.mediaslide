@@ -391,6 +391,20 @@ $.widget( "ui.mediaslide", {
 	_update_controls: function() { 
 		this.top_controls_position_indicator.html((this.position+1)+' / '+this.d.length);
 		this.top_controls_position_indicator.fadeIn('fast');
+		if (this.position==1) { 
+			this.top_controls_previous_button.attr('disabled',true);
+			this.top_controls_first_button.attr('disabled',true);
+		} else {
+			this.top_controls_previous_button.attr('disabled',false);
+			this.top_controls_first_button.attr('disabled',false);
+		}
+		if (this.position=this.d.length-1) { 
+			this.top_controls_next_button.attr('disabled',true);
+			this.top_controls_last_button.attr('disabled',true);
+		} else {
+			this.top_controls_next_button.attr('disabled',false);
+			this.top_controls_last_button.attr('disabled',false);
+		}
 	},
 	// Size the scrollbar handle depending on how many media items we have
 	_size_scrollbar: function() { 
