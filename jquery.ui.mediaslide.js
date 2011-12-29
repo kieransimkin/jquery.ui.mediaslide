@@ -398,7 +398,7 @@ $.widget( "ui.mediaslide", {
 			this.top_controls_previous_button.attr('disabled',false);
 			this.top_controls_first_button.attr('disabled',false);
 		}
-		if (this.position=this.d.length-1) { 
+		if (this.position==this.d.length-1) { 
 			this.top_controls_next_button.attr('disabled',true);
 			this.top_controls_last_button.attr('disabled',true);
 		} else {
