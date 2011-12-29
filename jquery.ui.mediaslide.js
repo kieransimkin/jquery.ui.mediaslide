@@ -78,6 +78,18 @@ $.widget( "ui.mediaslide", {
 	get_current_title: function() { 
 		return this.d[this.position].title;	
 	},
+	// Get the id of the current media item
+	get_current_id: function() { 
+		return this.d[this.position].id;	
+	},
+	// Get the link of the current media item
+	get_current_link: function() { 
+		return this.d[this.position].link;	
+	},
+	// Get the updated date of the current media item
+	get_current_updated: function() { 
+		return this.d[this.position].updated;	
+	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
 		var frame=this._get_foreground_pframe();
