@@ -33,6 +33,7 @@ $.widget( "ui.mediaslide", {
 		"quantize_scroll": false,
 		"caption_formatter": function(c) { return c; },
 		"small_captions": true,
+		"small_top_controls": true,
 		"show_bottom_controls": true,
 		"show_top_controls": true,
 		"show_slide_page_controls": true,
@@ -209,22 +210,40 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
 							.html('Beginning')
 							.appendTo(this.top_controls)
-							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}});
+							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}})
+							.click(function() { 
+								me.first();
+							});
 		this.top_controls_previous_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-previous-button')
 							.html('Previous')
 							.appendTo(this.top_controls)
-							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}});
+							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}})
+							.click(function() { 
+								me.previous();
+							});
 		this.top_controls_next_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-next-button')
 							.html('Next')
 							.appendTo(this.top_controls)
-							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}});
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}})
+							.click(function() { 
+								me.next();
+							});
 		this.top_controls_last_button=jQuery("<div></div>")
 							.addClass("ui-widget-mediaslide-top-controls-last-button")
 							.html('End')
 							.appendTo(this.top_controls)
-							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}});
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}})
+							.click(function() { 
+								me.last();
+							});
+		if (this.options.small_top_controls) { 
+			this.top_controls_first_button.wrap('<small></small>');
+			this.top_controls_previous_button.wrap('<small></small>');
+			this.top_controls_next_button.wrap('<small></small>');
+			this.top_controls_last_button.wrap('<small></small>');
+		}
 	},
 	// Setup the HTML for the bottom controls
 	_do_bottom_controls_html_setup: function() { 
