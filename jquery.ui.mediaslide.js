@@ -25,13 +25,14 @@ $.widget( "ui.mediaslide", {
 		"json_data": null,
 		"json_ajax": null,
 
-		"start_position": 0, // where to start in the list
+		"start_position": 0, // where to start in the list (zero indexed)
 		"num_thumbs": 4, 
 		"thumb_width": 200,
 		"thumb_spacing": 10,	
 		"loading_thumb": "ajaxloader.gif",
 		"quantize_scroll": false,
 		"caption_formatter": function(c) { return c; },
+		"position_indicator_formatter": function(c) { return c; },
 		"small_captions": true,
 		"small_top_controls": true,
 		"show_bottom_controls": true,
@@ -408,7 +409,7 @@ $.widget( "ui.mediaslide", {
 	// Gets executed after a slide to update the controls with the current image's title and position
 	_update_controls: function() { 
 		if (this.options.top_position_indicator) { 
-			this.top_controls_position_indicator.html((this.position+1)+' / '+this.d.length);
+			this.top_controls_position_indicator.html(this.options.position_indicator_formatter((this.position+1)+' / '+this.d.length));
 			this.top_controls_position_indicator.fadeIn('fast');
 		}
 	},
