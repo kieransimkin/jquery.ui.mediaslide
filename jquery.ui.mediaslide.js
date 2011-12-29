@@ -219,7 +219,7 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
 							.html((this.options.navigation_controls_text ? 'Beginning' : null))
 							.appendTo(this.top_controls_leftfloat)
-							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}})
+							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}, text: this.options.navigation_controls_text})
 							.click(function() { 
 								me.first();
 							});
@@ -227,7 +227,7 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-top-controls-previous-button')
 							.html((this.options.navigation_controls_text ? 'Previous' : null))
 							.appendTo(this.top_controls_leftfloat)
-							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}})
+							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}, text: this.options.navigation_controls_text})
 							.click(function() { 
 								me.previous();
 							});
@@ -235,7 +235,7 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-top-controls-next-button')
 							.html((this.options.navigation_controls_text ? 'Next' : null))
 							.appendTo(this.top_controls_rightfloat)
-							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}})
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}, text: this.options.navigation_controls_text})
 							.click(function() { 
 								me.next();
 							});
@@ -243,7 +243,7 @@ $.widget( "ui.mediaslide", {
 							.addClass("ui-widget-mediaslide-top-controls-last-button")
 							.html((this.options.navigation_controls_text ? 'End' : null))
 							.appendTo(this.top_controls_rightfloat)
-							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}})
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}, text: this.options.navigation_controls_text})
 							.click(function() { 
 								me.last();
 							});
@@ -386,11 +386,6 @@ $.widget( "ui.mediaslide", {
 	},
 	_begin_update_controls: function() { 
 		this.top_controls_position_indicator.fadeOut('fast');
-	},
-	// Gets executed after a slide to update the controls with the current image's title and position
-	_update_controls: function() { 
-		this.top_controls_position_indicator.html((this.position+1)+' / '+this.d.length);
-		this.top_controls_position_indicator.fadeIn('fast');
 		if (this.position==1) { 
 			this.top_controls_previous_button.attr('disabled',true);
 			this.top_controls_first_button.attr('disabled',true);
@@ -405,6 +400,11 @@ $.widget( "ui.mediaslide", {
 			this.top_controls_next_button.attr('disabled',false);
 			this.top_controls_last_button.attr('disabled',false);
 		}
+	},
+	// Gets executed after a slide to update the controls with the current image's title and position
+	_update_controls: function() { 
+		this.top_controls_position_indicator.html((this.position+1)+' / '+this.d.length);
+		this.top_controls_position_indicator.fadeIn('fast');
 	},
 	// Size the scrollbar handle depending on how many media items we have
 	_size_scrollbar: function() { 
