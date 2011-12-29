@@ -292,7 +292,7 @@ $.widget( "ui.mediaslide", {
 
 		});
 		this.thumbslide.width(this._get_visible_scrollbox_width());
-		this.thumbslide_content.width(this._get_total_scrollbox_width());
+		this.thumbslide_content.width(this._get_total_scrollbox_width()+5); // +5 is a hack to stop glitches caused by breaking onto a new line when the length occasionally goes over what it should be during animations
 		this.top_controls_rightfloat.width(this._get_visible_scrollbox_width());
 		this.thumbslide_scrollbar.width(this._get_visible_scrollbox_width());
 
