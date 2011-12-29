@@ -142,8 +142,8 @@ $.widget( "ui.mediaslide", {
 				tob._toggle_pframe();
 				jQuery(active_frame).css({opacity: 0}).hide();
 				tob.slide_in_progress=false;
-				this._trigger("endslide",this.position);
-				this._update_controls();
+				tob._trigger("endslide",this.position);
+				tob._update_controls();
 			});
 			tob._handle_thumb_slide(oldpos);
 		});
