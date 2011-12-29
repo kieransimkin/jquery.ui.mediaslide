@@ -212,8 +212,8 @@ $.widget( "ui.mediaslide", {
 	// Setup the HTML for the top controls
 	_do_top_controls_html_setup: function() { 
 		var me = this;
-		this.top_controls_rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.top_controls);
 		this.top_controls_center=jQuery("<div></div>").css({'position': 'absolute','text-align': 'center'}).appendTo(this.top_controls);
+		this.top_controls_rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.top_controls);
 		this.top_controls_leftfloat=jQuery("<div></div>").css({'text-align': 'left'}).appendTo(this.top_controls);
 		this.top_controls_first_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
