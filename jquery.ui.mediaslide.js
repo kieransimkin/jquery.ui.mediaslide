@@ -90,6 +90,10 @@ $.widget( "ui.mediaslide", {
 	get_current_updated: function() { 
 		return this.d[this.position].updated;	
 	},
+	// Get the full data object for the current media item
+	get_current_object: function() { 
+		return this.d[this.position];
+	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
 		var frame=this._get_foreground_pframe();
