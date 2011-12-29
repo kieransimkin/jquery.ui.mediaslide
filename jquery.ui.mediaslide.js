@@ -209,8 +209,8 @@ $.widget( "ui.mediaslide", {
 	// Setup the HTML for the top controls
 	_do_top_controls_html_setup: function() { 
 		var me = this;
-		var leftfloat=jQuery("<div></div>").css({'float': 'left', 'width': 200}).appendTo(this.top_controls);
-		var rightfloat=jQuery("<div></div>").css({'float': 'right', 'width': 200}).appendTo(this.top_controls);
+		var leftfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'left', 'width': '100%'}).appendTo(this.top_controls);
+		var rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right', 'width': '100%'}).appendTo(this.top_controls);
 		this.top_controls_first_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
 							.html('Beginning')
