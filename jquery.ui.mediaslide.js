@@ -205,6 +205,7 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide_content=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
+							.css({'white-space': 'nowrap'})
 							.appendTo(this.thumbslide);
 		if (!this.options.show_thumbs) { 
 			this.thumbslide.hide();
@@ -311,7 +312,7 @@ $.widget( "ui.mediaslide", {
 
 		});
 		this.thumbslide.width(this._get_visible_scrollbox_width());
-		this.thumbslide_content.width(this._get_total_scrollbox_width()+2); // +5 is a hack to stop glitches caused by breaking onto a new line when the length occasionally goes over what it should be during animations, screws up the scroll positioning a bit though
+		this.thumbslide_content.width(this._get_total_scrollbox_width()); 
 		this.top_controls_rightfloat.width(this._get_visible_scrollbox_width());
 		this.top_controls_center.width(this._get_visible_scrollbox_width());
 		this.thumbslide_scrollbar.width(this._get_visible_scrollbox_width());
