@@ -289,7 +289,8 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-thumb-caption')
 							.css({'width': me.options.thumb_width, 'margin-bottom': '5px','display' : 'inline-block'})
 							.html(me.options.caption_formatter(o.title))
-							.appendTo(an);
+							.appendTo(an)
+							.wrap('<div style="padding-left: 5px; padding-right: 5px;"></div>');
 			if (me.options.small_captions) { 
 				cap.wrap("<small></small>");
 			}
