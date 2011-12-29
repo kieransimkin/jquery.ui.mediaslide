@@ -125,6 +125,7 @@ $.widget( "ui.mediaslide", {
 			//console.log('Mediaslide: Slide already in progress');
 			return false;
 		}
+		this._trigger("startslide",offset);
 		this.slide_in_progress = true;
 		var oldpos=this.position;
 		this.position=this.position+offset;
@@ -141,6 +142,8 @@ $.widget( "ui.mediaslide", {
 				tob._toggle_pframe();
 				jQuery(active_frame).css({opacity: 0}).hide();
 				tob.slide_in_progress=false;
+				this._trigger("endslide",this.position);
+				this._update_controls();
 			});
 			tob._handle_thumb_slide(oldpos);
 		});
@@ -206,10 +209,12 @@ $.widget( "ui.mediaslide", {
 	// Setup the HTML for the top controls
 	_do_top_controls_html_setup: function() { 
 		var me = this;
+		var leftfloat=jQuery("<div></div>").css({'float': 'left', 'width': 200}).appendTo(this.top_controls);
+		var rightfloat=jQuery("<div></div>").css({'float': 'right', 'width': 200}).appendTo(this.top_controls);
 		this.top_controls_first_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
 							.html('Beginning')
-							.appendTo(this.top_controls)
+							.appendTo(leftfloat)
 							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}})
 							.click(function() { 
 								me.first();
@@ -217,7 +222,7 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_previous_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-previous-button')
 							.html('Previous')
-							.appendTo(this.top_controls)
+							.appendTo(leftfloat)
 							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}})
 							.click(function() { 
 								me.previous();
@@ -225,7 +230,7 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_next_button=jQuery("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-next-button')
 							.html('Next')
-							.appendTo(this.top_controls)
+							.appendTo(rightfloat)
 							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}})
 							.click(function() { 
 								me.next();
@@ -233,7 +238,7 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_last_button=jQuery("<div></div>")
 							.addClass("ui-widget-mediaslide-top-controls-last-button")
 							.html('End')
-							.appendTo(this.top_controls)
+							.appendTo(rightfloat)
 							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}})
 							.click(function() { 
 								me.last();
@@ -360,6 +365,10 @@ $.widget( "ui.mediaslide", {
 		scrollPane.css( "overflow", "hidden" );
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
+	},
+	// Gets executed after a slide to update the controls with the current image's title and position
+	_update_controls: function() { 
+
 	},
 	// Size the scrollbar handle depending on how many media items we have
 	_size_scrollbar: function() { 
