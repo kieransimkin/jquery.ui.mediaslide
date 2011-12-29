@@ -382,7 +382,7 @@ $.widget( "ui.mediaslide", {
 	},
 	// Gets executed after a slide to update the controls with the current image's title and position
 	_update_controls: function() { 
-
+		this.top_controls_position_indicator.html((this.position+1)+' / '+this.d.length);
 	},
 	// Size the scrollbar handle depending on how many media items we have
 	_size_scrollbar: function() { 
