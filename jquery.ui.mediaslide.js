@@ -468,7 +468,7 @@ $.widget( "ui.mediaslide", {
 				this.top_controls_media_title.fadeOut('fast');
 			}
 		}
-		if (pos==1) { 
+		if (pos==0) { 
 			this.top_controls_previous_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.top_controls_first_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_previous_button.attr('disabled',true).addClass('ui-state-disabled');
