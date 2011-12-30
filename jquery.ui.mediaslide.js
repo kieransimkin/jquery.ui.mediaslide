@@ -34,6 +34,7 @@ $.widget( "ui.mediaslide", {
 		"caption_formatter": function(c) { return c; },
 		"position_indicator_formatter": function(c) { return c; },
 		"title_formatter": function(c) { return c; },
+		"picture_click_handler": function(link) { return true; },
 		"small_captions": true,
 		"small_top_controls": true,
 		"small_bottom_controls": true,
@@ -178,12 +179,14 @@ $.widget( "ui.mediaslide", {
 		this.pictureframe1=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe1')
-							.css({position: 'absolute', 'top': '0px', 'left': '0px'})
+							.css({position: 'absolute', 'top': '0px', 'left': '0px','cursor': 'pointer'})
+							.click(this._pictureframe_click)
 							.appendTo(this.mainpicture);
 		this.pictureframe2=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe2')
-							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
+							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0','cursor':'pointer'})
+							.click(this._pictureframe_click)
 							.appendTo(this.mainpicture);
 		this.bottom_controls=jQuery('<div></div>')
 							.addClass('ui-widget')
@@ -509,6 +512,11 @@ $.widget( "ui.mediaslide", {
 		if (this.options.top_media_title) { 
 			this.top_controls_media_title.html(this.options.title_formatter(this.get_current_title()));
 			this.top_controls_media_title.fadeIn('fast');
+		}
+	},
+	_pictureframe_click: function() { 
+		if (this.options.picture_click_handler(this.get_current_link())!==false) {
+			location.href=this.get_current_link();
 		}
 	},
 	// Size the scrollbar handle depending on how many media items we have
