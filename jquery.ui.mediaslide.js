@@ -180,13 +180,13 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe1')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px','cursor': 'pointer'})
-							.click(this._pictureframe_click)
+							.click(this._pictureframe_click())
 							.appendTo(this.mainpicture);
 		this.pictureframe2=jQuery('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe2')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0','cursor':'pointer'})
-							.click(this._pictureframe_click)
+							.click(this._pictureframe_click())
 							.appendTo(this.mainpicture);
 		this.bottom_controls=jQuery('<div></div>')
 							.addClass('ui-widget')
@@ -514,9 +514,12 @@ $.widget( "ui.mediaslide", {
 			this.top_controls_media_title.fadeIn('fast');
 		}
 	},
-	_pictureframe_click: function() { 
-		if (this.options.picture_click_handler(this.get_current_link())!==false) {
-			location.href=this.get_current_link();
+	_pictureframe_click: function() {
+		var me = this;
+		return function () { 
+			if (me.options.picture_click_handler(me.get_current_link())!==false) {
+				location.href=me.get_current_link();
+			}
 		}
 	},
 	// Size the scrollbar handle depending on how many media items we have
