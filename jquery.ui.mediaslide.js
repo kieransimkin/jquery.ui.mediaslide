@@ -43,7 +43,7 @@ $.widget( "ui.mediaslide", {
 		"top_navigation_controls_text": false,
 		"bottom_navigation_controls_text": false,
 		"top_position_indicator": true,
-		"bottom_position_indicator": false,
+		"bottom_position_indicator": true,
 		"bottom_media_title": true
 	},
 	// Slide to a specific position
