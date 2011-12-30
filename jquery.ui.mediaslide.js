@@ -33,6 +33,7 @@ $.widget( "ui.mediaslide", {
 		"quantize_scroll": false,
 		"caption_formatter": function(c) { return c; },
 		"position_indicator_formatter": function(c) { return c; },
+		"title_formatter": function(c) { return c; },
 		"small_captions": true,
 		"small_top_controls": true,
 		"show_bottom_controls": true,
@@ -41,7 +42,9 @@ $.widget( "ui.mediaslide", {
 		"show_thumbs": true,
 		"top_navigation_controls_text": false,
 		"bottom_navigation_controls_text": false,
-		"top_position_indicator": true
+		"top_position_indicator": true,
+		"bottom_position_indicator": false,
+		"bottom_media_title": true
 	},
 	// Slide to a specific position
 	position_slide_to: function(pos) { 
@@ -257,7 +260,6 @@ $.widget( "ui.mediaslide", {
 							.css({'display': 'none'})
 							.appendTo(this.top_controls_center);
 		if (this.options.small_top_controls) { 
-			
 			this.top_controls_first_button.wrap('<small></small>');
 			this.top_controls_previous_button.wrap('<small></small>');
 			this.top_controls_next_button.wrap('<small></small>');
@@ -302,6 +304,18 @@ $.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.last();
 							});
+		this.bottom_controls_position_indicator=jQuery("<div></div>")
+							.addClass("ui-widget")
+							.addClass("ui-widget-mediaslide-bottom-controls-position-indicator")
+							.html('Loading')
+							.css({'display': 'none'})
+							.appendTo(this.bottom_controls_center);
+		this.bottom_controls_media_title=jQuery("<div></div>")
+							.addClass("ui-widget")
+							.addClass("ui-widget-mediaslide-bottom-controls-media-title")
+							.html('Loading')	
+							.css({'display': 'none'})
+							.appendTo(this.bottom_controls_center);
 		if (this.options.small_bottom_controls) { 
 			this.bottom_controls_first_button.wrap('<small></small>');
 			this.bottom_controls_previous_button.wrap('<small></small>');
@@ -435,6 +449,12 @@ $.widget( "ui.mediaslide", {
 		if (this.options.top_position_indicator) { 
 			this.top_controls_position_indicator.fadeOut('fast');
 		}
+		if (this.options.bottom_position_indicator) { 
+			this.bottom_controls_positon_indicator.fadeOut('fast');
+		}
+		if (this.options.bottom_media_title) { 
+			this.bottom_controls_media_title.fadeOut('fast');
+		}
 		if (this.position==1) { 
 			this.top_controls_previous_button.attr('disabled',true);
 			this.top_controls_first_button.attr('disabled',true);
@@ -455,6 +475,14 @@ $.widget( "ui.mediaslide", {
 		if (this.options.top_position_indicator) { 
 			this.top_controls_position_indicator.html(this.options.position_indicator_formatter((this.position+1)+' / '+this.d.length));
 			this.top_controls_position_indicator.fadeIn('fast');
+		}
+		if (this.options.bottom_position_indicator) { 
+			this.bottom_controls_position_indicator.html(this.options.position_indicator_formatter((this.position+1)+' / '+this.d.length));
+			this.bottom_controls_position_indicator.fadeIn('fast');
+		}
+		if (this.options.bottom_media_title) { 
+			this.bottom_controls_media_title.html(this.options.title_formatter(this.get_current_title()));
+			this.bottom_controls_media_title.fadeIn('fast');
 		}
 	},
 	// Size the scrollbar handle depending on how many media items we have
