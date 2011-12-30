@@ -569,13 +569,17 @@ $.widget( "ui.mediaslide", {
 		this.scrollbar.slider('value',this._get_position_scroll_estimate());
 		this.thumbslide_content.width(this.thumbslide_content.width()+10); // This is a nasty hack to stop linebreaks causing the animation to go glitchy
 		var me = this;
-		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px', 'opacity': 0.0, 'top': '-150px'}).show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing(), 'opacity': 1.0,'top': '0px'},600,'linear',function() { 
+		var joff='-150px';
+		if (this.options.thumbs_on_top) { 
+			joff='150px';
+		}
+		this.thumbnails[oldpos].width(0).css({'margin-left': '0px', 'margin-right': '0px', 'opacity': 0.0, 'top': joff}).show().animate({width: this.options.thumb_width, 'margin-left': this._get_left_thumb_spacing(),'margin-right': this._get_right_thumb_spacing(), 'opacity': 1.0,'top': '0px'},600,'linear',function() { 
 
 			me.thumbslide_content.width(me.thumbslide_content.width()-10); // This is a nasty hack to stop linebreaks causing the animation to go glitchy
 		});
 		var me = this;
 		var p=me.position;
-		this.thumbnails[this.position].animate({'opacity': 0.0, width: '0px', 'margin-left': '0px', 'margin-right': '0px', 'top': '-150px'},600,'linear',function() { 
+		this.thumbnails[this.position].animate({'opacity': 0.0, width: '0px', 'margin-left': '0px', 'margin-right': '0px', 'top': joff},600,'linear',function() { 
 			me.thumbnails[p].hide();
 		});
 		
