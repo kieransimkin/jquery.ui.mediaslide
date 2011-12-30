@@ -36,7 +36,7 @@ $.widget( "ui.mediaslide", {
 		"picture_click_handler": function(link) { return true; },
 		"quantize_scroll": false,
 		"small_captions": true,
-		"thumbs_on_top": false,
+		"thumbs_on_top": true,
 		"scrollbar_on_top": false,
 		"captions_on_top": false,
 		"small_top_controls": true,
