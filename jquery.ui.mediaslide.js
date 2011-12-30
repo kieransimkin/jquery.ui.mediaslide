@@ -36,6 +36,7 @@ $.widget( "ui.mediaslide", {
 		"title_formatter": function(c) { return c; },
 		"small_captions": true,
 		"small_top_controls": true,
+		"small_bottom_controls": true,
 		"show_bottom_controls": true,
 		"show_top_controls": true,
 		"show_slide_page_controls": true,
