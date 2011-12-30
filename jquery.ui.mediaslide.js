@@ -266,6 +266,48 @@ $.widget( "ui.mediaslide", {
 	},
 	// Setup the HTML for the bottom controls
 	_do_bottom_controls_html_setup: function() { 
+		var me = this;
+		this.bottom_controls_center=jQuery("<div></div>").css({'position': 'absolute','text-align': 'center'}).appendTo(this.bottom_controls);
+		this.bottom_controls_rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.bottom_controls);
+		this.bottom_controls_leftfloat=jQuery("<div></div>").css({'text-align': 'left'}).appendTo(this.bottom_controls);
+		this.bottom_controls_first_button=jQuery("<div></div>")
+							.addClass('ui-widget-mediaslide-bottom-controls-first-button')
+							.html((this.options.bottom_navigation_controls_text ? 'Beginning' : null))
+							.appendTo(this.bottom_controls_leftfloat)
+							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}, text: this.options.bottom_navigation_controls_text})
+							.click(function() { 
+								me.first();
+							});
+		this.bottom_controls_previous_button=jQuery("<div></div>")
+							.addClass('ui-widget-mediaslide-bottom-controls-previous-button')
+							.html((this.options.bottom_navigation_controls_text ? 'Previous' : null))
+							.appendTo(this.bottom_controls_leftfloat)
+							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}, text: this.options.bottom_navigation_controls_text})
+							.click(function() { 
+								me.previous();
+							});
+		this.bottom_controls_next_button=jQuery("<div></div>")
+							.addClass('ui-widget-mediaslide-bottom-controls-next-button')
+							.html((this.options.bottom_navigation_controls_text ? 'Next' : null))
+							.appendTo(this.bottom_controls_rightfloat)
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}, text: this.options.bottom_navigation_controls_text})
+							.click(function() { 
+								me.next();
+							});
+		this.bottom_controls_last_button=jQuery("<div></div>")
+							.addClass("ui-widget-mediaslide-bottom-controls-last-button")
+							.html((this.options.bottom_navigation_controls_text ? 'End' : null))
+							.appendTo(this.bottom_controls_rightfloat)
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}, text: this.options.bottom_navigation_controls_text})
+							.click(function() { 
+								me.last();
+							});
+		if (this.options.small_bottom_controls) { 
+			this.bottom_controls_first_button.wrap('<small></small>');
+			this.bottom_controls_previous_button.wrap('<small></small>');
+			this.bottom_controls_next_button.wrap('<small></small>');
+			this.bottom_controls_last_button.wrap('<small></small>');
+		}
 
 	},
 	// Setup the HTML for the thumbnail strip
