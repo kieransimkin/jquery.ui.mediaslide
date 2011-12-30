@@ -195,9 +195,8 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide_scrollbar=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
-							.css({'z-index': 1,'margin':'auto auto'})
+							.css({'z-index': 1,'margin':'auto auto','margin-bottom':'5px'})
 							.appendTo(this.element);
-		jQuery('<br />').appendTo(this.element);
 		this.thumbslide_slider=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-slider')
