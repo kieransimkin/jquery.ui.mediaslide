@@ -450,7 +450,7 @@ $.widget( "ui.mediaslide", {
 			this.top_controls_position_indicator.fadeOut('fast');
 		}
 		if (this.options.bottom_position_indicator) { 
-			this.bottom_controls_positon_indicator.fadeOut('fast');
+			this.bottom_controls_position_indicator.fadeOut('fast');
 		}
 		if (this.options.bottom_media_title) { 
 			this.bottom_controls_media_title.fadeOut('fast');
