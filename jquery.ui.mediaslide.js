@@ -422,7 +422,7 @@ $.widget( "ui.mediaslide", {
 		var sb=this.scrollbar;
 		//append icon to handle
 		this.handleHelper = this.scrollbar.find( ".ui-slider-handle" )
-		.css({'top': '-1px','height': '0.8em'})
+		.css({'top': '-1px','height': '0.8em', 'cursor': 'col-resize'})
 		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical' style='margin: auto auto; position: relative; top: -1px;'></span>" )
 		.wrap( jQuery("<div></div>" ).css({ 'position': 'relative', width: '100%', height: '100%', margin: '0 auto' })).parent();
 		//change overflow to hidden now that slider handles the scrolling
