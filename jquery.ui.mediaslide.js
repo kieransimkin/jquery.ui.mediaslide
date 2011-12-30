@@ -42,9 +42,9 @@ $.widget( "ui.mediaslide", {
 		"show_thumbs": true,
 		"top_navigation_controls_text": false,
 		"bottom_navigation_controls_text": false,
-		"top_position_indicator": false,
+		"top_position_indicator": true,
 		"bottom_position_indicator": false,
-		"top_media_title": true,
+		"top_media_title": false,
 		"bottom_media_title": true
 	},
 	// Slide to a specific position
