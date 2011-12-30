@@ -30,11 +30,11 @@ $.widget( "ui.mediaslide", {
 		"thumb_width": 200,
 		"thumb_spacing": 10,	
 		"loading_thumb": "ajaxloader.gif",
-		"quantize_scroll": false,
 		"caption_formatter": function(c) { return c; },
 		"position_indicator_formatter": function(c) { return c; },
 		"title_formatter": function(c) { return c; },
 		"picture_click_handler": function(link) { return true; },
+		"quantize_scroll": false,
 		"small_captions": true,
 		"thumbs_on_top": false,
 		"scrollbar_on_top": true,
@@ -204,11 +204,6 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
 							.css({'z-index': 1,'margin':'auto auto','margin-bottom':'5px'});
-		if (this.options.thumbs_on_top) { 
-			this.thumbslide_scrollbar.prependTo(this.element);
-		} else { 
-			this.thumbslide_scrollbar.appendTo(this.element);
-		}
 		this.thumbslide_slider=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-slider')
@@ -216,10 +211,22 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
 							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto'});
-		if (this.options.thumbs_on_top)  {	
-			this.thumbslide.prependTo(this.element);
-		} else { 
-			this.thumbslide.appendTo(this.element);
+		if (this.options.thumbs_on_top) { 
+			if (this.options.scrollbar_on_top) { 
+				this.thumbslide.prependTo(this.element);
+				this.thumbslide_scrollbar.prependTo(this.element);
+			} else { 
+				this.thumbslide_scrollbar.prependTo(this.element);
+				this.thumbslide.prependTo(this.element);
+			}
+		} else {
+			if (this.options.scrollbar_on_top) {  
+				this.thumbslide_scrollbar.appendTo(this.element);
+				this.thumbslide.appendTo(this.element);
+			} else { 
+				this.thumbslide.appendTo(this.element);
+				this.thumbslide_scrollbar.appendTo(this.element);
+			}
 		}
 		this.thumbslide_content=jQuery('<div></div>')
 							.addClass('ui-widget')
