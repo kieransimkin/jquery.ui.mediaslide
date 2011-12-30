@@ -36,6 +36,7 @@ $.widget( "ui.mediaslide", {
 		"title_formatter": function(c) { return c; },
 		"picture_click_handler": function(link) { return true; },
 		"small_captions": true,
+		"captions_on_top": true,
 		"small_top_controls": true,
 		"small_bottom_controls": true,
 		"show_bottom_controls": true,
@@ -369,8 +370,12 @@ $.widget( "ui.mediaslide", {
 			var cap=jQuery("<span></span>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
 							.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px'})
-							.html(me.options.caption_formatter(o.title))
-							.appendTo(an);
+							.html(me.options.caption_formatter(o.title));
+			if (me.options.captions_on_top) { 
+				cap.prependTo(an);
+			} else { 
+				cap.appendTo(an);
+			}
 			if (me.options.small_captions) { 
 				cap.wrap("<small></small>");
 			}
