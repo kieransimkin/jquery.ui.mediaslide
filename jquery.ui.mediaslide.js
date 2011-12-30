@@ -37,7 +37,7 @@ $.widget( "ui.mediaslide", {
 		"quantize_scroll": false,
 		"small_captions": true,
 		"thumbs_on_top": true,
-		"scrollbar_on_top": false,
+		"scrollbar_on_top": true,
 		"captions_on_top": false,
 		"small_top_controls": true,
 		"small_bottom_controls": true,
