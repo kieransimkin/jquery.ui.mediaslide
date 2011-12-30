@@ -356,6 +356,8 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide_content.width(this._get_total_scrollbox_width()); 
 		this.top_controls_rightfloat.width(this._get_visible_scrollbox_width());
 		this.top_controls_center.width(this._get_visible_scrollbox_width());
+		this.bottom_controls_rightfloat.width(this._get_visible_scrollbox_width());
+		this.bottom_controls_center.width(this._get_visible_scrollbox_width());
 		this.thumbslide_scrollbar.width(this._get_visible_scrollbox_width());
 
 		//scrollpane parts
