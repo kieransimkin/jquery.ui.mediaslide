@@ -519,7 +519,7 @@ $.widget( "ui.mediaslide", {
 		var d=this.d;
 		for (var i=this._get_first_preload_thumb_position(pos);i<=this._get_last_preload_thumb_position(pos);i++) { 
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load", function() {
-				jQuery(this).parent().parent().css({top: '-100px'}).animate({top: '0px'},'slow');
+				jQuery(this).parent().parent().css({top: '150px'}).animate({top: '0px'},'slow');
 			}); 
 			l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
 		}
