@@ -521,7 +521,9 @@ $.widget( "ui.mediaslide", {
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load", function() {
 				jQuery(this).parent().parent().css({top: '150px',opacity: '0.0'}).animate({top: '0px','opacity':'1.0'},'slow');
 			}); 
-			l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
+			if (l[i].find('.ui-widget-mediaslide-thumb-img').attr('src')!=d[i].thumb) { 
+				l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
+			}
 		}
 	},
 	// Perform the actual animations that show and hide thumbs from the thumbnail strip
