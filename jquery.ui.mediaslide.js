@@ -115,7 +115,7 @@ $.widget( "ui.mediaslide", {
 			me.mainpicture.width(jQuery(frame).width());
 			me.mainpicture.height(jQuery(frame).height());
 		});
-		this._begin_update_controls(true);
+		this._begin_update_controls(this.position,true);
 		this._update_controls();
 	},
 	// Slides forwards or backwards a number of positions
@@ -138,7 +138,7 @@ $.widget( "ui.mediaslide", {
 		}
 		this._trigger("startslide",offset);
 		this.slide_in_progress = true;
-		this._begin_update_controls();
+		this._begin_update_controls(this.position+offset);
 		var oldpos=this.position;
 		this.position=this.position+offset;
 		var tob=this;
@@ -453,7 +453,7 @@ $.widget( "ui.mediaslide", {
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
 	},
-	_begin_update_controls: function(initial) { 
+	_begin_update_controls: function(pos,initial) { 
 		if (initial!==true) { 
 			if (this.options.top_position_indicator) { 
 				this.top_controls_position_indicator.fadeOut('fast');
@@ -468,7 +468,7 @@ $.widget( "ui.mediaslide", {
 				this.top_controls_media_title.fadeOut('fast');
 			}
 		}
-		if (this.position==1) { 
+		if (pos==1) { 
 			this.top_controls_previous_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.top_controls_first_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_previous_button.attr('disabled',true).addClass('ui-state-disabled');
@@ -480,7 +480,7 @@ $.widget( "ui.mediaslide", {
 			this.bottom_controls_previous_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_first_button.attr('disabled',false).removeClass('ui-state-disabled');
 		}
-		if (this.position==this.d.length-1) { 
+		if (pos==this.d.length-1) { 
 			this.top_controls_next_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.top_controls_last_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_next_button.attr('disabled',true).addClass('ui-state-disabled');
