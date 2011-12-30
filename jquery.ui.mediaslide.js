@@ -41,7 +41,7 @@ $.widget( "ui.mediaslide", {
 		"show_slide_page_controls": true,
 		"show_thumbs": true,
 		"top_navigation_controls_text": false,
-		"bottom_navigation_controls_text": false,
+		"bottom_navigation_controls_text": true,
 		"top_position_indicator": true,
 		"bottom_position_indicator": false,
 		"top_media_title": false,
