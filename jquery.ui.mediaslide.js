@@ -519,7 +519,7 @@ $.widget( "ui.mediaslide", {
 		var d=this.d;
 		for (var i=this._get_first_preload_thumb_position(pos);i<=this._get_last_preload_thumb_position(pos);i++) { 
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load", function() {
-				var curheight=l[i].height();
+				var curheight=l[i].parent().height();
 				console.log(curheight);
 				l[i].css({height: '1px'}).animate({height: curheight+'px'},'fast');
 			}); 
