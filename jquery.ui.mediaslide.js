@@ -519,6 +519,9 @@ $.widget( "ui.mediaslide", {
 		var d=this.d;
 		for (var i=this._get_first_preload_thumb_position(pos);i<=this._get_last_preload_thumb_position(pos);i++) { 
 			l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
+			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load", function() {
+				l[i].find('.ui-widget-mediaslide-thumb-img').slideDown('fast');
+			}); 
 		}
 	},
 	// Perform the actual animations that show and hide thumbs from the thumbnail strip
