@@ -115,6 +115,7 @@ $.widget( "ui.mediaslide", {
 			me.mainpicture.width(jQuery(frame).width());
 			me.mainpicture.height(jQuery(frame).height());
 		});
+		this._begin_update_controls(true);
 		this._update_controls();
 	},
 	// Slides forwards or backwards a number of positions
@@ -452,18 +453,20 @@ $.widget( "ui.mediaslide", {
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
 	},
-	_begin_update_controls: function() { 
-		if (this.options.top_position_indicator) { 
-			this.top_controls_position_indicator.fadeOut('fast');
-		}
-		if (this.options.bottom_position_indicator) { 
-			this.bottom_controls_position_indicator.fadeOut('fast');
-		}
-		if (this.options.bottom_media_title) { 
-			this.bottom_controls_media_title.fadeOut('fast');
-		}
-		if (this.options.top_media_title) { 
-			this.top_controls_media_title.fadeOut('fast');
+	_begin_update_controls: function(initial) { 
+		if (initial!==true) { 
+			if (this.options.top_position_indicator) { 
+				this.top_controls_position_indicator.fadeOut('fast');
+			}
+			if (this.options.bottom_position_indicator) { 
+				this.bottom_controls_position_indicator.fadeOut('fast');
+			}
+			if (this.options.bottom_media_title) { 
+				this.bottom_controls_media_title.fadeOut('fast');
+			}
+			if (this.options.top_media_title) { 
+				this.top_controls_media_title.fadeOut('fast');
+			}
 		}
 		if (this.position==1) { 
 			this.top_controls_previous_button.attr('disabled',true).addClass('ui-state-disabled');
