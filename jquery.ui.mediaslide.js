@@ -519,8 +519,7 @@ $.widget( "ui.mediaslide", {
 		var d=this.d;
 		for (var i=this._get_first_preload_thumb_position(pos);i<=this._get_last_preload_thumb_position(pos);i++) { 
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load", function() {
-				console.log(jQuery(this).height());
-				jQuery(this).parent().parent().css({top: '150px',opacity: '0.0'}).animate({top: '0px','opacity':'1.0'},'slow');
+				jQuery(this).parent().parent().css({top: (0-jQuery(this).height())+'px',opacity: '0.0'}).animate({top: '0px','opacity':'1.0'},'slow');
 			}); 
 			if (l[i].find('.ui-widget-mediaslide-thumb-img').attr('src')!=d[i].thumb) { 
 				l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
