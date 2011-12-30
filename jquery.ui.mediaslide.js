@@ -211,6 +211,10 @@ $.widget( "ui.mediaslide", {
 		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
 							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto'});
+		this.thumbslide_content=jQuery('<div></div>')
+							.addClass('ui-widget')
+							.addClass('ui-widget-mediaslide-thumbslide-content')
+							.appendTo(this.thumbslide);
 		if (this.options.thumbs_on_top) { 
 			if (this.options.scrollbar_on_top) { 
 				this.thumbslide.prependTo(this.element);
@@ -228,10 +232,6 @@ $.widget( "ui.mediaslide", {
 				this.thumbslide_scrollbar.appendTo(this.element);
 			}
 		}
-		this.thumbslide_content=jQuery('<div></div>')
-							.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-thumbslide-content')
-							.appendTo(this.thumbslide);
 		if (!this.options.show_thumbs) { 
 			this.thumbslide.hide();
 			this.thumbslide_scrollbar.hide();
