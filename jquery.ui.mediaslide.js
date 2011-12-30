@@ -42,8 +42,9 @@ $.widget( "ui.mediaslide", {
 		"show_thumbs": true,
 		"top_navigation_controls_text": false,
 		"bottom_navigation_controls_text": false,
-		"top_position_indicator": true,
-		"bottom_position_indicator": true,
+		"top_position_indicator": false,
+		"bottom_position_indicator": false,
+		"top_media_title": true,
 		"bottom_media_title": true
 	},
 	// Slide to a specific position
@@ -259,6 +260,12 @@ $.widget( "ui.mediaslide", {
 							.html('Loading')
 							.css({'display': 'none'})
 							.appendTo(this.top_controls_center);
+		this.top_controls_media_title=jQuery("<div></div>")
+							.addClass("ui-widget")
+							.addClass("ui-widget-mediaslide-top-controls-media-title")
+							.html('Loading')	
+							.css({'display': 'none'})
+							.appendTo(this.top_controls_center);
 		if (this.options.small_top_controls) { 
 			this.top_controls_first_button.wrap('<small></small>');
 			this.top_controls_previous_button.wrap('<small></small>');
@@ -455,6 +462,9 @@ $.widget( "ui.mediaslide", {
 		if (this.options.bottom_media_title) { 
 			this.bottom_controls_media_title.fadeOut('fast');
 		}
+		if (this.options.top_media_title) { 
+			this.top_controls_media_title.fadeOut('fast');
+		}
 		if (this.position==1) { 
 			this.top_controls_previous_button.attr('disabled',true);
 			this.top_controls_first_button.attr('disabled',true);
@@ -483,6 +493,10 @@ $.widget( "ui.mediaslide", {
 		if (this.options.bottom_media_title) { 
 			this.bottom_controls_media_title.html(this.options.title_formatter(this.get_current_title()));
 			this.bottom_controls_media_title.fadeIn('fast');
+		}
+		if (this.options.top_media_title) { 
+			this.top_controls_media_title.html(this.options.title_formatter(this.get_current_title()));
+			this.top_controls_media_title.fadeIn('fast');
 		}
 	},
 	// Size the scrollbar handle depending on how many media items we have
