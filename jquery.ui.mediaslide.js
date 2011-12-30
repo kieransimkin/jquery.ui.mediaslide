@@ -522,6 +522,7 @@ $.widget( "ui.mediaslide", {
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load", function() {
 				var curheight=l[i].find('.ui-widget-mediaslide-thumb-img').height();
 				l[i].css({height: '1px'}).animate({height: curheight+'px'},'fast');
+				console.log('got here');
 			}); 
 		}
 	},
