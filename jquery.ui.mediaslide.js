@@ -492,11 +492,29 @@ $.widget( "ui.mediaslide", {
 	},
 	// Set everything to the loading state
 	_set_loading_state: function() { 
-
+		this.pictureframe1.css({cursor:'wait'});
+		this.pictureframe2.css({cursor:'wait'});
+		this.top_controls_previous_button.css({cursor:'wait'});
+		this.top_controls_first_button.css({cursor:'wait'});
+		this.bottom_controls_previous_button.css({cursor:'wait'});
+		this.bottom_controls_first_button.css({cursor:'wait'});
+		this.top_controls_next_button.css({cursor:'wait'});
+		this.top_controls_last_button.css({cursor:'wait'});
+		this.bottom_controls_next_button.css({cursor:'wait'});
+		this.bottom_controls_last_button.css({cursor:'wait'});
 	},
 	// Unset the loading state
 	_unset_loading_state: function() { 
-
+		this.pictureframe1.css({cursor:'pointer'});
+		this.pictureframe2.css({cursor:'pointer'});
+		this.top_controls_previous_button.css({cursor:''});
+		this.top_controls_first_button.css({cursor:''});
+		this.bottom_controls_previous_button.css({cursor:''});
+		this.bottom_controls_first_button.css({cursor:''});
+		this.top_controls_next_button.css({cursor:''});
+		this.top_controls_last_button.css({cursor:''});
+		this.bottom_controls_next_button.css({cursor:''});
+		this.bottom_controls_last_button.css({cursor:''});
 	},
 	// Update controls - triggered before a slide
 	_begin_update_controls: function(pos,initial) { 
@@ -565,6 +583,9 @@ $.widget( "ui.mediaslide", {
 	_pictureframe_click: function() {
 		var me = this;
 		return function () { 
+			if (me.slide_in_progress) { 
+				return;
+			}
 			if (me.options.picture_click_handler(me.get_current_link())!==false) {
 				location.href=me.get_current_link();
 			}
