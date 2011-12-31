@@ -582,7 +582,14 @@ $.widget( "ui.mediaslide", {
 	},
 	// Preload the full sized versions of the previous and next images
 	_preload_neighbors: function() { 
-
+		var previous=new Image();
+		if (this.position!=0) { 
+			previous.src=this.d[this.position-1].normal;
+		}
+		var next=new Image();
+		if (this.position!=this.d.length-1) { 
+			next.src=this.d[this.position+1].normal;
+		}
 	},
 	// Handle a click on the main picture frame
 	_pictureframe_click: function() {
