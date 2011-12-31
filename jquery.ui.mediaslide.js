@@ -119,6 +119,9 @@ $.widget( "ui.mediaslide", {
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
 			me.mainpicture.width(jQuery(frame).width());
 			me.mainpicture.height(jQuery(frame).height());
+			if (jQuery(frame).width()>tob._get_visible_scrollbox_width()) { 
+				me.mainpicture.css({left: 0-(jQuery(frame).width()-tob._get_visible_scrollbox_width())/2});
+			}
 		});
 		this._begin_update_controls(this.position,true);
 		this._update_controls();
@@ -156,7 +159,6 @@ $.widget( "ui.mediaslide", {
 				var leftoff=0;
 				if (jQuery(inactive_frame).width()>tob._get_visible_scrollbox_width()) { 
 					leftoff-=(jQuery(inactive_frame).width()-tob._get_visible_scrollbox_width())/2;
-					console.log("Got here: "+leftoff);
 				}
 				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width(), left: leftoff+'px'},'fast');
 			}
