@@ -897,7 +897,7 @@ $.widget( "ui.mediaslide", {
 					med=lob.media.o;
 					repstr='_o';
 				}
-				if (this.options.flickr_data.smallthumbs===true) { 
+				if (me.options.flickr_data.smallthumbs===true) { 
 					thumb=med.replace(repstr,'_t');
 				} else { 
 					thumb=med.replace(repstr,'_m');
