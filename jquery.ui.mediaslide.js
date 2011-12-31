@@ -872,7 +872,7 @@ $.widget( "ui.mediaslide", {
 		} else if (this.dataType=='json') { 
 		
 		} else if (this.dataType=='flickr') { 
-			this.data.items.each(function(i,ob) { 
+			jQuery.each(this.data.items,function(i,ob) { 
 
 				console.log(ob.toString());
 			});
