@@ -904,7 +904,11 @@ $.widget( "ui.mediaslide", {
 					thumb=med.replace(repstr,'_m');
 					me.options.thumb_width='240';
 				}
-				normal=med.replace(repstr,'_z');
+				if (me.options.flickr_data.largenormals===true) { 
+					normal=med.replace(repstr,'_b');
+				} else { 
+					normal=med.replace(repstr,'_z');
+				}
 				d.push({
 					title: lob.title,
 					link: lob.link,
