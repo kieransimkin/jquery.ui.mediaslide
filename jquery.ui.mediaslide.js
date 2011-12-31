@@ -880,7 +880,7 @@ $.widget( "ui.mediaslide", {
 				var normal=null;
 				var thumb=null;
 				thumb=lob.media.m;
-				normal=lob.media.m.replace('m','z');
+				normal=lob.media.m.replace('_m','_z');
 				d.push({
 					title: lob.title,
 					link: lob.link,
