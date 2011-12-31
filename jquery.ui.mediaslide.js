@@ -122,6 +122,7 @@ $.widget( "ui.mediaslide", {
 			if (jQuery(frame).width()>me._get_visible_scrollbox_width()) { 
 				me.mainpicture.css({left: 0-(jQuery(frame).width()-me._get_visible_scrollbox_width())/2});
 			}
+			me._preload_neighbors();
 		});
 		this._begin_update_controls(this.position,true);
 		this._update_controls();
@@ -146,6 +147,7 @@ $.widget( "ui.mediaslide", {
 		}
 		this._trigger("startslide",offset);
 		this.slide_in_progress = true;
+		this._set_loading_state();
 		this._begin_update_controls(this.position+offset);
 		var oldpos=this.position;
 		this.position=this.position+offset;
@@ -165,9 +167,11 @@ $.widget( "ui.mediaslide", {
 			jQuery(inactive_frame).fadeTo('slow', 1.0, 'linear', function() { 
 				tob._toggle_pframe();
 				jQuery(active_frame).css({opacity: 0}).hide();
+				tob._update_controls();
+				tob._unset_loading_state();
+				tob._preload_neighbors();
 				tob.slide_in_progress=false;
 				tob._trigger("endslide",this.position);
-				tob._update_controls();
 			});
 			tob._handle_thumb_slide(oldpos);
 		});
@@ -486,6 +490,15 @@ $.widget( "ui.mediaslide", {
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
 	},
+	// Set everything to the loading state
+	_set_loading_state: function() { 
+
+	},
+	// Unset the loading state
+	_unset_loading_state: function() { 
+
+	},
+	// Update controls - triggered before a slide
 	_begin_update_controls: function(pos,initial) { 
 		if (initial!==true) { 
 			if (this.options.top_position_indicator) { 
@@ -544,6 +557,11 @@ $.widget( "ui.mediaslide", {
 			this.top_controls_media_title.fadeIn('fast');
 		}
 	},
+	// Preload the full sized versions of the previous and next images
+	_preload_neighbors: function() { 
+
+	},
+	// Handle a click on the main picture frame
 	_pictureframe_click: function() {
 		var me = this;
 		return function () { 
