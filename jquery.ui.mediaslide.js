@@ -820,7 +820,7 @@ $.widget( "ui.mediaslide", {
 			}
 		} else if (this.options.flickr_data !== null) { 
 			if (typeof(this.options.flickr_data)!='string') { 
-				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{tags: 'cat', tagmode: 'any', format: 'json'}, function(data) { 
+				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_data.id, format: 'json'}, function(data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();	
