@@ -411,6 +411,7 @@ $.widget( "ui.mediaslide", {
 			l.push(p);
 
 		});
+		jQuery('<br style="clear: both;" />').appendTo(t);
 		this.thumbslide.width(this._get_visible_scrollbox_width());
 		this.thumbslide_content.width(this._get_total_scrollbox_width()); 
 		this.top_controls_rightfloat.width(this._get_visible_scrollbox_width());
