@@ -22,7 +22,7 @@ $.widget( "ui.mediaslide", {
 		// One of these must be specified:
 		"atom_xml_data": null,
 		"atom_xml_ajax": null,
-		"flickr_data": null,
+		"flickr_public_photos_data": null,
 		"json_data": null,
 		"json_ajax": null,
 
@@ -876,15 +876,15 @@ $.widget( "ui.mediaslide", {
 					alert(t);
 				}});
 			}
-		} else if (this.options.flickr_data !== null) { 
-			if (typeof(this.options.flickr_data)!='string') { 
-				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_data.id, format: 'json'}, function(data) { 
+		} else if (this.options.flickr_public_photos_data !== null) { 
+			if (typeof(this.options.flickr_public_photos_data)!='string') { 
+				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_public_photos_data.id, ids: this.options.flickr_public_photos_data.ids, tags: this.options.flickr_public_photos_data.tags, tagmode: this.options.flickr_public_photos_data.tagmode, format: 'json'}, function(data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();	
 				});
 			} else { 
-				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_data, format: 'json'}, function(data) { 
+				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_public_photos_data, format: 'json'}, function(data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();	
@@ -955,14 +955,14 @@ $.widget( "ui.mediaslide", {
 					med=lob.media.o;
 					repstr='_o.';
 				}
-				if (me.options.flickr_data.smallthumbs===true) { 
+				if (me.options.flickr_public_photos_data.smallthumbs===true) { 
 					thumb=med.replace(repstr,'_t.');
 					me.options.thumb_width='100';
 				} else { 
 					thumb=med.replace(repstr,'_m.');
 					me.options.thumb_width='240';
 				}
-				if (me.options.flickr_data.largenormals===true) { 
+				if (me.options.flickr_public_photos_data.largenormals===true) { 
 					normal=med.replace(repstr,'_b.');
 				} else { 
 					normal=med.replace(repstr,'_z.');
