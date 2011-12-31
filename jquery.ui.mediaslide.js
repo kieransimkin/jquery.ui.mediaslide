@@ -22,6 +22,7 @@ $.widget( "ui.mediaslide", {
 		// One of these must be specified:
 		"atom_xml_data": null,
 		"atom_xml_ajax": null,
+		"flickr_data": null,
 		"json_data": null,
 		"json_ajax": null,
 
@@ -817,6 +818,25 @@ $.widget( "ui.mediaslide", {
 					alert(t);
 				}});
 			}
+		} else if (this.options.flickr_data !== null) { 
+			if (typeof(this.options.flickr_data)!='string') { 
+				jQuery.getJSON(this.options.flickr_data.url+'&amp;jsoncallback=?',{data: this.options.flickr_data.options,success: function(data) { 
+					o.data=jQuery(data);
+					o.dataType='flickr';
+					o._init_display();	
+				}, error: function(j,t,e) { 
+					alert(t);
+				}});
+			} else { 
+				jQuery.getJSON(this.options.flickr_data+'&amp;jsoncallback=?',{success: function(data) { 
+					o.data=jQuery(data);
+					o.dataType='flickr';
+					o._init_display();	
+				}, error: function(j,t,e) { 
+					alert(t);
+				}});
+			}
+		
 		} else {
 			alert('No data specified.');
 		}
@@ -854,7 +874,10 @@ $.widget( "ui.mediaslide", {
 			});
 			this.d=d;
 		} else if (this.dataType=='json') { 
-
+		
+		} else if (this.dataType=='flickr') { 
+			console.log(this.data.html());
+	
 		} else {
 			alert('unknown data type');
 		}
