@@ -23,6 +23,8 @@ $.widget( "ui.mediaslide", {
 		"atom_xml_data": null,
 		"atom_xml_ajax": null,
 		"flickr_public_photos_data": null,
+		"flickr_favorites_data": null,
+		"flickr_groups_data": null,
 		"json_data": null,
 		"json_ajax": null,
 
@@ -890,7 +892,34 @@ $.widget( "ui.mediaslide", {
 					o._init_display();	
 				});
 			}
-		
+		} else if (this.options.flickr_favorites_data !== null) { 
+			if (typeof(this.options.flickr_favorites_data)!='string') { 
+				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data, format: 'json'}, function (data) { 
+					o.data=data;
+					o.dataType='flickr';
+					o._init_display();
+				});
+			} else { 
+				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data.id}, function (data) { 
+					o.data=data;
+					o.dataType='flickr';
+					o._init_display();
+				});
+			}
+		} else if (this.options.flickr_groups_data !== null) {
+			if (typeof(this.options.flickr_groups_data)!='string') { 
+				jQuery.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?jsoncallback=?",{id: this.options.flickr_groups_data, format: 'json'}, function (data) { 
+					o.data=data;
+					o.dataType='flickr';
+					o._init_display();
+				});	
+			} else { 
+				jQuery.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?jsoncallback=?",{id: this.options.flickr_groups_data.id, format: 'json'}, function (data) { 
+					o.data=data;
+					o.dataType='flickr';
+					o._init_display();
+				});
+			}	
 		} else {
 			alert('No data specified.');
 		}
