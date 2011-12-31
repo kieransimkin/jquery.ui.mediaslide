@@ -1,7 +1,7 @@
 {
 
 	"name": "mediaslide",
-	"version": "0.0.1",
+	"version": "1.0",
 	"author": "Kieran Simkin",
 	"description": "Media viewer widget with a sliding thumbnail bar",
 	"homepage": "http://slinq.com/software/mediaslide",

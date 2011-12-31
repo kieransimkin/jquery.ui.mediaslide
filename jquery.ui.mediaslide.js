@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 0.0.1
+ *  Ver: 1.0
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2012, Kieran Simkin
