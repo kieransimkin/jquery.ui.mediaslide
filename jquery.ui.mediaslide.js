@@ -156,6 +156,7 @@ $.widget( "ui.mediaslide", {
 				var leftoff=0;
 				if (jQuery(inactive_frame).width()>tob._get_visible_scrollbox_width()) { 
 					leftoff-=(jQuery(inactive_frame).width()-tob._get_visible_scrollbox_width())/2;
+					console.log("Got here: "+leftoff);
 				}
 				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width(), left: leftoff+'px'},'fast');
 			}
