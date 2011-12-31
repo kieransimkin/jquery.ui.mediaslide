@@ -874,7 +874,7 @@ $.widget( "ui.mediaslide", {
 		} else if (this.dataType=='flickr') { 
 			jQuery.each(this.data.items,function(i,ob) { 
 
-				console.log(ob.toString());
+				//console.log(ob.toString());
 			});
 	
 		} else {
