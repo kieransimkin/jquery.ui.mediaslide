@@ -872,10 +872,6 @@ $.widget( "ui.mediaslide", {
 		} else if (this.dataType=='json') { 
 		
 		} else if (this.dataType=='flickr') { 
-			//jQuery.each(this.data.items,function(i,ob) { 
-
-				//console.log(ob.toString());
-			//})	u
 			jQuery.each(this.data.items,function(o,lob) { 
 				var normal=null;
 				var thumb=null;
@@ -883,7 +879,6 @@ $.widget( "ui.mediaslide", {
 				med=lob.media.m;
 				thumb=med.replace('_m','_t');
 				normal=med.replace('_m','_z');
-				console.log("normal: "+normal+" thumb: "+thumb);
 				d.push({
 					title: lob.title,
 					link: lob.link,
@@ -892,7 +887,6 @@ $.widget( "ui.mediaslide", {
 					normal: normal,
 					thumb: thumb
 				});
-				console.log(lob);
 			});
 			this.d=d;
 			console.log(this.data);
