@@ -899,8 +899,10 @@ $.widget( "ui.mediaslide", {
 				}
 				if (me.options.flickr_data.smallthumbs===true) { 
 					thumb=med.replace(repstr,'_t');
+					me.options.thumb_width='100';
 				} else { 
 					thumb=med.replace(repstr,'_m');
+					me.options.thumb_width='240';
 				}
 				normal=med.replace(repstr,'_z');
 				d.push({
