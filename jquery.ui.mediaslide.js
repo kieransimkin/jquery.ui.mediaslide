@@ -407,7 +407,7 @@ $.widget( "ui.mediaslide", {
 		this.bottom_controls_rightfloat.width(this._get_visible_scrollbox_width());
 		this.bottom_controls_center.width(this._get_visible_scrollbox_width());
 		this.thumbslide_scrollbar.width(this._get_visible_scrollbox_width());
-
+		this.element.width(this._get_visible_scrollbox_width());
 		//scrollpane parts
 		var scrollPane = this.thumbslide, scrollContent = this.thumbslide_content;
 		this.preloadtimeout=null;
