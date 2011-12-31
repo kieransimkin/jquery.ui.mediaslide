@@ -222,7 +222,7 @@ $.widget( "ui.mediaslide", {
 							.appendTo(this.thumbslide_scrollbar);
 		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
-							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto'});
+							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto','position':'relative'});
 		this.thumbslide_content=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
@@ -502,6 +502,9 @@ $.widget( "ui.mediaslide", {
 		this.top_controls_last_button.css({cursor:'wait'});
 		this.bottom_controls_next_button.css({cursor:'wait'});
 		this.bottom_controls_last_button.css({cursor:'wait'});
+		this.thumbslide_loading_overlay=jQuery("<div></div>")
+							.css({'position':'absolute','top':'0px','left':'0px','background-color':'red','width':this._get_total_thumbslide_width(), 'height':'50px'})
+							.prependTo(this.thumbslide);
 	},
 	// Unset the loading state
 	_unset_loading_state: function() { 
