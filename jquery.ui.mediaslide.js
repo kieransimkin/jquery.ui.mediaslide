@@ -848,6 +848,7 @@ $.widget( "ui.mediaslide", {
 	},
 	_parse_data: function() { 
 		var d=new Array();
+		var me = this;
 		if (this.dataType=='atom') { 
 			this.data.find('entry').each(function(i,ob) { 
 				var normal=null;
@@ -876,9 +877,32 @@ $.widget( "ui.mediaslide", {
 				var normal=null;
 				var thumb=null;
 				var med=null;
-				med=lob.media.m;
-				thumb=med.replace('_m','_t');
-				normal=med.replace('_m','_z');
+				var repstr='';
+				if (typeof(lob.media.m)!='undefined') { 
+					med=lob.media.m;
+					repstr='_m';
+				} else if (typeof(lob.media.s)!='undefined') {
+					med=lob.media.s;
+					repstr='_s';
+				} else if (typeof(lob.media.t)!='undefined') { 
+					med=lob.media.t;
+					repstr='_t';
+				} else if (typeof(lob.media.z)!='undefined') { 
+					med=lob.media.z;
+					repstr='_z';
+				} else if (typeof(lob.media.b)!='undefined') { 
+					med=lob.media.b;
+					repstr='_b';
+				} else if (typeof(lob.media.o)!='undefined') { 
+					med=lob.media.o;
+					repstr='_o';
+				}
+				if (this.options.flickr_data.smallthumbs===true) { 
+					thumb=med.replace(repstr,'_t');
+				} else { 
+					thumb=med.replace(repstr,'_m');
+				}
+				normal=med.replace(repstr,'_z');
 				d.push({
 					title: lob.title,
 					link: lob.link,
