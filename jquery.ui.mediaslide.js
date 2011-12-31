@@ -821,7 +821,7 @@ $.widget( "ui.mediaslide", {
 		} else if (this.options.flickr_data !== null) { 
 			if (typeof(this.options.flickr_data)!='string') { 
 				jQuery.getJSON(this.options.flickr_data.url+'&amp;jsoncallback=?',{data: this.options.flickr_data.options,success: function(data) { 
-					o.data=jQuery(data);
+					o.data=data;
 					o.dataType='flickr';
 					o._init_display();	
 				}, error: function(j,t,e) { 
@@ -829,7 +829,7 @@ $.widget( "ui.mediaslide", {
 				}});
 			} else { 
 				jQuery.getJSON(this.options.flickr_data+'&amp;jsoncallback=?',{success: function(data) { 
-					o.data=jQuery(data);
+					o.data=data;
 					o.dataType='flickr';
 					o._init_display();	
 				}, error: function(j,t,e) { 
