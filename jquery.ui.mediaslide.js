@@ -876,7 +876,10 @@ $.widget( "ui.mediaslide", {
 		} else if (this.dataType=='json') { 
 		
 		} else if (this.dataType=='flickr') { 
-			console.log(this.data.html());
+			this.data.each(function(i,ob) { 
+
+				console.log(ob.html());
+			});
 	
 		} else {
 			alert('unknown data type');
