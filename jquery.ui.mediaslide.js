@@ -876,7 +876,9 @@ $.widget( "ui.mediaslide", {
 
 				//console.log(ob.toString());
 			//})	u
-			alert(jQuery(this.data).html());
+			jQuery.each(this.data.items,function(o,lob) { 
+				console.log(lob);
+			});
 			this.d=d;
 			console.log(this.data);
 	
