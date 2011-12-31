@@ -877,6 +877,18 @@ $.widget( "ui.mediaslide", {
 				//console.log(ob.toString());
 			//})	u
 			jQuery.each(this.data.items,function(o,lob) { 
+				var normal=null;
+				var thumb=null;
+				thumb=lob.media.m;
+				normal=lob.media.m;
+				d.push({
+					title: lob.title,
+					link: lob.link,
+					id: lob.link,
+					updated: lob.published,
+					normal: normal,
+					thumb: thumb
+				});
 				console.log(lob);
 			});
 			this.d=d;
