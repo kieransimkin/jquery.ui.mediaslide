@@ -887,34 +887,34 @@ $.widget( "ui.mediaslide", {
 				var repstr='';
 				if (typeof(lob.media.m)!='undefined') { 
 					med=lob.media.m;
-					repstr='_m';
+					repstr='_m.';
 				} else if (typeof(lob.media.s)!='undefined') {
 					med=lob.media.s;
-					repstr='_s';
+					repstr='_s.';
 				} else if (typeof(lob.media.t)!='undefined') { 
 					med=lob.media.t;
-					repstr='_t';
+					repstr='_t.';
 				} else if (typeof(lob.media.z)!='undefined') { 
 					med=lob.media.z;
-					repstr='_z';
+					repstr='_z.';
 				} else if (typeof(lob.media.b)!='undefined') { 
 					med=lob.media.b;
-					repstr='_b';
+					repstr='_b.';
 				} else if (typeof(lob.media.o)!='undefined') { 
 					med=lob.media.o;
-					repstr='_o';
+					repstr='_o.';
 				}
 				if (me.options.flickr_data.smallthumbs===true) { 
-					thumb=med.replace(repstr,'_t');
+					thumb=med.replace(repstr,'_t.');
 					me.options.thumb_width='100';
 				} else { 
-					thumb=med.replace(repstr,'_m');
+					thumb=med.replace(repstr,'_m.');
 					me.options.thumb_width='240';
 				}
 				if (me.options.flickr_data.largenormals===true) { 
-					normal=med.replace(repstr,'_b');
+					normal=med.replace(repstr,'_b.');
 				} else { 
-					normal=med.replace(repstr,'_z');
+					normal=med.replace(repstr,'_z.');
 				}
 				d.push({
 					title: lob.title,
