@@ -889,8 +889,6 @@ $.widget( "ui.mediaslide", {
 				});
 			});
 			this.d=d;
-			console.log(this.data);
-	
 		} else {
 			alert('unknown data type');
 		}
