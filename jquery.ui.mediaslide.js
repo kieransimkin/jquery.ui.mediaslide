@@ -503,7 +503,7 @@ $.widget( "ui.mediaslide", {
 		this.bottom_controls_next_button.css({cursor:'wait'});
 		this.bottom_controls_last_button.css({cursor:'wait'});
 		this.thumbslide_loading_overlay=jQuery("<div></div>")
-							.css({'position':'absolute','top':'0px','left':'0px','background-color':'red','width':this._get_total_scrollbox_width(), 'height':'50px','z-index':'2'})
+							.css({'position':'absolute','top':'0px','left':'0px','background-color':'red','width':this._get_total_scrollbox_width(), 'height':this.thumbslide_content.height(),'z-index':'2','cursor':'wait'})
 							.prependTo(this.thumbslide);
 	},
 	// Unset the loading state
