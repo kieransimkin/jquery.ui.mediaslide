@@ -826,13 +826,11 @@ $.widget( "ui.mediaslide", {
 					o._init_display();	
 				});
 			} else { 
-				jQuery.ajax(this.options.flickr_data+'&amp;jsoncallback=?',{success: function(data) { 
+				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_data, format: 'json'}, function(data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();	
-				}, error: function(j,t,e) { 
-					alert(t);
-				}});
+				});
 			}
 		
 		} else {
@@ -874,9 +872,9 @@ $.widget( "ui.mediaslide", {
 		} else if (this.dataType=='json') { 
 		
 		} else if (this.dataType=='flickr') { 
-			this.data.each(function(i,ob) { 
+			this.data.items.each(function(i,ob) { 
 
-				console.log(ob.html());
+				console.log(ob.toString());
 			});
 	
 		} else {
