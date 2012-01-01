@@ -632,7 +632,7 @@ $.widget( "ui.mediaslide", {
 					console.log(l[i].find('.ui-widget-mediaslide-thumb-img').parent().html());
 					console.log(d[i].thumb);
 					l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-jQuery(this).height())+'px',opacity: '0.0'});
-					l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
+					l[i].find('.ui-widget-mediaslide-thumb-img:eq(0)').attr('src',d[i].thumb);
 					l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'slow');
 				});
 				tim.src=d[i].thumb;
