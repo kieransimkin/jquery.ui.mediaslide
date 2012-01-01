@@ -628,6 +628,7 @@ $.widget( "ui.mediaslide", {
 		for (var i=this._get_first_preload_thumb_position(pos);i<=this._get_last_preload_thumb_position(pos);i++) { 
 			if (l[i].find('.ui-widget-mediaslide-thumb-img').attr('src')!=d[i].thumb) { 
 				var tim=new Image();
+				console.log(i);
 				jQuery(tim).bind("load",function() { 
 					l[i].find('.ui-widget-mediaslide-thumb-img:eq(0)').attr('src',d[i].thumb);
 					console.log(l[i].find('.ui-widget-mediaslide-thumb-img').parent().html());
