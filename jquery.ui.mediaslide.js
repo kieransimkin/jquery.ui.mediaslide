@@ -896,7 +896,7 @@ $.widget( "ui.mediaslide", {
 		} else if (this.options.flickr_favorites_data !== null) { 
 			if (typeof(this.options.flickr_favorites_data)!='string') { 
 				this.flickr_smallthumbs=this.options.flickr_favorites_data.smallthumbs;
-				this.flickr_largenormals=this.options.flickr_favourites_data.largenormals;
+				this.flickr_largenormals=this.options.flickr_favorites_data.largenormals;
 				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data.id}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
