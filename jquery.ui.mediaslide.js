@@ -636,10 +636,13 @@ $.widget( "ui.mediaslide", {
 	},
 	_handle_thumbnail_load_callback: function(d,l,i,tim) { 
 		return function() { 
-			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-jQuery(tim).height())+'px',opacity: '0.0'});
+			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({opacity: '0.0'});
+			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load",function() { 
+
+				l[i].find('.ui-widget-mediaslide-thumb-img').css({top: (0-jQuery(this).height())+'px'});
+				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'slow');
+			});
 			l[i].find('.ui-widget-mediaslide-thumb-img:eq(0)').attr('src',d[i].thumb);
-			console.log(jQuery(tim).height());
-			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'slow');
 		}
 	},
 	// Perform the actual animations that show and hide thumbs from the thumbnail strip
