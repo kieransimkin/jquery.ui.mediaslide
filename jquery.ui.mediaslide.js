@@ -629,7 +629,7 @@ $.widget( "ui.mediaslide", {
 			if (l[i].find('.ui-widget-mediaslide-thumb-img').attr('src')!=d[i].thumb) { 
 				var tim=new Image();
 				jQuery(tim).bind("load",function() { 
-					console.log(l[i].find('.ui-widget-mediaslide-thumb-img').html());
+					console.log(l[i].find('.ui-widget-mediaslide-thumb-img').parent().html());
 					l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-jQuery(this).height())+'px',opacity: '0.0'});
 					l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
 					l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'slow');
