@@ -879,6 +879,8 @@ $.widget( "ui.mediaslide", {
 			}
 		} else if (this.options.flickr_public_photos_data !== null) { 
 			if (typeof(this.options.flickr_public_photos_data)!='string') { 
+				this.flickr_smallthumbs=this.options.flickr_public_photos_data.smallthumbs;
+				this.flickr_largenormals=this.options.flickr_public_photos_data.largenormals;
 				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_public_photos_data.id, ids: this.options.flickr_public_photos_data.ids, tags: this.options.flickr_public_photos_data.tags, tagmode: this.options.flickr_public_photos_data.tagmode, format: 'json'}, function(data) { 
 					o.data=data;
 					o.dataType='flickr';
@@ -893,6 +895,8 @@ $.widget( "ui.mediaslide", {
 			}
 		} else if (this.options.flickr_favorites_data !== null) { 
 			if (typeof(this.options.flickr_favorites_data)!='string') { 
+				this.flickr_smallthumbs=this.options.flickr_favorites_data.smallthumbs;
+				this.flickr_largenormals=this.options.flickr_favourites_data.largenormals;
 				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data.id}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
@@ -907,6 +911,8 @@ $.widget( "ui.mediaslide", {
 			}
 		} else if (this.options.flickr_groups_data !== null) {
 			if (typeof(this.options.flickr_groups_data)!='string') { 
+				this.flickr_smallthumbs=this.options.flickr_groups_data.smallthumbs;
+				this.flickr_largenormals=this.options.flickr_groups_data.largenormals;
 				jQuery.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?jsoncallback=?",{id: this.options.flickr_groups_data.id, format: 'json'}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
@@ -983,14 +989,14 @@ $.widget( "ui.mediaslide", {
 					med=lob.media.o;
 					repstr='_o.';
 				}
-				if (me.options.flickr_public_photos_data.smallthumbs===true) { 
+				if (me.flickr_smallthumbs===true) { 
 					thumb=med.replace(repstr,'_t.');
 					me.options.thumb_width='100';
 				} else { 
 					thumb=med.replace(repstr,'_m.');
 					me.options.thumb_width='240';
 				}
-				if (me.options.flickr_public_photos_data.largenormals===true) { 
+				if (me.flickr_largenormals===true) { 
 					normal=med.replace(repstr,'_b.');
 				} else { 
 					normal=med.replace(repstr,'_z.');
