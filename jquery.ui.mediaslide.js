@@ -624,13 +624,18 @@ $.widget( "ui.mediaslide", {
 		var l=this.thumbnails;
 		var t=this.thumbslide_content;
 		var d=this.d;
+		var me=this;
 		for (var i=this._get_first_preload_thumb_position(pos);i<=this._get_last_preload_thumb_position(pos);i++) { 
-			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load", function() {
-				jQuery(this).parent().parent().css({top: (0-jQuery(this).height())+'px',opacity: '0.0'}).animate({top: '0px','opacity':'1.0'},'slow');
-			}); 
 			if (l[i].find('.ui-widget-mediaslide-thumb-img').attr('src')!=d[i].thumb) { 
-				l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
+				var tim=new Image();
+				jQuery(tim).bind("load"),function() { 
+					l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-jQuery(this).height())+'px',opacity: '0.0'});
+					l[i].find('.ui-widget-mediaslide-thumb-img').attr('src',d[i].thumb);
+					l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'slow');
+				});
+				tim.src=d[i].thumb;
 			}
+			
 		}
 	},
 	// Perform the actual animations that show and hide thumbs from the thumbnail strip
