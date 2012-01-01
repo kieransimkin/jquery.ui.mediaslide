@@ -638,6 +638,7 @@ $.widget( "ui.mediaslide", {
 		return function() { 
 			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-jQuery(tim).height())+'px',opacity: '0.0'});
 			l[i].find('.ui-widget-mediaslide-thumb-img:eq(0)').attr('src',d[i].thumb);
+			console.log(jQuery(tim).height());
 			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'slow');
 		}
 	},
