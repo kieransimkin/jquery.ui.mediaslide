@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<title>Large Gallery Example</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script src="../jquery.ui.mediaslide.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all" />
+<body>
+<div id="switcher"></div>
+<br style="clear: both;" />
+<div id="slide_1" style="margin: auto auto;"></div><br style="clear: both;" />
+<a href="#" onclick="$('#slide_1').mediaslide('first'); return false;">First</a> - <a href="#" onclick="$('#slide_1').mediaslide('previous'); return false;">Prev</a> - <a href="#" onclick="$('#slide_1').mediaslide('next'); return false;">Next</a> - <a href="#" onclick="$('#slide_1').mediaslide('last'); return false;">Last</a>
+<script>
+	$('#slide_1').mediaslide({atom_xml_ajax: {url: 'landscapes.xml', data: {} }});
+</script>
+<script type="text/javascript"
+  src="http://jqueryui.com/themeroller/themeswitchertool/">
+</script>
+<script>
+ $(document).ready(function(){
+    $('#switcher').themeswitcher();
+  });
+</script>
+</body>
+</html> 
