@@ -639,7 +639,7 @@ $.widget( "ui.mediaslide", {
 			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({opacity: '0.0'});
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load",function() { 
 
-				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-jQuery(this).height())+'px'});
+				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-(jQuery(this).height()-20))+'px'});
 				console.log(jQuery(this).height());
 				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'slow');
 			});
