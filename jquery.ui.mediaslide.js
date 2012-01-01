@@ -609,6 +609,9 @@ $.widget( "ui.mediaslide", {
 		var remainder = scrollContent.width() - scrollPane.width();
 		var proportion = remainder / scrollContent.width();
 		var handleSize = scrollPane.width() - ( proportion * scrollPane.width() );
+		if (handleSize<15) {
+			handleSize=15;
+		}
 		this.scrollbar.find( ".ui-slider-handle" ).css({
 			width: handleSize,
 			"margin-left": -handleSize / 2
