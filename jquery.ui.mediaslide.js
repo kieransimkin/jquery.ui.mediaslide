@@ -378,12 +378,15 @@ $.widget( "ui.mediaslide", {
 							.addClass('ui-widget-mediaslide-thumb-div')
 							.addClass('ui-corner-all')
 							.addClass('ui-state-default')
-							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center','border': 'none'})
+							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center','border': 'none','cursor':'pointer'})
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.hover(function() { 
 								p.addClass('ui-state-hover');
 							}, function() { 
 								p.removeClass('ui-state-hover');
+							})
+							.click(function() { 
+								me.position_slide_to(i);
 							})
 							.appendTo(t);
 			p.find('.ui-widget-mediaslide-thumb-img').wrap('<a href="#" class="ui-widget-mediaslide-thumb-link" />');
