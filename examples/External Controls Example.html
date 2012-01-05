@@ -26,9 +26,16 @@
 			show_bottom_controls: false,
 			thumbs_on_top: true,
 			picture_click_handler: function(url) { 
-				alert('Picture click handled by custom function, URL is: \n'+url);
+				alert('Picture click handled by custom function, destination URL is: \n'+url);
 				return false;
+			},
+			startslide: function(offset) { 
+				console.log("start slide");
+			},
+			endslide: function(position) { 
+				console.log("end slide");
 			}
+
 				});
 </script>
 <script type="text/javascript"
