@@ -34,25 +34,24 @@
 		$('#title').fadeTo('fast',1.0);
 	}
 	$('#slide_1').mediaslide({
-			atom_xml_ajax: {url: 'imagelist.xml', data: {} },
-			show_top_controls: false,
-			show_bottom_controls: false,
-			thumbs_on_top: true,
-			picture_click_handler: function(url) { 
-				alert('Picture click handled by custom function, destination URL is: \n'+url);
-				return false;
-			},
-			startslide: function(offset) { 
-				begin_update_position_indicator();
-			},
-			endslide: function(position) { 
-				update_position_indicator();
-			},
-			ready: function() { 
-				update_position_indicator();
-			}
-
-				});
+		atom_xml_ajax: {url: 'imagelist.xml', data: {} },
+		show_top_controls: false,
+		show_bottom_controls: false,
+		thumbs_on_top: true,
+		picture_click_handler: function(url) { 
+			alert('Picture click handled by custom function, destination URL is: \n'+url);
+			return false;
+		},
+		startslide: function(offset) { 
+			begin_update_position_indicator();
+		},
+		endslide: function(position) { 
+			update_position_indicator();
+		},
+		ready: function() { 
+			update_position_indicator();
+		}
+	});
 </script>
 <script type="text/javascript"
   src="http://jqueryui.com/themeroller/themeswitchertool/">
