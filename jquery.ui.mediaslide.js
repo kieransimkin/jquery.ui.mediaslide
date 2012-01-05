@@ -121,9 +121,8 @@ jQuery.widget( "ui.mediaslide", {
 		jQuery(frame).css({opacity:0});
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
 			me.mainpicture.width(jQuery(frame).width());
-			me.mainpicture.animate({height: jQuery(frame).height()},500);
-			jQuery(frame).fadeTo(500,1.0);
-//			me.mainpicture.height(jQuery(frame).height());
+			me.mainpicture.animate({height: jQuery(frame).height()},'slow');
+			jQuery(frame).fadeTo('slow',1.0);
 			if (jQuery(frame).width()>me._get_visible_scrollbox_width()) { 
 				me.mainpicture.css({left: 0-(jQuery(frame).width()-me._get_visible_scrollbox_width())/2});
 			}
