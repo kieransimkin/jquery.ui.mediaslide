@@ -16,7 +16,8 @@
 	<a href="#" onclick="$('#slide_1').mediaslide('next'); return false;"><img src="next.png" alt="Next" title="Next"></a> 
 	<a href="#" onclick="$('#slide_1').mediaslide('last'); return false;"><img src="end.png" title="End" alt="End"></a>
 	<br>
-	<div id="position_indicator"></div>
+	<div id="position_indicator"></div><br />
+	<div id="title"></div><br />
 </div>
 <br style="clear: both;" />
 <div id="slide_1" style="margin: auto auto;"></div><br style="clear: both;" />
@@ -24,10 +25,13 @@
 <script>
 	function begin_update_position_indicator() { 
 		$('#position_indicator').fadeTo('fast',0.0);
+		$('#title').fadeTo('fast',0.0);
 	}
 	function update_position_indicator() { 
 		$('#position_indicator').html(($('#slide_1').mediaslide('get_position')+1)+' / '+$('#slide_1').mediaslide('get_count'));
+		$('#title').html($('#slide_1').mediaslide('get_current_title'));
 		$('#position_indicator').fadeTo('fast',1.0);
+		$('#title').fadeTo('fast',1.0);
 	}
 	$('#slide_1').mediaslide({
 			atom_xml_ajax: {url: 'imagelist.xml', data: {} },
