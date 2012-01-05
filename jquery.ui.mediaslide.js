@@ -35,7 +35,7 @@ $.widget( "ui.mediaslide", {
 		"caption_formatter": function(c) { return c; },
 		"position_indicator_formatter": function(c) { return c; },
 		"title_formatter": function(c) { return c; },
-		"picture_click": function(link) { return true; },
+		"picture_click_handler": function(link) { return true; },
 		"quantize_scroll": false,
 		"small_captions": true,
 		"thumbs_on_top": false,
@@ -605,7 +605,7 @@ $.widget( "ui.mediaslide", {
 			if (me.slide_in_progress) { 
 				return;
 			}
-			if (me._trigger('picture_click',me.get_current_link())!==false) {
+			if (me.options.picture_click_handler(me.get_current_link())!==false) {
 				location.href=me.get_current_link();
 			}
 		}
