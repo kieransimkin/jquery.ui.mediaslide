@@ -25,8 +25,8 @@
 			show_top_controls: false,
 			show_bottom_controls: false,
 			thumbs_on_top: true,
-			picture_click_handler: function() { 
-				alert('picture clicked, not doing anything');
+			picture_click_handler: function(url) { 
+				alert('Picture click handled by custom function, URL is: '+url);
 				return false;
 			}
 				});
