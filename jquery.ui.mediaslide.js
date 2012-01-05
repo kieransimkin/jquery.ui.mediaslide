@@ -270,6 +270,7 @@ jQuery.widget( "ui.mediaslide", {
 							.html((this.options.top_navigation_controls_text ? 'Beginning' : null))
 							.appendTo(this.top_controls_leftfloat)
 							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}, text: this.options.top_navigation_controls_text})
+							.css({'margin-left':'5px'})
 							.click(function() { 
 								me.first();
 							});
@@ -294,6 +295,7 @@ jQuery.widget( "ui.mediaslide", {
 							.html((this.options.top_navigation_controls_text ? 'End' : null))
 							.appendTo(this.top_controls_rightfloat)
 							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}, text: this.options.top_navigation_controls_text})
+							.css({'margin-right':'5px'})
 							.click(function() { 
 								me.last();
 							});
@@ -327,6 +329,7 @@ jQuery.widget( "ui.mediaslide", {
 							.html((this.options.bottom_navigation_controls_text ? 'Beginning' : null))
 							.appendTo(this.bottom_controls_leftfloat)
 							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}, text: this.options.bottom_navigation_controls_text})
+							.css({'margin-left':'5px'})
 							.click(function() { 
 								me.first();
 							});
@@ -351,6 +354,7 @@ jQuery.widget( "ui.mediaslide", {
 							.html((this.options.bottom_navigation_controls_text ? 'End' : null))
 							.appendTo(this.bottom_controls_rightfloat)
 							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}, text: this.options.bottom_navigation_controls_text})
+							.css({'margin-right':'5px'})
 							.click(function() { 
 								me.last();
 							});
