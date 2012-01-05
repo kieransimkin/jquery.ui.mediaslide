@@ -15,11 +15,20 @@
 	<a href="#" onclick="$('#slide_1').mediaslide('previous'); return false;"><img src="previous.png" title="Previous" alt="Previous"></a> 
 	<a href="#" onclick="$('#slide_1').mediaslide('next'); return false;"><img src="next.png" alt="Next" title="Next"></a> 
 	<a href="#" onclick="$('#slide_1').mediaslide('last'); return false;"><img src="end.png" title="End" alt="End"></a>
+	<br>
+	<div id="position_indicator"></div>
 </div>
 <br style="clear: both;" />
 <div id="slide_1" style="margin: auto auto;"></div><br style="clear: both;" />
 <a href="http://slinq.com/software/mediaslide">MediaSlide by Kieran Simkin</a>
 <script>
+	function begin_update_position_indicator() { 
+		$('#position_indicator').fadeOut('fast');
+	}
+	function update_position_indicator() { 
+		$('#position_indicator').html($('#slide_1').mediaslide('get_position')+' / '+$('#slide_1').mediaslide('get_count'));
+		$('#position_indicator').fadeIn('fast');
+	}
 	$('#slide_1').mediaslide({
 			atom_xml_ajax: {url: 'imagelist.xml', data: {} },
 			show_top_controls: false,
@@ -30,10 +39,10 @@
 				return false;
 			},
 			startslide: function(offset) { 
-				console.log("start slide");
+				begin_update_position_indicator();
 			},
 			endslide: function(position) { 
-				console.log("end slide");
+				end_update_position_indicator();
 			}
 
 				});
