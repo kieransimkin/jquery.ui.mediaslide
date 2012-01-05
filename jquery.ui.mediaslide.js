@@ -844,6 +844,7 @@ jQuery.widget( "ui.mediaslide", {
 		this.pframe_displaying=1;
 		this._init_data();
 	},
+	// Load and parse the data from its data source
 	_init_data: function() { 
 		o=this;
 		if (this.options.atom_xml_data !== null) { 
@@ -946,6 +947,7 @@ jQuery.widget( "ui.mediaslide", {
 			alert('No data specified.');
 		}
 	},
+	// Setup display
 	_init_display: function() { 
 		if (!this.html_setup) { 
 			this._do_html_setup();
@@ -953,9 +955,10 @@ jQuery.widget( "ui.mediaslide", {
 		}
 		this._parse_data();
 		this.position_skip(this.position);
-		this._trigger('ready');
 		this.setup=true;
+		this._trigger('ready');
 	},
+	// Doesn't actually parse the data - that's already done, what it does is take the parsed data and translate it into a normalized format
 	_parse_data: function() { 
 		var d=new Array();
 		var me = this;
