@@ -26,7 +26,7 @@
 		$('#position_indicator').fadeTo('fast',0.0);
 	}
 	function update_position_indicator() { 
-		$('#position_indicator').html($('#slide_1').mediaslide('get_position')+' / '+$('#slide_1').mediaslide('get_count'));
+		$('#position_indicator').html(($('#slide_1').mediaslide('get_position')+1)+' / '+$('#slide_1').mediaslide('get_count'));
 		$('#position_indicator').fadeTo('fast',1.0);
 	}
 	$('#slide_1').mediaslide({
