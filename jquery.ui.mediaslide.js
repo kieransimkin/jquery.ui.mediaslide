@@ -117,14 +117,14 @@ jQuery.widget( "ui.mediaslide", {
 		this.thumbnails[this.position].hide();
 		var me=this;
 		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">');
-		jQuery(frame).hide();
+		me.mainpicture.height(0);
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
 			me.mainpicture.width(jQuery(frame).width());
-			me.mainpicture.height(jQuery(frame).height());
+			me.mainpicture.animate({height: jQuery(frame).height()},500);
+//			me.mainpicture.height(jQuery(frame).height());
 			if (jQuery(frame).width()>me._get_visible_scrollbox_width()) { 
 				me.mainpicture.css({left: 0-(jQuery(frame).width()-me._get_visible_scrollbox_width())/2});
 			}
-			jQuery(frame).slideDown(500);
 			me._preload_neighbors();
 		});
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
