@@ -886,17 +886,13 @@ $.widget( "ui.mediaslide", {
 					o.data=jQuery(data);
 					o.dataType='json';
 					o._init_display();
-				}, error: function (j,t,e) { 
-					alert(t);
-				}});
+				});
 			} else { 
 				jQuery.getJSON(this.options.json_ajax,{}, function(data) { 
 					o.data=jQuery(data);
 					o.dataType='json';
 					o._init_display();
-				}, error: function (j,t,e) { 
-					alert(t);
-				}});
+				});
 			}
 		} else if (this.options.flickr_public_photos_data !== null) { 
 			if (typeof(this.options.flickr_public_photos_data)!='string') { 
