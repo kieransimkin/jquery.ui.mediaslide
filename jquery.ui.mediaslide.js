@@ -953,7 +953,7 @@ $.widget( "ui.mediaslide", {
 		}
 		this._parse_data();
 		this.position_skip(this.position);
-		this._trigger('load');
+		this._trigger('ready');
 		this.setup=true;
 	},
 	_parse_data: function() { 
