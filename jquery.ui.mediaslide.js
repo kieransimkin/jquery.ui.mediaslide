@@ -990,6 +990,7 @@ $.widget( "ui.mediaslide", {
 				});
 				console.log(ob);
 			});
+			this.d=d;
 		} else if (this.dataType=='flickr') { 
 			jQuery.each(this.data.items,function(o,lob) { 
 				var normal=null;
