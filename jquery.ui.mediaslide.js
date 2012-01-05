@@ -986,7 +986,7 @@ $.widget( "ui.mediaslide", {
 					id: ob['id'],
 					updated: ob['updated'],
 					normal: ob['normal'],
-					thumb: thumb
+					thumb: ob['thumb']
 				});
 			});
 		} else if (this.dataType=='flickr') { 
