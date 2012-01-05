@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>AJAX Atom XML Example</title>
+<title>Custom Formatters Example</title>
 <meta charset="utf-8">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
@@ -14,7 +14,18 @@
 <a href="http://slinq.com/software/mediaslide">MediaSlide by Kieran Simkin</a><br />
 <a href=".">Return to examples list</a>
 <script>
-	$('#slide_1').mediaslide({atom_xml_ajax: {url: 'imagelist.xml', data: {} }});
+	$('#slide_1').mediaslide({
+		json_ajax: {url: 'landscapes.json', data: {} },
+		caption_formatter: function(c) { 
+			return '"'+c+'"';
+		},
+		position_indicator_formatter: function(c) { 
+			return c.replace("/","of");
+		},
+		title_formatter: function(c) { 
+			return jQuery(c).wrap("<b></b>");
+		}
+	});
 </script>
 <script type="text/javascript"
   src="http://jqueryui.com/themeroller/themeswitchertool/">
