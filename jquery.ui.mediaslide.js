@@ -182,6 +182,7 @@ jQuery.widget( "ui.mediaslide", {
 	_do_html_setup: function() { 
 		this.element.html('');
 		this.top_controls=jQuery('<div></div>')	.addClass('ui-widget')
+							.addClass('ui-widget-content')
 							.addClass('ui-widget-mediaslide-top-controls-div')
 							.css({'z-index': 1,'margin':'auto auto'})
 							.prependTo(this.element);
@@ -207,6 +208,7 @@ jQuery.widget( "ui.mediaslide", {
 							.appendTo(this.mainpicture);
 		this.bottom_controls=jQuery('<div></div>')
 							.addClass('ui-widget')
+							.addClass('ui-widget-content')
 							.addClass('ui-widget-mediaslide-bottom-controls-div')
 							.css({'z-index': 1,'margin':'auto auto'})
 							.appendTo(this.element);
