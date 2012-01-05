@@ -46,6 +46,7 @@ $.widget( "ui.mediaslide", {
 		"show_bottom_controls": true,
 		"show_top_controls": true,
 		"show_thumbs": true,
+		"show_scrollbar": true,
 		"top_navigation_controls_text": false,
 		"bottom_navigation_controls_text": false,
 		"top_position_indicator": true,
@@ -115,7 +116,7 @@ $.widget( "ui.mediaslide", {
 		this.position=pos;
 		this.thumbnails[this.position].hide();
 		var me=this;
-		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
+		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">');
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
 			me.mainpicture.width(jQuery(frame).width());
 			me.mainpicture.height(jQuery(frame).height());
@@ -124,6 +125,7 @@ $.widget( "ui.mediaslide", {
 			}
 			me._preload_neighbors();
 		});
+		jQuery(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
 		this._begin_update_controls(this.position,true);
 		this._update_controls();
 	},
@@ -246,6 +248,9 @@ $.widget( "ui.mediaslide", {
 		}
 		if (!this.options.show_thumbs) { 
 			this.thumbslide.hide();
+			this.thumbslide_scrollbar.hide();
+		}
+		if (!this.options.show_scrollbar) { 
 			this.thumbslide_scrollbar.hide();
 		}
 		this.html_setup=true;
@@ -489,7 +494,6 @@ $.widget( "ui.mediaslide", {
 		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical' style='margin: auto auto; position: relative; top: -1px;'></span>" )
 		.wrap( jQuery("<div></div>" ).css({ 'position': 'relative', width: '100%', height: '100%', margin: '0 auto' })).parent();
 		//change overflow to hidden now that slider handles the scrolling
-
 		scrollPane.css( "overflow", "hidden" );
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
@@ -648,7 +652,7 @@ $.widget( "ui.mediaslide", {
 			l[i].find('.ui-widget-mediaslide-thumb-img:eq(0)').attr('src',d[i].thumb);
 		}
 	},
-	// Perform the actual animations that show and hide thumbs from the thumbnail strip
+	// Perform the actual animations that show and hide thumbs from the thumbnail strip as we move between images
 	_handle_thumb_slide: function(oldpos) { 
 		this._do_thumbnail_image_loads();
 		this.scrollbar.slider('value',this._get_position_scroll_estimate());
@@ -878,7 +882,7 @@ $.widget( "ui.mediaslide", {
 			this._init_display();
 		} else if (this.options.json_ajax !== null) { 
 			if (typeof(this.options.json_ajax)!='string') { 
-				jQuery.getJSON(this.options.json_ajax.url,{data: this.options.json_ajax.options, success: function(data) { 
+				jQuery.getJSON(this.options.json_ajax.url,this.options.json_ajax.options, function(data) { 
 					o.data=jQuery(data);
 					o.dataType='json';
 					o._init_display();
@@ -886,7 +890,7 @@ $.widget( "ui.mediaslide", {
 					alert(t);
 				}});
 			} else { 
-				jQuery.getJSON(this.options.json_ajax,{success: function(data) { 
+				jQuery.getJSON(this.options.json_ajax,{}, function(data) { 
 					o.data=jQuery(data);
 					o.dataType='json';
 					o._init_display();
@@ -980,7 +984,15 @@ $.widget( "ui.mediaslide", {
 			});
 			this.d=d;
 		} else if (this.dataType=='json') { 
-		
+			this.data.each(function(i,ob) { 
+				d.push({title: ob['title'],
+					link: ob['link'],
+					id: ob['id'],
+					updated: ob['updated'],
+					normal: ob['normal'],
+					thumb: thumb
+				});
+			});
 		} else if (this.dataType=='flickr') { 
 			jQuery.each(this.data.items,function(o,lob) { 
 				var normal=null;
