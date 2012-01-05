@@ -980,7 +980,7 @@ $.widget( "ui.mediaslide", {
 			});
 			this.d=d;
 		} else if (this.dataType=='json') { 
-			this.data.each(function(i,ob) { 
+			jQuery.each(this.data,function(i,ob) { 
 				d.push({title: ob.title,
 					link: ob.link,
 					id: ob.id,
