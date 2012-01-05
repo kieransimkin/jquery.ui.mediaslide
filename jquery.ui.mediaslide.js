@@ -13,8 +13,8 @@
  *
  */
 
-(function( $ ) {
-$.widget( "ui.mediaslide", {
+(function( jQuery ) {
+jQuery.widget( "ui.mediaslide", {
 	// These options will be used as defaults
 	options: { 
 
@@ -827,13 +827,13 @@ $.widget( "ui.mediaslide", {
 		}
 		 
 		// In jQuery UI 1.8, you have to manually invoke the _setOption method from the base widget
-		$.Widget.prototype._setOption.apply( this, arguments );
+		jQuery.Widget.prototype._setOption.apply( this, arguments );
 
 	},
  
 	// Use the destroy method to clean up any modifications your widget has made to the DOM
 	destroy: function() {
-		$.Widget.prototype.destroy.call( this );
+		jQuery.Widget.prototype.destroy.call( this );
 	},
 	// Set up the widget
 	_create: function() {
