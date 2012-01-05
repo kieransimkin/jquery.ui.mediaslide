@@ -988,6 +988,7 @@ $.widget( "ui.mediaslide", {
 					normal: ob['normal'],
 					thumb: ob['thumb']
 				});
+				console.log(ob);
 			});
 		} else if (this.dataType=='flickr') { 
 			jQuery.each(this.data.items,function(o,lob) { 
