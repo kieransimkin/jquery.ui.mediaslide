@@ -24,7 +24,11 @@
 			atom_xml_ajax: {url: 'imagelist.xml', data: {} },
 			show_top_controls: false,
 			show_bottom_controls: false,
-			thumbs_on_top: true
+			thumbs_on_top: true,
+			picture_click_handler: function() { 
+				alert('picture clicked, not doing anything');
+				return false;
+			}
 				});
 </script>
 <script type="text/javascript"
