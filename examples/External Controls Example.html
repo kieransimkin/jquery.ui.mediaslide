@@ -23,11 +23,11 @@
 <a href="http://slinq.com/software/mediaslide">MediaSlide by Kieran Simkin</a>
 <script>
 	function begin_update_position_indicator() { 
-		$('#position_indicator').fadeOut('fast');
+		$('#position_indicator').fadeTo(0.0,'fast');
 	}
 	function update_position_indicator() { 
 		$('#position_indicator').html($('#slide_1').mediaslide('get_position')+' / '+$('#slide_1').mediaslide('get_count'));
-		$('#position_indicator').fadeIn('fast');
+		$('#position_indicator').fadeTo(1.0,'fast');
 	}
 	$('#slide_1').mediaslide({
 			atom_xml_ajax: {url: 'imagelist.xml', data: {} },
