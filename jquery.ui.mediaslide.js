@@ -414,7 +414,7 @@ jQuery.widget( "ui.mediaslide", {
 			jQuery('<br />').appendTo(an);
 			var cap=jQuery("<span></span>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
-							.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px'})
+							.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px','word-wrap':'break-word'})
 							.html(me.options.caption_formatter(o.title));
 			if (me.options.captions_on_top) { 
 				cap.prependTo(an);
