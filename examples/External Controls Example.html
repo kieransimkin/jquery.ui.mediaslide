@@ -15,7 +15,11 @@
 <br style="clear: both;" />
 <a href="http://slinq.com/software/mediaslide">MediaSlide by Kieran Simkin</a>
 <script>
-	$('#slide_1').mediaslide({atom_xml_ajax: {url: 'imagelist.xml', data: {} }});
+	$('#slide_1').mediaslide({
+			atom_xml_ajax: {url: 'imagelist.xml', data: {} },
+			show_top_controls: false,
+			show_bottom_controls: false
+				});
 </script>
 <script type="text/javascript"
   src="http://jqueryui.com/themeroller/themeswitchertool/">
