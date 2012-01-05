@@ -125,6 +125,7 @@ jQuery.widget( "ui.mediaslide", {
 				me.mainpicture.css({left: 0-(jQuery(frame).width()-me._get_visible_scrollbox_width())/2});
 			}
 			jQuery(frame).slideDown(500);
+			jQuery(frame).fadeIn(500);
 			me._preload_neighbors();
 		});
 		jQuery(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
