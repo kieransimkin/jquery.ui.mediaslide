@@ -19,13 +19,13 @@ $.widget( "ui.mediaslide", {
 	options: { 
 
 		// One of these must be specified:
+		"json_data": null,
+		"json_ajax": null,
 		"atom_xml_data": null,
 		"atom_xml_ajax": null,
 		"flickr_public_photos_data": null,
 		"flickr_favorites_data": null,
 		"flickr_groups_data": null,
-		"json_data": null,
-		"json_ajax": null,
 
 		"start_position": 0, // where to start in the list (zero indexed)
 		"num_thumbs": 4, 
@@ -988,7 +988,6 @@ $.widget( "ui.mediaslide", {
 					normal: ob.normal,
 					thumb: ob.thumb
 				});
-				console.log(ob);
 			});
 			this.d=d;
 		} else if (this.dataType=='flickr') { 
