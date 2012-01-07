@@ -224,7 +224,7 @@ jQuery.widget( "ui.mediaslide", {
 		this.thumbslide_scrollbar=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
-							.css({'z-index': 1,'margin':'auto auto','margin-bottom':'5px'});
+							.css({'z-index': 1,'margin':'auto auto','margin-bottom':'5px','margin-top': '5px'});
 		this.thumbslide_slider=jQuery('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-slider')
