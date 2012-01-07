@@ -1,2 +1,3 @@
  * Slideshow feature
- * Fix thumbnail left offset during thumb slide animations (so they go straight up rather than up and to the side) 
+ * Fix thumbnail left offset during thumb slide animations (so they go straight up rather than up and to one side) 
+ * Video media support
