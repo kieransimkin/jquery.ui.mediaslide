@@ -47,12 +47,12 @@ jQuery.widget( "ui.mediaslide", {
 		"top_position_indicator": true,
 		"bottom_position_indicator": false,
 		"top_media_title": false,
-		"bottom_media_title": true
+		"bottom_media_title": true,
 		"quantize_scroll": false,
 		"caption_formatter": function(c) { return c; },
 		"position_indicator_formatter": function(c) { return c; },
 		"title_formatter": function(c) { return c; },
-		"picture_click_handler": function(link) { return true; },
+		"picture_click_handler": function(link) { return true; }
 	},
 	// Slide to a specific position
 	position_slide_to: function(pos) { 
