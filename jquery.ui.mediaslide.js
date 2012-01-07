@@ -910,6 +910,7 @@ jQuery.widget( "ui.mediaslide", {
 			if (typeof(this.options.flickr_public_photos_data)!='string') { 
 				this.flickr_smallthumbs=this.options.flickr_public_photos_data.smallthumbs;
 				this.flickr_largenormals=this.options.flickr_public_photos_data.largenormals;
+				this.flickr_smallnormals=this.options.flickr_public_photos_data.smallnormals;
 				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_public_photos_data.id, ids: this.options.flickr_public_photos_data.ids, tags: this.options.flickr_public_photos_data.tags, tagmode: this.options.flickr_public_photos_data.tagmode, format: 'json'}, function(data) { 
 					o.data=data;
 					o.dataType='flickr';
@@ -926,6 +927,7 @@ jQuery.widget( "ui.mediaslide", {
 			if (typeof(this.options.flickr_favorites_data)!='string') { 
 				this.flickr_smallthumbs=this.options.flickr_favorites_data.smallthumbs;
 				this.flickr_largenormals=this.options.flickr_favorites_data.largenormals;
+				this.flickr_smallnormals=this.options.flickr_favorites_data.smallnormals;
 				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data.id,'format': 'json'}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
@@ -942,6 +944,7 @@ jQuery.widget( "ui.mediaslide", {
 			if (typeof(this.options.flickr_groups_data)!='string') { 
 				this.flickr_smallthumbs=this.options.flickr_groups_data.smallthumbs;
 				this.flickr_largenormals=this.options.flickr_groups_data.largenormals;
+				this.flickr_smallnormals=this.options.flickr_groups_data.smallnormals;
 				jQuery.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?jsoncallback=?",{id: this.options.flickr_groups_data.id, format: 'json'}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
@@ -1039,6 +1042,8 @@ jQuery.widget( "ui.mediaslide", {
 				}
 				if (me.flickr_largenormals===true) { 
 					normal=med.replace(repstr,'_b.');
+				} else if (me.flickr_smallnormals===true) { 
+					normal=med.replace(repstr,'_-.');
 				} else { 
 					normal=med.replace(repstr,'_z.');
 				}
