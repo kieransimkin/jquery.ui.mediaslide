@@ -1043,7 +1043,7 @@ jQuery.widget( "ui.mediaslide", {
 				if (me.flickr_largenormals===true) { 
 					normal=med.replace(repstr,'_b.');
 				} else if (me.flickr_smallnormals===true) { 
-					normal=med.replace(repstr,'_-.');
+					normal=med.replace(repstr,'_m.');
 				} else { 
 					normal=med.replace(repstr,'_z.');
 				}
