@@ -2,3 +2,4 @@
  * Fix thumbnail left offset during thumb slide animations (so they go straight up rather than up and to one side) 
  * Video media support
  * Borders on thumbnails
+ * Option to progressively pre-cache all images in the background rather than just precaching the images immediately to the left and right (better user experience, more bandwidth hungry)
