@@ -13,8 +13,8 @@
  *
  */
 
-(function( jQuery ) {
-jQuery.widget( "ui.mediaslide", {
+(function( $ ) {
+$.widget( "ui.mediaslide", {
 	// These options will be used as defaults
 	options: { 
 
@@ -116,19 +116,19 @@ jQuery.widget( "ui.mediaslide", {
 		this.position=pos;
 		this.thumbnails[this.position].hide();
 		var me=this;
-		jQuery(frame).html('<img class="ui-widget-mediaslide-active-img">');
+		$(frame).html('<img class="ui-widget-mediaslide-active-img">');
 		me.mainpicture.height(0);
-		jQuery(frame).css({opacity:0});
-		jQuery(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
-			me.mainpicture.width(jQuery(frame).width());
-			me.mainpicture.animate({height: jQuery(frame).height()},'slow');
-			jQuery(frame).fadeTo('slow',1.0);
-			if (jQuery(frame).width()>me._get_visible_scrollbox_width()) { 
-				me.mainpicture.css({left: 0-(jQuery(frame).width()-me._get_visible_scrollbox_width())/2});
+		$(frame).css({opacity:0});
+		$(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
+			me.mainpicture.width($(frame).width());
+			me.mainpicture.animate({height: $(frame).height()},'slow');
+			$(frame).fadeTo('slow',1.0);
+			if ($(frame).width()>me._get_visible_scrollbox_width()) { 
+				me.mainpicture.css({left: 0-($(frame).width()-me._get_visible_scrollbox_width())/2});
 			}
 			me._preload_neighbors();
 		});
-		jQuery(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
+		$(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
 		this._begin_update_controls(this.position,true);
 		this._update_controls();
 	},
@@ -159,19 +159,19 @@ jQuery.widget( "ui.mediaslide", {
 		var tob=this;
 		var active_frame = this._get_foreground_pframe();
 		var inactive_frame = this._get_background_pframe();
-		jQuery(active_frame).css({'z-index': 1});
-		jQuery(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position].normal);
-		jQuery(inactive_frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
-			if (tob.mainpicture.height()!=jQuery(inactive_frame).height() || tob.mainpicture.width()!=jQuery(inactive_frame).width()) { 
+		$(active_frame).css({'z-index': 1});
+		$(inactive_frame).css({'z-index': 2}).html('<img class="ui-widget-mediaslide-active-img">').find('.ui-widget-mediaslide-active-img').attr('src',this.d[this.position].normal);
+		$(inactive_frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
+			if (tob.mainpicture.height()!=$(inactive_frame).height() || tob.mainpicture.width()!=$(inactive_frame).width()) { 
 				var leftoff=0;
-				if (jQuery(inactive_frame).width()>tob._get_visible_scrollbox_width()) { 
-					leftoff-=(jQuery(inactive_frame).width()-tob._get_visible_scrollbox_width())/2;
+				if ($(inactive_frame).width()>tob._get_visible_scrollbox_width()) { 
+					leftoff-=($(inactive_frame).width()-tob._get_visible_scrollbox_width())/2;
 				}
-				jQuery(tob.mainpicture).animate({height: jQuery(inactive_frame).height(), width: jQuery(inactive_frame).width(), left: leftoff+'px'},'fast');
+				$(tob.mainpicture).animate({height: $(inactive_frame).height(), width: $(inactive_frame).width(), left: leftoff+'px'},'fast');
 			}
-			jQuery(inactive_frame).fadeTo('slow', 1.0, 'linear', function() { 
+			$(inactive_frame).fadeTo('slow', 1.0, 'linear', function() { 
 				tob._toggle_pframe();
-				jQuery(active_frame).css({opacity: 0}).hide();
+				$(active_frame).css({opacity: 0}).hide();
 				tob._update_controls();
 				tob._unset_loading_state();
 				tob._preload_neighbors();
@@ -184,7 +184,7 @@ jQuery.widget( "ui.mediaslide", {
 	// Setup the main HTML
 	_do_html_setup: function() { 
 		this.element.html('');
-		this.top_controls=jQuery('<div></div>')	.addClass('ui-widget')
+		this.top_controls=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-content')
 							.addClass('ui-corner-all')
 							.addClass('ui-widget-mediaslide-top-controls-div')
@@ -194,23 +194,23 @@ jQuery.widget( "ui.mediaslide", {
 		if (!this.options.show_top_controls) { 
 			this.top_controls.hide();
 		}
-		this.mainpicture=jQuery('<div></div>')	.addClass('ui-widget')
+		this.mainpicture=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-main-picture-div')
 							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'auto auto'})
 							.appendTo(this.element);
-		this.pictureframe1=jQuery('<div></div>').addClass('ui-widget')
+		this.pictureframe1=$('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe1')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px','cursor': 'pointer'})
 							.click(this._pictureframe_click())
 							.appendTo(this.mainpicture);
-		this.pictureframe2=jQuery('<div></div>').addClass('ui-widget')
+		this.pictureframe2=$('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe2')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0','cursor':'pointer'})
 							.click(this._pictureframe_click())
 							.appendTo(this.mainpicture);
-		this.bottom_controls=jQuery('<div></div>')
+		this.bottom_controls=$('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-content')
 							.addClass('ui-corner-all')
@@ -221,18 +221,18 @@ jQuery.widget( "ui.mediaslide", {
 		if (!this.options.show_bottom_controls) { 
 			this.bottom_controls.hide();
 		}
-		this.thumbslide_scrollbar=jQuery('<div></div>')
+		this.thumbslide_scrollbar=$('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-scrollbar')
 							.css({'z-index': 1,'margin':'auto auto','margin-bottom':'5px','margin-top': '5px'});
-		this.thumbslide_slider=jQuery('<div></div>')
+		this.thumbslide_slider=$('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-slider')
 							.appendTo(this.thumbslide_scrollbar);
-		this.thumbslide=jQuery('<div></div>')	.addClass('ui-widget')
+		this.thumbslide=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
 							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto','position':'relative'});
-		this.thumbslide_content=jQuery('<div></div>')
+		this.thumbslide_content=$('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
 							.appendTo(this.thumbslide);
@@ -265,10 +265,10 @@ jQuery.widget( "ui.mediaslide", {
 	// Setup the HTML for the top controls
 	_do_top_controls_html_setup: function() { 
 		var me = this;
-		this.top_controls_center=jQuery("<div></div>").css({'position': 'absolute','text-align': 'center'}).appendTo(this.top_controls);
-		this.top_controls_rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.top_controls);
-		this.top_controls_leftfloat=jQuery("<div></div>").css({'text-align': 'left'}).appendTo(this.top_controls);
-		this.top_controls_first_button=jQuery("<div></div>")
+		this.top_controls_center=$("<div></div>").css({'position': 'absolute','text-align': 'center'}).appendTo(this.top_controls);
+		this.top_controls_rightfloat=$("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.top_controls);
+		this.top_controls_leftfloat=$("<div></div>").css({'text-align': 'left'}).appendTo(this.top_controls);
+		this.top_controls_first_button=$("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-first-button')
 							.html((this.options.top_navigation_controls_text ? 'Beginning' : null))
 							.appendTo(this.top_controls_leftfloat)
@@ -277,7 +277,7 @@ jQuery.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.first();
 							});
-		this.top_controls_previous_button=jQuery("<div></div>")
+		this.top_controls_previous_button=$("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-previous-button')
 							.html((this.options.top_navigation_controls_text ? 'Previous' : null))
 							.appendTo(this.top_controls_leftfloat)
@@ -285,7 +285,7 @@ jQuery.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.previous();
 							});
-		this.top_controls_next_button=jQuery("<div></div>")
+		this.top_controls_next_button=$("<div></div>")
 							.addClass('ui-widget-mediaslide-top-controls-next-button')
 							.html((this.options.top_navigation_controls_text ? 'Next' : null))
 							.appendTo(this.top_controls_rightfloat)
@@ -293,7 +293,7 @@ jQuery.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.next();
 							});
-		this.top_controls_last_button=jQuery("<div></div>")
+		this.top_controls_last_button=$("<div></div>")
 							.addClass("ui-widget-mediaslide-top-controls-last-button")
 							.html((this.options.top_navigation_controls_text ? 'End' : null))
 							.appendTo(this.top_controls_rightfloat)
@@ -302,13 +302,13 @@ jQuery.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.last();
 							});
-		this.top_controls_position_indicator=jQuery("<div></div>")
+		this.top_controls_position_indicator=$("<div></div>")
 							.addClass("ui-widget")
 							.addClass("ui-widget-mediaslide-top-controls-position-indicator")
 							.html('Loading')
 							.css({'display': 'none'})
 							.appendTo(this.top_controls_center);
-		this.top_controls_media_title=jQuery("<div></div>")
+		this.top_controls_media_title=$("<div></div>")
 							.addClass("ui-widget")
 							.addClass("ui-widget-mediaslide-top-controls-media-title")
 							.html('Loading')	
@@ -324,10 +324,10 @@ jQuery.widget( "ui.mediaslide", {
 	// Setup the HTML for the bottom controls
 	_do_bottom_controls_html_setup: function() { 
 		var me = this;
-		this.bottom_controls_center=jQuery("<div></div>").css({'position': 'absolute','text-align': 'center'}).appendTo(this.bottom_controls);
-		this.bottom_controls_rightfloat=jQuery("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.bottom_controls);
-		this.bottom_controls_leftfloat=jQuery("<div></div>").css({'text-align': 'left'}).appendTo(this.bottom_controls);
-		this.bottom_controls_first_button=jQuery("<div></div>")
+		this.bottom_controls_center=$("<div></div>").css({'position': 'absolute','text-align': 'center'}).appendTo(this.bottom_controls);
+		this.bottom_controls_rightfloat=$("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.bottom_controls);
+		this.bottom_controls_leftfloat=$("<div></div>").css({'text-align': 'left'}).appendTo(this.bottom_controls);
+		this.bottom_controls_first_button=$("<div></div>")
 							.addClass('ui-widget-mediaslide-bottom-controls-first-button')
 							.html((this.options.bottom_navigation_controls_text ? 'Beginning' : null))
 							.appendTo(this.bottom_controls_leftfloat)
@@ -336,7 +336,7 @@ jQuery.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.first();
 							});
-		this.bottom_controls_previous_button=jQuery("<div></div>")
+		this.bottom_controls_previous_button=$("<div></div>")
 							.addClass('ui-widget-mediaslide-bottom-controls-previous-button')
 							.html((this.options.bottom_navigation_controls_text ? 'Previous' : null))
 							.appendTo(this.bottom_controls_leftfloat)
@@ -344,7 +344,7 @@ jQuery.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.previous();
 							});
-		this.bottom_controls_next_button=jQuery("<div></div>")
+		this.bottom_controls_next_button=$("<div></div>")
 							.addClass('ui-widget-mediaslide-bottom-controls-next-button')
 							.html((this.options.bottom_navigation_controls_text ? 'Next' : null))
 							.appendTo(this.bottom_controls_rightfloat)
@@ -352,7 +352,7 @@ jQuery.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.next();
 							});
-		this.bottom_controls_last_button=jQuery("<div></div>")
+		this.bottom_controls_last_button=$("<div></div>")
 							.addClass("ui-widget-mediaslide-bottom-controls-last-button")
 							.html((this.options.bottom_navigation_controls_text ? 'End' : null))
 							.appendTo(this.bottom_controls_rightfloat)
@@ -361,13 +361,13 @@ jQuery.widget( "ui.mediaslide", {
 							.click(function() { 
 								me.last();
 							});
-		this.bottom_controls_position_indicator=jQuery("<div></div>")
+		this.bottom_controls_position_indicator=$("<div></div>")
 							.addClass("ui-widget")
 							.addClass("ui-widget-mediaslide-bottom-controls-position-indicator")
 							.html('Loading')
 							.css({'display': 'none'})
 							.appendTo(this.bottom_controls_center);
-		this.bottom_controls_media_title=jQuery("<div></div>")
+		this.bottom_controls_media_title=$("<div></div>")
 							.addClass("ui-widget")
 							.addClass("ui-widget-mediaslide-bottom-controls-media-title")
 							.html('Loading')	
@@ -389,8 +389,8 @@ jQuery.widget( "ui.mediaslide", {
 		t.html('');
 		var op = this.options;
 		var me = this;
-		jQuery.each(this.d,function(i,o) { 
-			var p=jQuery('<div></div>')	.addClass('ui-widget')
+		$.each(this.d,function(i,o) { 
+			var p=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-div')
 							.addClass('ui-corner-all')
 							.addClass('ui-state-default')
@@ -414,8 +414,8 @@ jQuery.widget( "ui.mediaslide", {
 			});
 
 			an.css({'outline': 0});
-			jQuery('<br />').appendTo(an);
-			var cap=jQuery("<span></span>")		.addClass('ui-widget')
+			$('<br />').appendTo(an);
+			var cap=$("<span></span>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
 							.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px','word-wrap':'break-word'})
 							.html(me.options.caption_formatter(o.title));
@@ -430,7 +430,7 @@ jQuery.widget( "ui.mediaslide", {
 			l.push(p);
 
 		});
-		jQuery('<br style="clear: both;" />').appendTo(t);
+		$('<br style="clear: both;" />').appendTo(t);
 		this.thumbslide.width(this._get_visible_scrollbox_width());
 		this.top_controls_rightfloat.width(this._get_visible_scrollbox_width());
 		this.top_controls_center.width(this._get_visible_scrollbox_width());
@@ -503,7 +503,7 @@ jQuery.widget( "ui.mediaslide", {
 		this.handleHelper = this.scrollbar.find( ".ui-slider-handle" )
 		.css({'top': '-1px','height': '0.8em', 'cursor': 'col-resize'})
 		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical' style='margin: auto auto; position: relative; top: -1px;'></span>" )
-		.wrap( jQuery("<div></div>" ).css({ 'position': 'relative', width: '100%', height: '100%', margin: '0 auto' })).parent();
+		.wrap( $("<div></div>" ).css({ 'position': 'relative', width: '100%', height: '100%', margin: '0 auto' })).parent();
 		//change overflow to hidden now that slider handles the scrolling
 		scrollPane.css( "overflow", "hidden" );
 		this._size_scrollbar();	
@@ -521,7 +521,7 @@ jQuery.widget( "ui.mediaslide", {
 		this.top_controls_last_button.css({cursor:'wait'});
 		this.bottom_controls_next_button.css({cursor:'wait'});
 		this.bottom_controls_last_button.css({cursor:'wait'});
-		this.thumbslide_loading_overlay=jQuery("<div></div>")
+		this.thumbslide_loading_overlay=$("<div></div>")
 							.css({'position':'absolute','top':'0px','left':'0px','width':this._get_total_scrollbox_width(), 'height':this.thumbslide_content.height(),'z-index':'2','cursor':'wait'})
 							.prependTo(this.thumbslide);
 	},
@@ -646,7 +646,7 @@ jQuery.widget( "ui.mediaslide", {
 		for (var i=this._get_first_preload_thumb_position(pos);i<=this._get_last_preload_thumb_position(pos);i++) { 
 			if (l[i].find('.ui-widget-mediaslide-thumb-img').attr('src')!=d[i].thumb) { 
 				var tim=new Image();
-				jQuery(tim).bind("load",me._handle_thumbnail_load_callback(d,l,i,tim));
+				$(tim).bind("load",me._handle_thumbnail_load_callback(d,l,i,tim));
 				tim.src=d[i].thumb;
 			}
 		}
@@ -657,7 +657,7 @@ jQuery.widget( "ui.mediaslide", {
 			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({opacity: '0.0'});
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load",function() { 
 
-				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-(jQuery(this).height()-20))+'px'});
+				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-($(this).height()-20))+'px'});
 				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'500');
 			});
 			l[i].find('.ui-widget-mediaslide-thumb-img:eq(0)').attr('src',d[i].thumb);
@@ -838,13 +838,13 @@ jQuery.widget( "ui.mediaslide", {
 		}
 		 
 		// In jQuery UI 1.8, you have to manually invoke the _setOption method from the base widget
-		jQuery.Widget.prototype._setOption.apply( this, arguments );
+		$.Widget.prototype._setOption.apply( this, arguments );
 
 	},
  
 	// Use the destroy method to clean up any modifications your widget has made to the DOM
 	destroy: function() {
-		jQuery.Widget.prototype.destroy.call( this );
+		$.Widget.prototype.destroy.call( this );
 	},
 	// Set up the widget
 	_create: function() {
@@ -861,23 +861,23 @@ jQuery.widget( "ui.mediaslide", {
 		if (this.options.atom_xml_data !== null) { 
 			this.dataType='atom';
 			if (typeof(this.options.atom_xml_data)=='string') { 
-				this.data=jQuery.parseXML(this.options.atom_xml_data);
+				this.data=$.parseXML(this.options.atom_xml_data);
 			} else { 
 				this.data=this.options.atom_xml_data;
 			}
 			this._init_display();
 		} else if (this.options.atom_xml_ajax !== null) { 
 			if (typeof(this.options.atom_xml_ajax)!='string') { 
-				jQuery.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
-					o.data=jQuery(data);
+				$.ajax(this.options.atom_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
+					o.data=$(data);
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
 					alert(t);
 				}});
 			} else { 
-				jQuery.ajax(this.options.atom_xml_ajax,{success: function(data) { 
-					o.data=jQuery(data);
+				$.ajax(this.options.atom_xml_ajax,{success: function(data) { 
+					o.data=$(data);
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
@@ -887,21 +887,21 @@ jQuery.widget( "ui.mediaslide", {
 		} else if (this.options.json_data!== null) { 
 			this.dataType='json';
 			if (typeof(this.options.json_data)=='string') { 
-				this.data=jQuery.parseJSON(this.options.json_data);
+				this.data=$.parseJSON(this.options.json_data);
 			} else { 
 				this.data=this.options.json_data;
 			}
 			this._init_display();
 		} else if (this.options.json_ajax !== null) { 
 			if (typeof(this.options.json_ajax)!='string') { 
-				jQuery.getJSON(this.options.json_ajax.url,this.options.json_ajax.options, function(data) { 
-					o.data=jQuery(data);
+				$.getJSON(this.options.json_ajax.url,this.options.json_ajax.options, function(data) { 
+					o.data=$(data);
 					o.dataType='json';
 					o._init_display();
 				});
 			} else { 
-				jQuery.getJSON(this.options.json_ajax,{}, function(data) { 
-					o.data=jQuery(data);
+				$.getJSON(this.options.json_ajax,{}, function(data) { 
+					o.data=$(data);
 					o.dataType='json';
 					o._init_display();
 				});
@@ -911,13 +911,13 @@ jQuery.widget( "ui.mediaslide", {
 				this.flickr_smallthumbs=this.options.flickr_public_photos_data.smallthumbs;
 				this.flickr_largenormals=this.options.flickr_public_photos_data.largenormals;
 				this.flickr_smallnormals=this.options.flickr_public_photos_data.smallnormals;
-				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_public_photos_data.id, ids: this.options.flickr_public_photos_data.ids, tags: this.options.flickr_public_photos_data.tags, tagmode: this.options.flickr_public_photos_data.tagmode, format: 'json'}, function(data) { 
+				$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_public_photos_data.id, ids: this.options.flickr_public_photos_data.ids, tags: this.options.flickr_public_photos_data.tags, tagmode: this.options.flickr_public_photos_data.tagmode, format: 'json'}, function(data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();	
 				});
 			} else { 
-				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_public_photos_data, format: 'json'}, function(data) { 
+				$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: this.options.flickr_public_photos_data, format: 'json'}, function(data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();	
@@ -928,13 +928,13 @@ jQuery.widget( "ui.mediaslide", {
 				this.flickr_smallthumbs=this.options.flickr_favorites_data.smallthumbs;
 				this.flickr_largenormals=this.options.flickr_favorites_data.largenormals;
 				this.flickr_smallnormals=this.options.flickr_favorites_data.smallnormals;
-				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data.id,'format': 'json'}, function (data) { 
+				$.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data.id,'format': 'json'}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();
 				});
 			} else { 
-				jQuery.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data, format: 'json'}, function (data) { 
+				$.getJSON("http://api.flickr.com/services/feeds/photos_faves.gne?jsoncallback=?",{id: this.options.flickr_favorites_data, format: 'json'}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();
@@ -945,13 +945,13 @@ jQuery.widget( "ui.mediaslide", {
 				this.flickr_smallthumbs=this.options.flickr_groups_data.smallthumbs;
 				this.flickr_largenormals=this.options.flickr_groups_data.largenormals;
 				this.flickr_smallnormals=this.options.flickr_groups_data.smallnormals;
-				jQuery.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?jsoncallback=?",{id: this.options.flickr_groups_data.id, format: 'json'}, function (data) { 
+				$.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?jsoncallback=?",{id: this.options.flickr_groups_data.id, format: 'json'}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();
 				});	
 			} else { 
-				jQuery.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?jsoncallback=?",{id: this.options.flickr_groups_data, format: 'json'}, function (data) { 
+				$.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?jsoncallback=?",{id: this.options.flickr_groups_data, format: 'json'}, function (data) { 
 					o.data=data;
 					o.dataType='flickr';
 					o._init_display();
@@ -980,25 +980,25 @@ jQuery.widget( "ui.mediaslide", {
 			this.data.find('entry').each(function(i,ob) { 
 				var normal=null;
 				var thumb=null;
-				jQuery(ob).find('link').each(function (o,lob) { 
-					if (jQuery(lob).attr('title')=='normal') { 
-						normal=jQuery(lob).attr('href');
-					} else if (jQuery(lob).attr('title')=='thumb') { 
-						thumb=jQuery(lob).attr('href');
+				$(ob).find('link').each(function (o,lob) { 
+					if ($(lob).attr('title')=='normal') { 
+						normal=$(lob).attr('href');
+					} else if ($(lob).attr('title')=='thumb') { 
+						thumb=$(lob).attr('href');
 					}
 				});
 				d.push({
-					title: jQuery(ob).find('title').text(),
-					link: jQuery(ob).find('link').attr('href'),
-					id: jQuery(ob).find('id').text(),
-					updated: jQuery(ob).find('updated').text(),
+					title: $(ob).find('title').text(),
+					link: $(ob).find('link').attr('href'),
+					id: $(ob).find('id').text(),
+					updated: $(ob).find('updated').text(),
 					normal: normal,
 					thumb: thumb
 				});
 			});
 			this.d=d;
 		} else if (this.dataType=='json') { 
-			jQuery.each(this.data,function(i,ob) { 
+			$.each(this.data,function(i,ob) { 
 				d.push({title: ob.title,
 					link: ob.link,
 					id: ob.id,
@@ -1009,7 +1009,7 @@ jQuery.widget( "ui.mediaslide", {
 			});
 			this.d=d;
 		} else if (this.dataType=='flickr') { 
-			jQuery.each(this.data.items,function(o,lob) { 
+			$.each(this.data.items,function(o,lob) { 
 				var normal=null;
 				var thumb=null;
 				var med=null;
