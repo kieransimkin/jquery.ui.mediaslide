@@ -4,3 +4,4 @@
  * Borders on thumbnails
  * Option to progressively pre-cache all images in the background rather than just precaching the images immediately to the left and right (better user experience, more bandwidth hungry)
  * Support disabled state
+ * Support destroy method to put back original HTML
