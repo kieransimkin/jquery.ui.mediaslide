@@ -57,30 +57,37 @@ $.widget( "ui.mediaslide", {
 	// Slide to a specific position
 	position_slide_to: function(pos) { 
 		this.position_slide(pos-this.position);
+		return this;
 	},
 	// Slide to the next position
 	next: function() { 
 		this.position_slide(1);
+		return this;
 	},
 	// Slide to the previous position
 	previous: function() { 
 		this.position_slide(-1);
+		return this;
 	},
 	// Slide forward a number of places
 	forward: function (num) { 
 		this.position_slide(num);
+		return this;
 	},
 	// Slide backwards a number of places
 	backward: function (num) { 
 		this.position_slide(0-num);
+		return this;
 	},
 	// Slide to the beginning
 	first: function() { 
 		this.position_slide_to(0);
+		return this;
 	},
 	// Slide to the end
 	last: function() { 
 		this.position_slide_to(this.d.length-1);
+		return this;
 	},
 	// Get the current position (zero indexed)
 	get_position: function() { 
@@ -131,6 +138,7 @@ $.widget( "ui.mediaslide", {
 		$(frame).find('.ui-widget-mediaslide-active-img').attr('src',this.d[pos].normal);
 		this._begin_update_controls(this.position,true);
 		this._update_controls();
+		return this;
 	},
 	// Slides forwards or backwards a number of positions
 	position_slide: function (offset) { 
@@ -180,6 +188,7 @@ $.widget( "ui.mediaslide", {
 			});
 			tob._handle_thumb_slide(oldpos);
 		});
+		return this;
 	},
 	// Setup the main HTML
 	_do_html_setup: function() { 
