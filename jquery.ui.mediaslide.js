@@ -192,7 +192,7 @@ $.widget( "ui.mediaslide", {
 	},
 	// Setup the main HTML
 	_do_html_setup: function() { 
-		this.element.html('');
+		this.element.clear();
 		this.top_controls=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-content')
 							.addClass('ui-corner-all')
@@ -395,7 +395,7 @@ $.widget( "ui.mediaslide", {
 		this.thumbnails=new Array();
 		var l = this.thumbnails;
 		var t = this.thumbslide_content;
-		t.html('');
+		t.clear();
 		var op = this.options;
 		var me = this;
 		$.each(this.d,function(i,o) { 
