@@ -14,7 +14,7 @@
  */
 
 (function( $ ) {
-$.widget( "ui.mediaslide", {
+$.widget( "slinq.mediaslide", {
 	// These options will be used as defaults
 	options: { 
 
