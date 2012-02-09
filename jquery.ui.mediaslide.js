@@ -395,7 +395,7 @@ $.widget( "slinq.mediaslide", {
 		this.thumbnails=new Array();
 		var l = this.thumbnails;
 		var t = this.thumbslide_content;
-		t.clear();
+		t.html('');
 		var op = this.options;
 		var me = this;
 		$.each(this.d,function(i,o) { 
