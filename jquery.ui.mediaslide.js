@@ -192,7 +192,7 @@ $.widget( "slinq.mediaslide", {
 	},
 	// Setup the main HTML
 	_do_html_setup: function() { 
-		this.element.clear();
+		this.element.html('');
 		this.top_controls=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-content')
 							.addClass('ui-corner-all')
