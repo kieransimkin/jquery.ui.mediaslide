@@ -882,7 +882,7 @@ $.widget( "slinq.mediaslide", {
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
-					alert(t);
+					throw new Error('MediaSlide: '+t);
 				}});
 			} else { 
 				$.ajax(this.options.atom_xml_ajax,{success: function(data) { 
@@ -890,7 +890,7 @@ $.widget( "slinq.mediaslide", {
 					o.dataType='atom';
 					o._init_display();
 				}, error: function(j,t,e) { 
-					alert(t);
+					throw new Error('MediaSlide: '+t);
 				}});
 			}
 		} else if (this.options.json_data!== null) { 
@@ -967,7 +967,7 @@ $.widget( "slinq.mediaslide", {
 				});
 			}	
 		} else {
-			alert('No data specified.');
+			throw new Error('MediaSlide: No data specified.');
 		}
 	},
 	// Setup display
@@ -1067,7 +1067,7 @@ $.widget( "slinq.mediaslide", {
 			});
 			this.d=d;
 		} else {
-			alert('unknown data type');
+			throw new Error('MediaSlide: unknown data type');
 		}
 		this._do_thumbnail_html_setup();
 	}
