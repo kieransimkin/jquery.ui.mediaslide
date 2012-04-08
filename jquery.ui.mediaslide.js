@@ -23,6 +23,8 @@ $.widget( "slinq.mediaslide", {
 		"json_ajax": null,
 		"atom_xml_data": null,
 		"atom_xml_ajax": null,
+		"esqoo_xml_data": null,
+		"esqoo_xml_ajax": null,
 		"flickr_public_photos_data": null,
 		"flickr_favorites_data": null,
 		"flickr_groups_data": null,
@@ -840,6 +842,8 @@ $.widget( "slinq.mediaslide", {
 		switch( key ) {
 			case "atom_xml_data":
 			case "atom_xml_ajax":
+			case "esqoo_xml_data":
+			case "esqoo_xml_ajax":
 			case "json_data":
 			case "json_ajax":
 				this._init_data();
@@ -888,6 +892,32 @@ $.widget( "slinq.mediaslide", {
 				$.ajax(this.options.atom_xml_ajax,{success: function(data) { 
 					o.data=$(data);
 					o.dataType='atom';
+					o._init_display();
+				}, error: function(j,t,e) { 
+					throw new Error('MediaSlide: '+t);
+				}});
+			}
+		} else if (this.options.esqoo_xml_data !== null) { 
+			this.dataType='esqoo';
+			if (typeof(this.options.esqoo_xml_data)=='string') { 
+				this.data=$.parseXML(this.options.esqoo_xml_data);
+			} else { 
+				this.data=this.options.esqoo_xml_data;
+			}
+			this._init_display();
+		} else if (this.options.esqoo_xml_ajax !== null) { 
+			if (typeof(this.options.esqoo_xml_ajax)!='string') { 
+				$.ajax(this.options.esqoo_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
+					o.data=$(data);
+					o.dataType='esqoo';
+					o._init_display();	
+				}, error: function(j,t,e) { 
+					throw new Error('MediaSlide: '+t);
+				}});
+			} else { 
+				$.ajax(this.options.esqoo_xml_ajax,{success: function(data) { 
+					o.data=$(data);
+					o.dataType='esqoo';
 					o._init_display();
 				}, error: function(j,t,e) { 
 					throw new Error('MediaSlide: '+t);
@@ -1006,6 +1036,19 @@ $.widget( "slinq.mediaslide", {
 				});
 			});
 			this.d=d;
+		} else if (this.dataType=='esqoo') { 
+			this.data.find('Item').each(function(i,ob) { 
+				var normal=$(ob).find('PictureURLs').find('web-medium').text();
+				var thumb=$(ob).find('PictureURLs').find('thumbnail-large').text();
+				d.push({title: $(ob).find('Name').text(),
+					link: '',
+					id: $(ob).find('PictureID').text(),
+					updated: $(ob).find('ModifyDate').text(),
+					normal: normal,
+					thumb: thumb
+				});
+				
+			});
 		} else if (this.dataType=='json') { 
 			$.each(this.data,function(i,ob) { 
 				d.push({title: ob.title,
