@@ -907,7 +907,7 @@ $.widget( "slinq.mediaslide", {
 			this._init_display();
 		} else if (this.options.esqoo_xml_ajax !== null) { 
 			if (typeof(this.options.esqoo_xml_ajax)!='string') { 
-				$.ajax(this.options.esqoo_xml_ajax.url,{data: this.options.atom_xml_ajax.options, success: function(data) { 
+				$.ajax(this.options.esqoo_xml_ajax.url,{data: this.options.esqoo_xml_ajax.options, success: function(data) { 
 					o.data=$(data);
 					o.dataType='esqoo';
 					o._init_display();	
