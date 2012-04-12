@@ -1049,6 +1049,7 @@ $.widget( "slinq.mediaslide", {
 				});
 				
 			});
+			this.d=d;
 		} else if (this.dataType=='json') { 
 			$.each(this.data,function(i,ob) { 
 				d.push({title: ob.title,
