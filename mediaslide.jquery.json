@@ -1,13 +1,13 @@
 {
 
 	"name": "mediaslide",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	"author": {
 		"name": "Kieran Simkin",
 		"email": "kieran@slinq.com",
 		"url": "http://slinq.com/"
 	},
-	"description": "Media gallery viewer widget with a sliding thumbnail bar - performs transition effects when you move between images",
+	"description": "Media gallery viewer widget with a sliding thumbnail bar - performs transition effects when you move between images. MediaSlide is similar in UI style to the filmstrip folder view in Windows XP. This plugin supports many different sources for media galleries - it can read galleries directly from your Flickr account, or they can be specified via XML or JSON. Many customization parameters are provided, and full documentation along with usage examples are provided on the plugin's website.",
 	"homepage": "http://slinq.com/software/mediaslide",
 	"title": "jQuery.ui.MediaSlide",
 	"licenses": [
@@ -31,7 +31,8 @@
 		"photo",
 		"picture",
 		"rotator",
-		"fade"
+		"fade",
+		"flickr"
 	],
 	"dependencies": {
 		"jquery": "1"
