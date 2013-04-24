@@ -1,7 +1,7 @@
 {
 
 	"name": "mediaslide",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"author": {
 		"name": "Kieran Simkin",
 		"email": "kieran@slinq.com",
@@ -20,7 +20,7 @@
 			"url": "http://www.opensource.org/licenses/bsd-license.php"
 		}
 	],
-	keywords: [
+	"keywords": [
 		"image",
 		"animation",
 		"slideshow",
