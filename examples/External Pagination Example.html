@@ -16,6 +16,7 @@
 <div id="slide_1" style="margin: auto auto;"></div><br style="clear: both;" />
 <div id="page_container" class="ui-widget ui-widget-content ui-corner-all" style="margin: auto auto; text-align: center; width: 500px;"></div>
 <script>
+ $(document).ready(function(){
 	function handle_click(num) { 
 		return function() { 
 			if (num<1) { 
@@ -49,6 +50,7 @@
 		$('.pagenums').removeClass('selected');
 		$('[data-pagenum='+$('#slide_1').mediaslide('get_current_page')+']').addClass('selected');
 	},num_thumbs:4,loading_thumb:'smallajaxloader.gif',flickr_public_photos_data: {id: '30529641@N08', smallthumbs: true, smallnormals: true }});
+});
 </script>
 <script type="text/javascript"
   src="http://jqueryui.com/themeroller/themeswitchertool/">
