@@ -8,24 +8,41 @@
 <script src="../jquery.ui.mediaslide.js"></script>
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/sunny/jquery-ui.css" type="text/css" media="all" />
 <body bgcolor="black">
+<style>
+	a.selected { text-decoration: none; color: gray; cursor: default;}
+</style>
 <div id="switcher"></div>
 <br style="clear: both;" />
 <div id="slide_1" style="margin: auto auto;"></div><br style="clear: both;" />
-<div id="page_container" style="margin: auto auto; text-align: center;"></div>
+<div id="page_container" class="ui-widget ui-widget-content ui-corner-all" style="margin: auto auto; text-align: center; width: 500px;"></div>
 <script>
 	function handle_click(num) { 
 		return function() { 
+			if (num<1) { 
+				return;
+			}
+			if (num>$('#slide_1').mediaslide('get_page_count')) { 
+				return;
+			}
 			$('#slide_1').mediaslide('scroll_to_page',num);
 			$('.pagenums').removeClass('selected');
 			$('[data-pagenum='+num+']').addClass('selected');
 			return false; 
 		}
 	}
+	function prev_page() { 
+		return handle_click($('#slide_1').mediaslide('get_current_page')-1)();
+	}
+	function next_page() { 
+		return handle_click($('#slide_1').mediaslide('get_current_page')+1)();
+	}
 	$('#slide_1').mediaslide({
 	ready: function() { 
+		$('<a></a>').html('<').attr('title','Back').css({'margin-right':'3px'}).attr('href','#').click(prev_page).appendTo('#page_container');
 		for (var c=1; c <= $('#slide_1').mediaslide('get_page_count'); c++) { 
 			$('<a></a>').html(c).attr('title','Page '+c).css({'margin-left':'3px','margin-right':'3px'}).attr('data-pagenum',c).addClass('pagenums').attr('href','#').click(handle_click(c)).appendTo('#page_container')
 		}
+		$('<a></a>').html('>').attr('title','Forward').css({'margin-left':'3px'}).attr('href','#').click(next_page).appendTo('#page_container');
 		$('[data-pagenum=1]').addClass('selected');
 	},
        	endslide: function() {

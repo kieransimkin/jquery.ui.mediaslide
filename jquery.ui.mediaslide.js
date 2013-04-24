@@ -134,7 +134,7 @@ $.widget( "slinq.mediaslide", {
 	},
 	// Get the approximate current page
 	get_current_page: function() { 
-		return Math.ceil(this.get_position() / this.options.num_thumbs);
+		return Math.ceil(this._get_scroll_position_estimate(this.thumbslide_slider.slider('value')) / this.options.num_thumbs);
 	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
