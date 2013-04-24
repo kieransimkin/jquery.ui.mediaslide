@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>External Pagination Example</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script src="../jquery.ui.mediaslide.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/sunny/jquery-ui.css" type="text/css" media="all" />
+<body bgcolor="black">
+<div id="switcher"></div>
+<br style="clear: both;" />
+<div id="slide_1" style="margin: auto auto;"></div><br style="clear: both;" />
+<div id="page_container" style="margin: auto auto; text-align: center;"></div>
+<script>
+	function handle_click(num) { 
+		return function() { 
+			$('#slide_1').mediaslide('scroll_to_page',num);
+			return false; 
+		}
+	}
+	$('#slide_1').mediaslide({
+	ready: function() { 
+		for (var c=1; c <= $('#slide_1').mediaslide('get_page_count'); c++) { 
+			$('<a></a>').html(c).attr('title','Page '+c).css({'margin-left':'3px','margin-right':'3px'}).attr('data-pagenum',c).attr('href','#').click(handle_click(c)).appendTo('#page_container')
+		}
+	},
+       	endslide: function() {
+	
+	},num_thumbs:4,loading_thumb:'smallajaxloader.gif',flickr_public_photos_data: {id: '30529641@N08', smallthumbs: true, smallnormals: true }});
+</script>
+<script type="text/javascript"
+  src="http://jqueryui.com/themeroller/themeswitchertool/">
+</script>
+<script>
+ $(document).ready(function(){
+    $('#switcher').themeswitcher();
+  });
+</script>
+</body>
+</html> 

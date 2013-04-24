@@ -1,8 +1,8 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.3.0
+ *  Ver: 1.3.1
  *  by Kieran Simkin - http://SlinQ.com/
  *
- *  Copyright (c) 2011-2012, Kieran Simkin
+ *  Copyright (c) 2011-2013, Kieran Simkin
  *  All rights reserved.
  *
  *  Redistribution and use, with or without modification, are permitted provided that the following condition is met:
@@ -93,11 +93,12 @@ $.widget( "slinq.mediaslide", {
 	},
 	// Scroll to a specific position on the thumbnail slide
 	scroll_to_position: function (pos) { 
-
+		this.scrollbar.slider('value',this._get_position_scroll_estimate(pos));
 	},
 	// Scroll to a specific page number on the thumbnail slide
 	scroll_to_page: function (page) { 
-
+		page = page - 1; // zero index;
+		this.scroll_to_position( (page * this.options.num_thumbs) + this._get_first_thumb_count());
 	},	
 	// Get the current position (zero indexed)
 	get_position: function() { 
