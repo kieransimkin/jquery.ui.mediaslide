@@ -1,8 +1,12 @@
 {
 
 	"name": "mediaslide",
-	"version": "1.3",
-	"author": "Kieran Simkin",
+	"version": "1.3.0",
+	"author": {
+		"name": "Kieran Simkin",
+		"email": "kieran@slinq.com",
+		"url": "http://slinq.com/"
+	},
 	"description": "Media viewer widget with a sliding thumbnail bar",
 	"homepage": "http://slinq.com/software/mediaslide",
 	"title": "jQuery.ui.MediaSlide",

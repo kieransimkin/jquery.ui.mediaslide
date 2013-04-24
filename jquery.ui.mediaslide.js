@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.3
+ *  Ver: 1.3.0
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2012, Kieran Simkin
@@ -91,6 +91,14 @@ $.widget( "slinq.mediaslide", {
 		this.position_slide_to(this.d.length-1);
 		return this;
 	},
+	// Scroll to a specific position on the thumbnail slide
+	scroll_to_position: function (pos) { 
+
+	},
+	// Scroll to a specific page number on the thumbnail slide
+	scroll_to_page: function (page) { 
+
+	},	
 	// Get the current position (zero indexed)
 	get_position: function() { 
 		return this.position;
@@ -118,6 +126,10 @@ $.widget( "slinq.mediaslide", {
 	// Get the full data object for the current media item
 	get_current_object: function() { 
 		return this.d[this.position];
+	},
+	// Get the total number of horizontal pages on the thumbnail slider
+	get_page_count: function() {
+		return Math.ceil(this.d.length / this.options.num_thumbs);
 	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
