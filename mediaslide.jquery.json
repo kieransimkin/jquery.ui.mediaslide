@@ -20,6 +20,19 @@
 			"url": "http://www.opensource.org/licenses/bsd-license.php"
 		}
 	],
+	keywords: [
+		"image",
+		"animation",
+		"slideshow",
+		"effect",
+		"ui",
+		"html5",
+		"gallery",
+		"photo",
+		"picture",
+		"rotator",
+		"fade"
+	],
 	"dependencies": {
 		"jquery": "1"
 	}
