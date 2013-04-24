@@ -132,6 +132,10 @@ $.widget( "slinq.mediaslide", {
 	get_page_count: function() {
 		return Math.ceil(this.d.length / this.options.num_thumbs);
 	},
+	// Get the approximate current page
+	get_current_page: function() { 
+		return Math.ceil(this.get_position() / this.options.num_thumbs);
+	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
 		var frame=this._get_foreground_pframe();

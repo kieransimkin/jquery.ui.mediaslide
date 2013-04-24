@@ -16,17 +16,21 @@
 	function handle_click(num) { 
 		return function() { 
 			$('#slide_1').mediaslide('scroll_to_page',num);
+			$('.pagenums').removeClass('selected');
+			$('[data-pagenum='+num+']').addClass('selected');
 			return false; 
 		}
 	}
 	$('#slide_1').mediaslide({
 	ready: function() { 
 		for (var c=1; c <= $('#slide_1').mediaslide('get_page_count'); c++) { 
-			$('<a></a>').html(c).attr('title','Page '+c).css({'margin-left':'3px','margin-right':'3px'}).attr('data-pagenum',c).attr('href','#').click(handle_click(c)).appendTo('#page_container')
+			$('<a></a>').html(c).attr('title','Page '+c).css({'margin-left':'3px','margin-right':'3px'}).attr('data-pagenum',c).addClass('pagenums').attr('href','#').click(handle_click(c)).appendTo('#page_container')
 		}
+		$('[data-pagenum=1]').addClass('selected');
 	},
        	endslide: function() {
-	
+		$('.pagenums').removeClass('selected');
+		$('[data-pagenum='+$('#slide_1').mediaslide('get_current_page')+']').addClass('selected');
 	},num_thumbs:4,loading_thumb:'smallajaxloader.gif',flickr_public_photos_data: {id: '30529641@N08', smallthumbs: true, smallnormals: true }});
 </script>
 <script type="text/javascript"
