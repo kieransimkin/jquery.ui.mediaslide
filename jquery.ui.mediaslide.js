@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.4
+ *  Ver: 1.4.5
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -51,9 +51,9 @@ $.widget( "slinq.mediaslide", {
 		"top_media_title": false,
 		"bottom_media_title": true,
 		"quantize_scroll": false,
-		"caption_formatter": function(c) { return c; },
+		"caption_formatter": function(c, o) { return c; },
 		"position_indicator_formatter": function(c) { return c; },
-		"title_formatter": function(c) { return c; },
+		"title_formatter": function(c, o) { return c; },
 		"picture_click_handler": function(link) { return true; }
 	},
 	// Slide to a specific position
@@ -446,7 +446,7 @@ $.widget( "slinq.mediaslide", {
 			var cap=$("<span></span>")		.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumb-caption')
 							.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px','word-wrap':'break-word'})
-							.html(me.options.caption_formatter(o.title));
+							.html(me.options.caption_formatter(o.title, o));
 			if (me.options.captions_on_top) { 
 				cap.prependTo(an);
 			} else { 
@@ -618,11 +618,11 @@ $.widget( "slinq.mediaslide", {
 			this.bottom_controls_position_indicator.fadeIn('fast');
 		}
 		if (this.options.bottom_media_title) { 
-			this.bottom_controls_media_title.html(this.options.title_formatter(this.get_current_title()));
+			this.bottom_controls_media_title.html(this.options.title_formatter(this.get_current_title(), this.get_current_object()));
 			this.bottom_controls_media_title.fadeIn('fast');
 		}
 		if (this.options.top_media_title) { 
-			this.top_controls_media_title.html(this.options.title_formatter(this.get_current_title()));
+			this.top_controls_media_title.html(this.options.title_formatter(this.get_current_title(), this.get_current_object()));
 			this.top_controls_media_title.fadeIn('fast');
 		}
 	},
