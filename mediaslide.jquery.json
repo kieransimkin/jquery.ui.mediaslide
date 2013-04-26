@@ -35,7 +35,8 @@
 		"picture",
 		"rotator",
 		"fade",
-		"flickr"
+		"flickr",
+		"scroll"
 	],
 	"dependencies": {
 		"jquery": "1"
