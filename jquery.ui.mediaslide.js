@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.8
+ *  Ver: 1.4.9
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -135,6 +135,16 @@ $.widget( "slinq.mediaslide", {
 	// Get the approximate current page
 	get_current_page: function() { 
 		return Math.ceil(this._get_scroll_position_estimate(this.thumbslide_slider.slider('value')) / this.options.num_thumbs);
+	},
+	// Get the current image width
+	get_current_width: function() {
+		var active_frame = this._get_foreground_pframe();
+		return active_frame.width();
+	},
+	// Get the current image height
+	get_current_height: function() {
+		var active_frame = this._get_foreground_pframe();
+		return active_frame.height();
 	},
 	// Skips (without sliding) to a specific image number
 	position_skip: function(pos) { 
