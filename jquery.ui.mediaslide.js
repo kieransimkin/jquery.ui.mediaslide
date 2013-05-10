@@ -562,6 +562,7 @@ $.widget( "slinq.mediaslide", {
 		this.thumbslide_loading_overlay=$("<div></div>")
 							.css({'position':'absolute','top':'0px','left':'0px','width':this._get_total_scrollbox_width(), 'height':this.thumbslide_content.height(),'z-index':'2','cursor':'wait'})
 							.prependTo(this.thumbslide);
+		this._trigger('startloading');
 	},
 	// Unset the loading state
 	_unset_loading_state: function() { 
@@ -576,6 +577,7 @@ $.widget( "slinq.mediaslide", {
 		this.bottom_controls_next_button.css({cursor:''});
 		this.bottom_controls_last_button.css({cursor:''});
 		this.thumbslide_loading_overlay.remove();
+		this._trigger('endloading');
 	},
 	// Update controls - triggered before a slide
 	_begin_update_controls: function(pos,initial) { 
