@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.12
+ *  Ver: 1.4.14
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -18,7 +18,7 @@ $.widget( "slinq.mediaslide", {
 	// These options will be used as defaults
 	options: { 
 
-		// If none of these is specified, MediaSlide will look for images in the HTML element it is widgetizing - 
+		// If none of these is specified, MediaSlide will look for <img> tags within the HTML element it is widgetizing - 
 		// See the Standard Div Image Container Example to see this in action
 		"json_data": null,
 		"json_ajax": null,
@@ -30,15 +30,20 @@ $.widget( "slinq.mediaslide", {
 		"flickr_favorites_data": null,
 		"flickr_groups_data": null,
 
+		// Config options:
 		"start_position": 0, // where to start in the list (zero indexed)
 		"num_thumbs": 4, 
 		"thumb_width": 200,
-		"thumb_spacing": 10,	
+		"thumb_spacing": 10,
+		"overlay_background_colour": "black",
+		"overlay_foreground_colour": "lightgreen",
+		"overlay_opacity": 0.6,
 		"loading_thumb": "ajaxloader.gif",
 		"show_bottom_controls": true,
 		"show_top_controls": true,
 		"show_thumbs": true,
 		"show_scrollbar": true,
+		"show_overlay_controls": false,
 		"small_top_controls": true,
 		"small_bottom_controls": true,
 		"small_captions": true,
@@ -159,6 +164,7 @@ $.widget( "slinq.mediaslide", {
 		$(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
 			me.mainpicture.width($(frame).width());
 			me.mainpicture.animate({height: $(frame).height()},'slow');
+			me.overlay_controls.animate({top: ($(frame).height()/2)-(me.overlay_controls_previous_button.height())}, 'slow');
 			$(frame).fadeTo('slow',1.0);
 			if ($(frame).width()>me._get_visible_scrollbox_width()) { 
 				me.mainpicture.css({left: 0-($(frame).width()-me._get_visible_scrollbox_width())/2});
@@ -206,6 +212,7 @@ $.widget( "slinq.mediaslide", {
 					leftoff-=($(inactive_frame).width()-tob._get_visible_scrollbox_width())/2;
 				}
 				$(tob.mainpicture).animate({height: $(inactive_frame).height(), width: $(inactive_frame).width(), left: leftoff+'px'},'fast');
+				tob.overlay_controls.animate({top: ($(inactive_frame).height()/2)-(tob.overlay_controls_previous_button.height())}, 'slow');
 			}
 			$(inactive_frame).fadeTo('slow', 1.0, 'linear', function() { 
 				tob._toggle_pframe();
@@ -242,11 +249,13 @@ $.widget( "slinq.mediaslide", {
 							.addClass('ui-widget-mediaslide-pictureframe1')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px','cursor': 'pointer'})
 							.click(this._pictureframe_click())
+							.hover(this._pictureframe_enter(), this._pictureframe_leave())
 							.appendTo(this.mainpicture);
 		this.pictureframe2=$('<div></div>').addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-pictureframe')
 							.addClass('ui-widget-mediaslide-pictureframe2')
 							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0','cursor':'pointer'})
+							.hover(this._pictureframe_enter(), this._pictureframe_leave())
 							.click(this._pictureframe_click())
 							.appendTo(this.mainpicture);
 		this.bottom_controls=$('<div></div>')
@@ -259,6 +268,14 @@ $.widget( "slinq.mediaslide", {
 		this._do_bottom_controls_html_setup();
 		if (!this.options.show_bottom_controls) { 
 			this.bottom_controls.hide();
+		}
+		this.overlay_controls=$('<div></div>')	
+							.addClass('ui-widget-mediaslide-overlay-controls-div')
+							.css({position: 'relative', top: '0px', left: '0px','z-index':2,'opacity':0})
+							.appendTo(this.mainpicture);
+		this._do_overlay_controls_html_setup();
+		if (!this.options.show_overlay_controls) {
+			this.overlay_controls.hide();
 		}
 		this.thumbslide_scrollbar=$('<div></div>')
 							.addClass('ui-widget')
@@ -419,6 +436,63 @@ $.widget( "slinq.mediaslide", {
 			this.bottom_controls_last_button.wrap('<small></small>');
 		}
 
+	},
+	_do_overlay_controls_html_setup: function() {
+		var me=this;
+		this.overlay_controls_previous_button = $('<div></div>')
+							.addClass('ui-widget-mediaslide-overlay-controls-previous-button')
+							.html('<')
+							.attr('title','Previous')
+							.css({	position: 'absolute', 
+								left: '0px', 
+								'font-size': '35px',
+								'font-weight': 'bold',
+								'border-bottom-right-radius':'5px', 
+								'border-top-right-radius':'5px',
+								'padding': '10px 20px 20px 15px',
+								'cursor': 'pointer',
+								'background-color':this.options.overlay_background_colour,
+								'color':this.options.overlay_foreground_colour,
+								opacity:this.options.overlay_opacity
+							})
+							.hover(function() {
+								$(this).css({'background-color':me.options.overlay_foreground_colour,'color':me.options.overlay_background_colour});
+								me._pictureframe_enter()();
+							},
+							function() { 
+								$(this).css({'background-color':me.options.overlay_background_colour,'color':me.options.overlay_foreground_colour});
+							})
+							.click(function() {
+								me.previous();
+							})
+							.appendTo(this.overlay_controls)
+		this.overlay_controls_next_button = $('<div></div>')
+							.addClass('ui-widget-mediaslide-overlay-controls-next-button')
+							.html('>')
+							.attr('title','Next')
+							.css({	position: 'absolute', 
+								right: '0px', 
+								'font-size': '35px',
+								'font-weight': 'bold',
+								'border-bottom-left-radius':'5px', 
+								'border-top-left-radius':'5px',
+								'padding': '10px 15px 20px 20px',
+								'cursor': 'pointer',
+								'background-color':this.options.overlay_background_colour,
+								'color':this.options.overlay_foreground_colour,
+								opacity:this.options.overlay_opacity
+							})
+							.hover(function() { 
+								$(this).css({'background-color':me.options.overlay_foreground_colour,'color':me.options.overlay_background_colour});
+								me._pictureframe_enter()();
+							},
+							function() {
+								$(this).css({'background-color':me.options.overlay_background_colour,'color':me.options.overlay_foreground_colour});
+							})
+							.click(function() {
+								me.next();
+							})
+							.appendTo(this.overlay_controls)
 	},
 	// Setup the HTML for the thumbnail strip
 	_do_thumbnail_html_setup: function() { 
@@ -660,6 +734,32 @@ $.widget( "slinq.mediaslide", {
 			if (me.options.picture_click_handler(me.get_current_link())!==false) {
 				location.href=me.get_current_link();
 			}
+		}
+	},
+	// Handle mouse enter event on the picture frame
+	_pictureframe_enter: function() {
+		var me = this;
+		return function() {
+			if (me.options.show_overlay_controls) {
+				if (typeof(me.overlay_effect) != 'undefined') { 
+					me.overlay_effect.stop(true);
+				}
+				me.overlay_effect=me.overlay_controls.fadeTo('slow',1.0);
+			}
+			return false;
+		}
+	},
+	// Handle mouse leave event on the picture frame
+	_pictureframe_leave: function() { 
+		var me = this;
+		return function() {
+			if (me.options.show_overlay_controls) {
+				if (typeof(me.overlay_effect) != 'undefined') {
+					me.overlay_effect.stop(true);
+				}
+				me.overlay_effect=me.overlay_controls.fadeTo('slow',0.0);
+			}
+			return false;
 		}
 	},
 	// Size the scrollbar handle depending on how many media items we have
