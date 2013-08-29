@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.11
+ *  Ver: 1.4.12
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -18,7 +18,8 @@ $.widget( "slinq.mediaslide", {
 	// These options will be used as defaults
 	options: { 
 
-		// One of these must be specified:
+		// If none of these is specified, MediaSlide will look for images in the HTML element it is widgetizing - 
+		// See the Standard Div Image Container Example to see this in action
 		"json_data": null,
 		"json_ajax": null,
 		"atom_xml_data": null,
@@ -866,7 +867,7 @@ $.widget( "slinq.mediaslide", {
 		}
 		return halfthumbs;
 	},
-	// Use the _setOption method to respond to changes to options
+	// Use the _setOption method to respond to changes to options - XXX This doesn't actually do anything
 	_setOption: function( key, value ) {
 		switch( key ) {
 			case "atom_xml_data":
@@ -884,7 +885,7 @@ $.widget( "slinq.mediaslide", {
 
 	},
  
-	// Use the destroy method to clean up any modifications your widget has made to the DOM
+	// Use the destroy method to clean up any modifications your widget has made to the DOM - XXX This doesn't actually do anything
 	destroy: function() {
 		$.Widget.prototype.destroy.call( this );
 	},
@@ -1026,7 +1027,15 @@ $.widget( "slinq.mediaslide", {
 				});
 			}	
 		} else {
-			throw new Error('MediaSlide: No data specified.');
+			// No data option specified - assuming the images are within the HTML element
+			if (this.element.find('img').length>0) { 
+				this.data=this.element.clone();
+				this.element.empty();
+				this.dataType='html';
+				o._init_display();
+			} else { 
+				throw new Error('MediaSlide: No gallery data specified.');
+			}
 		}
 	},
 	// Setup display
@@ -1139,8 +1148,47 @@ $.widget( "slinq.mediaslide", {
 				});
 			});
 			this.d=d;
+		} else if (this.dataType=='html') {
+			this.data.find('img').each(function() {
+				var title = $(this).attr('alt');
+				if (typeof(title) == 'undefined' && typeof($(this).attr('title')) != 'undefined') { 
+					title = $(this).attr('title');
+				} else if (typeof(title) == 'undefined') { 
+					title = '';
+				}
+				var link = '';
+				var id = $(this).attr('id');
+				var updated = $(this).attr('data-updated');
+				var normal = $(this).attr('src');
+				var thumb = $(this).attr('src');
+				if ($(this).is('[srcset]')) {
+					// Multiple image URLs specified via draft HTML5 srcset attribute
+					jQuery($(this).attr('srcset').split(',')).each(function() {
+						// Loop over each image candidate string
+						var cand = $.trim(this);
+						var pieces = cand.split(' ');
+						normal = pieces[0];
+						return false;
+					});
+				}
+				if ($(this).parent().is('a[href]')) {
+					link = $(this).parent().attr('href');
+				}
+				d.push({
+					title: title,
+					link: link,
+					id: id,
+					updated: updated,
+					normal: normal,
+					thumb: thumb
+				});
+			});
+			this.d=d;
 		} else {
 			throw new Error('MediaSlide: unknown data type');
+		}
+		if (this.d.length < 1) { 
+			throw new Error('MediaSlide: No images found');
 		}
 		this._do_thumbnail_html_setup();
 	}
