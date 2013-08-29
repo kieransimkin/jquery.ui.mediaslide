@@ -814,7 +814,7 @@ $.widget( "slinq.mediaslide", {
 		var me=this;
 		return function() { 
 			if (me.options.overlay_thumbslide) { 
-				me.thumbslide.animate({top: '-'+(this.thumbslide.height())+'px'},'slow');
+				me.thumbslide.animate({top: '-'+(me.thumbslide.height())+'px'},'slow');
 			}
 			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({opacity: '0.0'});
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load",function() { 
