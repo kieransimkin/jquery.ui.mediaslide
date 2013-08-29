@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.15
+ *  Ver: 1.4.16
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -38,6 +38,7 @@ $.widget( "slinq.mediaslide", {
 		"overlay_background_colour": "black",
 		"overlay_foreground_colour": "lightgreen",
 		"overlay_opacity": 0.6,
+		"overlay_thumbslide": false,
 		"loading_thumb": "ajaxloader.gif",
 		"show_bottom_controls": true,
 		"show_top_controls": true,
@@ -288,7 +289,11 @@ $.widget( "slinq.mediaslide", {
 							.appendTo(this.thumbslide_scrollbar);
 		this.thumbslide=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
-							.css({'overflow': 'auto','z-index': 2,'margin':'auto auto','position':'relative'});
+							.css({'overflow-x': 'auto','overflow-y': 'auto','z-index': 2,'margin':'auto auto','position':'relative'});
+		if (this.options.overlay_thumbslide) {
+			this.thumbslide.css({'background-color': 'rgba(0,0,0,0.6)', 'padding-top': this.options.thumb_spacing+'px', 'padding-bottom': this.options.thumb_spacing+'px'});
+
+		}
 		this.thumbslide_content=$('<div></div>')
 							.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide-content')
@@ -528,15 +533,16 @@ $.widget( "slinq.mediaslide", {
 			});
 
 			an.css({'outline': 0});
-			$('<br />').appendTo(an);
 			if (me.options.caption_formatter(o.title, o).length > 0 && me.options.show_captions) { 
-				var cap=$("<span></span>")		.addClass('ui-widget')
+				var cap=$("<span></span>")	.addClass('ui-widget')
 								.addClass('ui-widget-mediaslide-thumb-caption')
 								.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px','word-wrap':'break-word'})
 								.html(me.options.caption_formatter(o.title, o));
 				if (me.options.captions_on_top) { 
+					$('<br />').prependTo(an);
 					cap.prependTo(an);
 				} else { 
+					$('<br />').appendTo(an);
 					cap.appendTo(an);
 				}
 				if (me.options.small_captions) { 
@@ -621,7 +627,7 @@ $.widget( "slinq.mediaslide", {
 		.append( "<span class='ui-icon ui-icon-grip-dotted-vertical' style='margin: auto auto; position: relative; top: -1px;'></span>" )
 		.wrap( $("<div></div>" ).css({ 'position': 'relative', width: '100%', height: '100%', margin: '0 auto' })).parent();
 		//change overflow to hidden now that slider handles the scrolling
-		scrollPane.css( "overflow", "hidden" );
+		scrollPane.css( "overflow-x", "hidden" );
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
 	},
@@ -682,27 +688,27 @@ $.widget( "slinq.mediaslide", {
 			this.top_controls_first_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_previous_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_first_button.attr('disabled',true).addClass('ui-state-disabled');
-			this.overlay_controls_previous_button.hide();
+			this.overlay_controls_previous_button.fadeOut('fast');
 			
 		} else {
 			this.top_controls_previous_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.top_controls_first_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_previous_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_first_button.attr('disabled',false).removeClass('ui-state-disabled');
-			this.overlay_controls_previous_button.show();
+			this.overlay_controls_previous_button.fadeIn('fast');
 		}
 		if (pos==this.d.length-1) { 
 			this.top_controls_next_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.top_controls_last_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_next_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_last_button.attr('disabled',true).addClass('ui-state-disabled');
-			this.overlay_controls_next_button.hide();
+			this.overlay_controls_next_button.fadeOut('fast');
 		} else {
 			this.top_controls_next_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.top_controls_last_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_next_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_last_button.attr('disabled',false).removeClass('ui-state-disabled');
-			this.overlay_controls_next_button.show();
+			this.overlay_controls_next_button.fadeIn('fast');
 		}
 	},
 	// Gets executed after a slide to update the controls with the current image's title and position
@@ -805,7 +811,11 @@ $.widget( "slinq.mediaslide", {
 	},
 	// After the thumb has been precached, drop it in to the thumbstrip with an animation
 	_handle_thumbnail_load_callback: function(d,l,i,tim) { 
+		var me=this;
 		return function() { 
+			if (me.options.overlay_thumbslide) { 
+				me.thumbslide.animate({top: '-'+(this.thumbslide.height())+'px'},'slow');
+			}
 			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({opacity: '0.0'});
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load",function() { 
 
