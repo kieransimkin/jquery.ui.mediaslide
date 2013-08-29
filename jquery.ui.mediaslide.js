@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.20
+ *  Ver: 1.4.21
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -39,6 +39,7 @@ $.widget( "slinq.mediaslide", {
 		"overlay_foreground_colour": "lightgreen",
 		"overlay_opacity": 0.6,
 		"overlay_thumbslide": false,
+		"autohide_overlay_thumbslide": true,
 		"loading_thumb": "ajaxloader.gif",
 		"show_bottom_controls": true,
 		"show_top_controls": true,
@@ -289,7 +290,7 @@ $.widget( "slinq.mediaslide", {
 							.appendTo(this.thumbslide_scrollbar);
 		this.thumbslide=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-mediaslide-thumbslide')
-							.css({'overflow-x': 'auto','overflow-y': 'auto','z-index': 2,'margin':'auto auto','position':'relative'});
+							.css({'overflow-x': 'hidden','overflow-y': 'hidden','z-index': 2,'margin':'auto auto','position':'relative'});
 		if (this.options.overlay_thumbslide) {
 			this.thumbslide.css({'background-color': 'rgba(0,0,0,0.6)', 'padding-top': this.options.thumb_spacing+'px', 'padding-bottom': this.options.thumb_spacing+'px'});
 
@@ -467,6 +468,7 @@ $.widget( "slinq.mediaslide", {
 							},
 							function() { 
 								$(this).css({'background-color':me.options.overlay_background_colour,'color':me.options.overlay_foreground_colour});
+								me._pictureframe_leave()();
 							})
 							.click(function() {
 								me.previous();
@@ -494,6 +496,7 @@ $.widget( "slinq.mediaslide", {
 							},
 							function() {
 								$(this).css({'background-color':me.options.overlay_background_colour,'color':me.options.overlay_foreground_colour});
+								me._pictureframe_leave()();
 							})
 							.click(function() {
 								me.next();
