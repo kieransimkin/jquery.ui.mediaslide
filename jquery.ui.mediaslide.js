@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.19
+ *  Ver: 1.4.20
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -630,6 +630,10 @@ $.widget( "slinq.mediaslide", {
 		scrollPane.css( "overflow-x", "hidden" );
 		this._size_scrollbar();	
 		this._do_thumbnail_image_loads();
+		if (this.d.length < 2) { // If there's less than two thumbs, nothing will ever be snown in the thumb slide, so don't show it
+			this.thumbslide.hide();
+			this.scrollbar.hide();
+		}
 	},
 	// Set everything to the loading state
 	_set_loading_state: function() { 
