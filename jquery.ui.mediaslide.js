@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.14
+ *  Ver: 1.4.15
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -44,6 +44,7 @@ $.widget( "slinq.mediaslide", {
 		"show_thumbs": true,
 		"show_scrollbar": true,
 		"show_overlay_controls": false,
+		"show_captions": true,
 		"small_top_controls": true,
 		"small_bottom_controls": true,
 		"small_captions": true,
@@ -528,17 +529,19 @@ $.widget( "slinq.mediaslide", {
 
 			an.css({'outline': 0});
 			$('<br />').appendTo(an);
-			var cap=$("<span></span>")		.addClass('ui-widget')
-							.addClass('ui-widget-mediaslide-thumb-caption')
-							.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px','word-wrap':'break-word'})
-							.html(me.options.caption_formatter(o.title, o));
-			if (me.options.captions_on_top) { 
-				cap.prependTo(an);
-			} else { 
-				cap.appendTo(an);
-			}
-			if (me.options.small_captions) { 
-				cap.wrap("<small></small>");
+			if (me.options.caption_formatter(o.title, o).length > 0 && me.options.show_captions) { 
+				var cap=$("<span></span>")		.addClass('ui-widget')
+								.addClass('ui-widget-mediaslide-thumb-caption')
+								.css({'width': me.options.thumb_width-10, 'margin-bottom': '5px','display' : 'inline-block', 'margin-left': '5px', 'margin-right': '5px','word-wrap':'break-word'})
+								.html(me.options.caption_formatter(o.title, o));
+				if (me.options.captions_on_top) { 
+					cap.prependTo(an);
+				} else { 
+					cap.appendTo(an);
+				}
+				if (me.options.small_captions) { 
+					cap.wrap("<small></small>");
+				}
 			}
 			l.push(p);
 
@@ -634,6 +637,8 @@ $.widget( "slinq.mediaslide", {
 		this.top_controls_last_button.css({cursor:'wait'});
 		this.bottom_controls_next_button.css({cursor:'wait'});
 		this.bottom_controls_last_button.css({cursor:'wait'});
+		this.overlay_controls_previous_button.css({cursor:'wait'});
+		this.overlay_controls_next_button.css({cursor:'wait'});
 		this.thumbslide_loading_overlay=$("<div></div>")
 							.css({'position':'absolute','top':'0px','left':'0px','width':this._get_total_scrollbox_width(), 'height':this.thumbslide_content.height(),'z-index':'2','cursor':'wait'})
 							.prependTo(this.thumbslide);
@@ -651,6 +656,8 @@ $.widget( "slinq.mediaslide", {
 		this.top_controls_last_button.css({cursor:''});
 		this.bottom_controls_next_button.css({cursor:''});
 		this.bottom_controls_last_button.css({cursor:''});
+		this.overlay_controls_previous_button.css({cursor:'pointer'});
+		this.overlay_controls_next_button.css({cursor:'pointer'});
 		this.thumbslide_loading_overlay.remove();
 		this._trigger('endloading');
 	},
@@ -675,23 +682,27 @@ $.widget( "slinq.mediaslide", {
 			this.top_controls_first_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_previous_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_first_button.attr('disabled',true).addClass('ui-state-disabled');
+			this.overlay_controls_previous_button.hide();
 			
 		} else {
 			this.top_controls_previous_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.top_controls_first_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_previous_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_first_button.attr('disabled',false).removeClass('ui-state-disabled');
+			this.overlay_controls_previous_button.show();
 		}
 		if (pos==this.d.length-1) { 
 			this.top_controls_next_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.top_controls_last_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_next_button.attr('disabled',true).addClass('ui-state-disabled');
 			this.bottom_controls_last_button.attr('disabled',true).addClass('ui-state-disabled');
+			this.overlay_controls_next_button.hide();
 		} else {
 			this.top_controls_next_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.top_controls_last_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_next_button.attr('disabled',false).removeClass('ui-state-disabled');
 			this.bottom_controls_last_button.attr('disabled',false).removeClass('ui-state-disabled');
+			this.overlay_controls_next_button.show();
 		}
 	},
 	// Gets executed after a slide to update the controls with the current image's title and position
