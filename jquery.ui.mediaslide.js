@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.17
+ *  Ver: 1.4.18
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -166,7 +166,7 @@ $.widget( "slinq.mediaslide", {
 		$(frame).find('.ui-widget-mediaslide-active-img').bind("load", function() { 
 			me.mainpicture.width($(frame).width());
 			me.mainpicture.animate({height: $(frame).height()},'slow');
-			me.overlay_controls.animate({top: ($(frame).height()/2)-(me.overlay_controls_previous_button.height())}, 'slow');
+			me.overlay_controls.animate({top: ($(frame).height()/2)-(me.overlay_controls_previous_button.outerHeight()/2)}, 'slow');
 			$(frame).fadeTo('slow',1.0);
 			if ($(frame).width()>me._get_visible_scrollbox_width()) { 
 				me.mainpicture.css({left: 0-($(frame).width()-me._get_visible_scrollbox_width())/2});
@@ -214,7 +214,7 @@ $.widget( "slinq.mediaslide", {
 					leftoff-=($(inactive_frame).width()-tob._get_visible_scrollbox_width())/2;
 				}
 				$(tob.mainpicture).animate({height: $(inactive_frame).height(), width: $(inactive_frame).width(), left: leftoff+'px'},'fast');
-				tob.overlay_controls.animate({top: ($(inactive_frame).height()/2)-(tob.overlay_controls_previous_button.height())}, 'slow');
+				tob.overlay_controls.animate({top: ($(inactive_frame).height()/2)-(tob.overlay_controls_previous_button.outerHeight()/2)}, 'slow');
 			}
 			$(inactive_frame).fadeTo('slow', 1.0, 'linear', function() { 
 				tob._toggle_pframe();
@@ -814,7 +814,7 @@ $.widget( "slinq.mediaslide", {
 		var me=this;
 		return function() { 
 			if (me.options.overlay_thumbslide) { 
-				me.thumbslide.animate({top: '-'+(me.thumbslide.height())+'px'},'slow');
+				me.thumbslide.animate({top: '-'+(me.thumbslide.outerHeight())+'px'},'slow');
 			}
 			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({opacity: '0.0'});
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load",function() { 
