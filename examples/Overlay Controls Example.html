@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Overlay Controls Example</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script src="../jquery.ui.mediaslide.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/le-frog/jquery-ui.css" type="text/css" media="all" />
+<body>
+<br style="clear: both;" />
+<div id="slide_1" style="margin: auto auto;"></div><br style="clear: both;" />
+<a href="http://slinq.com/software/mediaslide">MediaSlide by Kieran Simkin</a><br />
+<a href=".">Return to examples list</a>
+<script>
+	$('#slide_1').mediaslide({
+		json_ajax: {url: 'beach.json', data: {} },
+		show_overlay_controls: true,
+		show_top_controls: false,
+		show_bottom_controls: false,
+		show_scrollbar: false
+	});
+</script>
+</body>
+</html> 
