@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.18
+ *  Ver: 1.4.19
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -813,12 +813,11 @@ $.widget( "slinq.mediaslide", {
 	_handle_thumbnail_load_callback: function(d,l,i,tim) { 
 		var me=this;
 		return function() { 
-			if (me.options.overlay_thumbslide) { 
-				me.thumbslide.animate({top: '-'+(me.thumbslide.outerHeight())+'px'},'slow');
-			}
 			l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({opacity: '0.0'});
 			l[i].find('.ui-widget-mediaslide-thumb-img').bind("load",function() { 
-
+				if (me.options.overlay_thumbslide) { 
+					me.thumbslide.animate({top: (0-(me.thumbslide.outerHeight()))+'px'},'slow');
+				}
 				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().css({top: (0-($(this).height()-20))+'px'});
 				l[i].find('.ui-widget-mediaslide-thumb-img').parent().parent().animate({top: '0px','opacity':'1.0'},'500');
 			});
