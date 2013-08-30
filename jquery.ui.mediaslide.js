@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.25
+ *  Ver: 1.4.26
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -111,7 +111,10 @@ $.widget( "slinq.mediaslide", {
 	},
 	// Re-init the control - useful if you show a mediaslide that was initially hidden
 	refresh: function() { 
-		this._create();
+		this.position_skip(this.options.start_position);
+		if (this.options.overlay_thumbslide) { 
+			this.thumbslide.animate({top: (0-(this.thumbslide.outerHeight()))+'px'},'slow');
+		}
 	},
 	// Get the current position (zero indexed)
 	get_position: function() { 
