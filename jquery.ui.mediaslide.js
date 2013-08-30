@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.24
+ *  Ver: 1.4.25
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -108,7 +108,11 @@ $.widget( "slinq.mediaslide", {
 	scroll_to_page: function (page) { 
 		page = page - 1; // zero index;
 		this.scroll_to_position( (page * this.options.num_thumbs) + this._get_first_thumb_count());
-	},	
+	},
+	// Re-init the control - useful if you show a mediaslide that was initially hidden
+	refresh: function() { 
+		this._create();
+	},
 	// Get the current position (zero indexed)
 	get_position: function() { 
 		return this.position;
@@ -234,6 +238,7 @@ $.widget( "slinq.mediaslide", {
 	_do_html_setup: function() { 
 		var me=this;
 		this.element.html('');
+		this.element.addClass('ui-widget-mediaslide');
 		this.top_controls=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-content')
 							.addClass('ui-corner-all')
