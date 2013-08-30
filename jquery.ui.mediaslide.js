@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.21
+ *  Ver: 1.4.22
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -38,14 +38,14 @@ $.widget( "slinq.mediaslide", {
 		"overlay_background_colour": "black",
 		"overlay_foreground_colour": "lightgreen",
 		"overlay_opacity": 0.6,
-		"overlay_thumbslide": false,
+		"overlay_thumbslide": true,
 		"autohide_overlay_thumbslide": true,
 		"loading_thumb": "ajaxloader.gif",
 		"show_bottom_controls": true,
 		"show_top_controls": true,
 		"show_thumbs": true,
 		"show_scrollbar": true,
-		"show_overlay_controls": false,
+		"show_overlay_controls": true,
 		"show_captions": true,
 		"small_top_controls": true,
 		"small_bottom_controls": true,
@@ -232,6 +232,7 @@ $.widget( "slinq.mediaslide", {
 	},
 	// Setup the main HTML
 	_do_html_setup: function() { 
+		var me=this;
 		this.element.html('');
 		this.top_controls=$('<div></div>')	.addClass('ui-widget')
 							.addClass('ui-widget-content')
@@ -293,7 +294,14 @@ $.widget( "slinq.mediaslide", {
 							.css({'overflow-x': 'hidden','overflow-y': 'hidden','z-index': 2,'margin':'auto auto','position':'relative'});
 		if (this.options.overlay_thumbslide) {
 			this.thumbslide.css({'background-color': 'rgba(0,0,0,0.6)', 'padding-top': this.options.thumb_spacing+'px', 'padding-bottom': this.options.thumb_spacing+'px'});
-
+			if (this.options.autohide_overlay_thumbslide) {
+				this.thumbslide.css({'opacity':0})
+						.hover(function() {
+							me._pictureframe_enter()();
+						}, function() {
+							me._pictureframe_leave()();
+						});
+			}
 		}
 		this.thumbslide_content=$('<div></div>')
 							.addClass('ui-widget')
@@ -519,8 +527,10 @@ $.widget( "slinq.mediaslide", {
 							.css({'float': 'left', 'position': 'relative', 'width': op.thumb_width, 'margin-left': me._get_left_thumb_spacing(),'margin-right': me._get_right_thumb_spacing(), 'text-align': 'center','border': 'none','cursor':'pointer'})
 							.html('<img class="ui-widget-mediaslide-thumb-img">')
 							.hover(function() { 
+								me._pictureframe_enter()();
 								p.addClass('ui-state-hover');
 							}, function() { 
+								me._pictureframe_leave()();
 								p.removeClass('ui-state-hover');
 							})
 							.click(function() { 
@@ -765,6 +775,12 @@ $.widget( "slinq.mediaslide", {
 		var me = this;
 		return function() {
 			if (me.options.show_overlay_controls) {
+				if (me.options.autohide_overlay_thumbslide) {
+					if (typeof(me.overlay_thumbslide_effect) != 'undefined') { 
+						me.overlay_thumbslide_effect.stop(true);
+					}
+					me.overlay_thumbslide_effect=me.thumbslide.fadeTo('slow',1.0);
+				}
 				if (typeof(me.overlay_effect) != 'undefined') { 
 					me.overlay_effect.stop(true);
 				}
@@ -778,6 +794,12 @@ $.widget( "slinq.mediaslide", {
 		var me = this;
 		return function() {
 			if (me.options.show_overlay_controls) {
+				if (me.options.autohide_overlay_thumbslide) {
+					if (typeof(me.overlay_thumbslide_effect) != 'undefined') {
+						me.overlay_thumbslide_effect.stop(true);
+					}
+					me.overlay_thumbslide_effect=me.thumbslide.fadeTo('slow',0.0);
+				}
 				if (typeof(me.overlay_effect) != 'undefined') {
 					me.overlay_effect.stop(true);
 				}
