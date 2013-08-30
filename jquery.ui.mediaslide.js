@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.23
+ *  Ver: 1.4.24
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -38,14 +38,14 @@ $.widget( "slinq.mediaslide", {
 		"overlay_background_colour": "black",
 		"overlay_foreground_colour": "lightgreen",
 		"overlay_opacity": 0.6,
-		"overlay_thumbslide": true,
+		"overlay_thumbslide": false,
 		"autohide_overlay_thumbslide": true,
 		"loading_thumb": "ajaxloader.gif",
 		"show_bottom_controls": true,
 		"show_top_controls": true,
 		"show_thumbs": true,
 		"show_scrollbar": true,
-		"show_overlay_controls": true,
+		"show_overlay_controls": false,
 		"show_captions": true,
 		"small_top_controls": true,
 		"small_bottom_controls": true,
