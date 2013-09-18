@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.28
+ *  Ver: 1.4.29
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -786,7 +786,8 @@ $.widget( "slinq.mediaslide", {
 				return false;
 			}
 			if (me.options.show_overlay_controls) {
-				if (me.options.autohide_overlay_thumbslide) {
+				// Only show the thumbslide if we've got autohide_overlay_thumbslide enabled and at least two images in the gallery:
+				if (me.options.autohide_overlay_thumbslide && me.d.length > 1) {
 					if (typeof(me.overlay_thumbslide_effect) != 'undefined') { 
 						me.overlay_thumbslide_effect.stop(true);
 					}
