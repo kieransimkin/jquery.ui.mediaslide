@@ -1,5 +1,5 @@
 /*  jQuery.ui.mediaslide.js
- *  Ver: 1.4.27
+ *  Ver: 1.4.28
  *  by Kieran Simkin - http://SlinQ.com/
  *
  *  Copyright (c) 2011-2013, Kieran Simkin
@@ -782,6 +782,9 @@ $.widget( "slinq.mediaslide", {
 	_pictureframe_enter: function() {
 		var me = this;
 		return function() {
+			if (me.slide_in_progress) {
+				return false;
+			}
 			if (me.options.show_overlay_controls) {
 				if (me.options.autohide_overlay_thumbslide) {
 					if (typeof(me.overlay_thumbslide_effect) != 'undefined') { 
@@ -801,6 +804,9 @@ $.widget( "slinq.mediaslide", {
 	_pictureframe_leave: function() { 
 		var me = this;
 		return function() {
+			if (me.slide_in_progress) {
+				return false;
+			}
 			if (me.options.show_overlay_controls) {
 				if (me.options.autohide_overlay_thumbslide) {
 					if (typeof(me.overlay_thumbslide_effect) != 'undefined') {
